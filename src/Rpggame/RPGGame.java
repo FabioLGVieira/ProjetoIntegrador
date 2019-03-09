@@ -8,24 +8,17 @@ package rpggame;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
-
-import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.nio.CharBuffer;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,10 +29,8 @@ public class RPGGame {
     static JFrame jframe;
     static JTextField jtxtfd;
     static JTextArea txtarea;
-    public static String nome;
     public static Player obj = new Player();  // cria uma instancia do Player
     public static boolean running = false;
-
     private static String[] commands;
 
     /**
@@ -54,15 +45,6 @@ public class RPGGame {
     public static void start() {
         createJFrame(); // chama o metodo que ir� criar a janela
         txtarea.setText("Digite seu nome nessa aventura:" + "\n");
-        /*jtxtfd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                running = true;
-                String n = jtxtfd.getText().toString();
-                generatePlayer(n); // chama o metodo de cria�ao de personagem
-            }
-        });*/
-
     }
 
     public static void run() {
@@ -79,23 +61,11 @@ public class RPGGame {
 
     public static void gameOver() {
         running = false;
-        txtarea.append("you're dead game is over");
-    }
-
-    public static void generatePlayer(String nome) {
-        //obj = new Player(); // cria uma instancia do Player
-        obj.setNomePlayer(nome);
-        obj.setHp(50);
-        obj.setMp(60);
-        obj.setOuro(150);
-        obj.setAtq(35);
-        obj.setDef(40);
-        obj.setPeso(15);
-
+        txtarea.append("you're dead the game is over");
     }
 
     public static void keyBoardInput() {
-        commands = new String[]{"w", "s", "a", "d", "", " ", "meu nome"};
+        commands = new String[]{"w", "s", "a", "d", "meu nome", "comandos", "ir para ", "atacar", "ver", "abrir"};
         jtxtfd = new JTextField("Digite o comando aqui", 62);
         jtxtfd.setFocusable(true);
         jtxtfd.addActionListener(new ActionListener() {
@@ -103,22 +73,15 @@ public class RPGGame {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 String str = jtxtfd.getText().toString();
-                boolean n = Arrays.stream(commands).anyMatch(str.toLowerCase()::contains);
 
-                if (n) {
+                if (Arrays.asList(commands).contains(str)) {
                     switch (str) {
                         case "meu nome":
                             if (obj.getNomePlayer() == null) {
-                                txtarea.append("Você nao tem nome");
+                                txtarea.append("você nao tem nome");
                             } else {
                                 txtarea.append("seu nome é " + obj.getNomePlayer());
                             }
-                            break;
-                        case "":
-                            txtarea.append("Você nao digitou nada");
-                            break;
-                        case " ":
-                            txtarea.append("Você nao digitou nada");
                             break;
                         case "w":
                             txtarea.append("voce andou pra cima");
@@ -132,15 +95,32 @@ public class RPGGame {
                         case "d":
                             txtarea.append("voce andou pra esquerda");
                             break;
+                        case "comandos":
+                            JOptionPane.showMessageDialog(null, Arrays.asList(commands), "Comandos", JOptionPane.INFORMATION_MESSAGE);
+                            break;
+                        case "ir para ":
+                            if (str.equals("ir para floresta")) {
+                                txtarea.append("voce foi para a floresta");
+                            } else if (str.equals("ir para vila")) {
+                                txtarea.append("voce para a vila");
+                            } else if (str.equals("ir para caverna")) {
+                                txtarea.append("voce foi para a caverna");
+                            } else {
+                                txtarea.append("escolha um lugar válido para ir");
+                            }
+                            break;
+                        case "atacar":
+                            break;
+                        case "ver":
+                            break;
+                        case "abrir":
+                            break;
                     }
-                } else  {
+                } else if (obj.getNomePlayer() == null && !(str != "" || str != " ")) {
                     generatePlayer(str);
-                    if (obj.getNomePlayer() == null) {
-                        txtarea.append("Você nao tem nome");
-                    } else {
-                        txtarea.append("seu nome é " + obj.getNomePlayer());
-                    }
-                }// else {                    txtarea.append("digita um nome");                }
+                } else {
+                    txtarea.append("Comando inválido, por favor digita um comando válido");
+                }
                 txtarea.append("\n");
                 jtxtfd.setText("");
             }
@@ -163,6 +143,16 @@ public class RPGGame {
             }
         }
         );
+    }
+
+    public static void generatePlayer(String nome) {
+        obj.setNomePlayer(nome);
+        obj.setHp(50);
+        obj.setMp(60);
+        obj.setOuro(150);
+        obj.setAtq(35);
+        obj.setDef(40);
+        obj.setPeso(15);
     }
 
     public static void createJFrame() {
@@ -205,7 +195,6 @@ public class RPGGame {
         jpnl3.add(jtxtfd);
         jpnl1.add(txtarea);
         jframe.setVisible(true); // mostra a janela
-
     }
 
 }
