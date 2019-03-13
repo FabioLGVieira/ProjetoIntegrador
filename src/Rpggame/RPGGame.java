@@ -31,6 +31,8 @@ public class RPGGame {
     public static Player obj;  // cria uma instancia do Player
     public static boolean running = false;
     private static String[] commands;
+    public static int characterPosition[][], vila[][],floresta[][];
+    public static int posX=0, posY=0; //0 vila, 1 floresta, 2 caverna
 
     /**
      * @param args the command line arguments
@@ -45,12 +47,13 @@ public class RPGGame {
         createJFrame(); // chama o metodo que ir� criar a janela
         obj = new Player();  // cria uma instancia do Player
         txtarea.setText("Digite seu nome nessa aventura:" + "\n");
+
     }
 
     public static void run() {
         running = true;
         while (running) {
-
+                       
             gameOver();
 
             if (obj.getHp() < 1) {
@@ -65,8 +68,8 @@ public class RPGGame {
     }
 
     public static void keyBoardInput() {
-        commands = new String[]{"w", "s", "a", "d", "meu nome", "comandos", "ir para flroesta", "ir para vila", "ir para caverna",
-            "atacar", "ver", "abrir"};
+        commands = new String[]{"w", "s", "a", "d", "meu nome", "/comandos", "ir para flroesta", "ir para vila", "ir para caverna",
+            "atacar", "ver", "abrir","pos"};
         jtxtfd = new JTextField("Digite o comando aqui", 62);
         jtxtfd.setFocusable(true);
         jtxtfd.addActionListener(new ActionListener() {
@@ -85,27 +88,39 @@ public class RPGGame {
                             }
                             break;
                         case "w":
+                            posX+=0;
+                            posY+=1;
+                            //characterPosition = [posX][posY];
                             txtarea.append("voce andou pra cima");
                             break;
                         case "s":
+                            posX+=0;
+                            posY-=1;
                             txtarea.append("voce andou pra baixo");
                             break;
                         case "a":
+                            posX-=1;
+                            posY+=0;
                             txtarea.append("voce andou pra esquerda");
                             break;
                         case "d":
+                            posX+=1;
+                            posY+=0;
                             txtarea.append("voce andou pra direita");
                             break;
-                        case "comandos":
+                        case "/comandos":
                             JOptionPane.showMessageDialog(null, Arrays.asList(commands), "Comandos", JOptionPane.INFORMATION_MESSAGE);
                             break;
                         case "ir para floresta":
+                            geradorMapa(1);
                             txtarea.append("voce foi para a floresta");
                             break;
                         case "ir para vila":
+                            geradorMapa(0);
                             txtarea.append("voce para a vila");
                             break;
                         case "ir para caverna":
+                            //geradorMapa(2);
                             txtarea.append("voce foi para a caverna");
                             break;
                         case "atacar":
@@ -114,12 +129,16 @@ public class RPGGame {
                             break;
                         case "abrir":
                             break;
+                        case "pos":
+                            txtarea.append("X: " + posX + "Y: " + posY);
+                            break;
                     }
                 } else if (obj.getNomePlayer() == null) {
                     generatePlayer(str);
                     txtarea.append("Nome salvo com sucesso!");
                 } else {
-                    txtarea.append("Comando inválido, por favor digita um comando válido");
+                    txtarea.append("Comando inválido, por favor digita um comando válido!"
+                            + " Para ver os comandos, digite /comandos");
                 }
                 txtarea.append("\n");
                 jtxtfd.setText("");
@@ -153,6 +172,28 @@ public class RPGGame {
         obj.setAtq(35);
         obj.setDef(40);
         obj.setPeso(15);
+    }
+
+    public static void geradorMapa(int mapa) {
+        if (mapa == 1) { //floresta
+            for (int x = 0; x < 10; x++) {
+                for (int y = 0; y < 10; y++) {
+                       floresta = new int[x][y];
+                }
+            }
+        } /*else if(mapa == 2){
+            for(int x=0;x<10;x++){
+            for(int y=0;y<10;y++){
+                 = new int[x][y];
+            }
+        }
+        }     nao sei se vai dar certo com matriz      */ else {
+            for (int x = 0; x < 4; x++) {  //vila
+                for (int y = 0; y < 4; y++) {
+                    vila = new int[x][y];
+                }
+            }
+        }
     }
 
     public static void createJFrame() {
@@ -191,23 +232,23 @@ public class RPGGame {
         JLabel labelhp = new JLabel("HP: "); //criação dos Labels de informações do personagem
         labelhp.setForeground(Color.black); //define a cor dos Labels
         JLabel labelHP = new JLabel("99/99");
-        labelhp.setForeground(Color.black);
+        labelHP.setForeground(Color.black);
         JLabel labelgold = new JLabel("Ouro: ");
-        labelhp.setForeground(Color.black);
+        labelgold.setForeground(Color.black);
         JLabel labelOuro = new JLabel("999,999");
-        labelhp.setForeground(Color.black);
-        labelhp.setForeground(Color.black);
+        labelOuro.setForeground(Color.black);
         JLabel labelatq = new JLabel("Ataque: ");
-        labelhp.setForeground(Color.black);
+        labelatq.setForeground(Color.black);
         JLabel labelATQ = new JLabel("25");
-        labelhp.setForeground(Color.black);
+        labelATQ.setForeground(Color.black);
         JLabel labeldef = new JLabel("Defesa: ");
-        labelhp.setForeground(Color.black);
+        labeldef.setForeground(Color.black);
         JLabel labelDEF = new JLabel("17");
-        labelhp.setForeground(Color.black);
+        labelDEF.setForeground(Color.black);
         JLabel labelweight = new JLabel("Peso: ");
-        labelhp.setForeground(Color.black);
+        labelweight.setForeground(Color.black);
         JLabel labelPeso = new JLabel("5kg");
+        labelPeso.setForeground(Color.black);
 
         jframe.add(jpnl1); //adicionando os paineis e labels ao devido lugar no JFrame
         jframe.add(jpnl2);
