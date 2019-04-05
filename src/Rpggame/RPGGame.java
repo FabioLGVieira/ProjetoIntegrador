@@ -15,28 +15,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
 import java.util.Arrays;
+import java.util.Random;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
 
 /**
- *
  * @author fabio.lgvieira
  */
 public class RPGGame {
 
-    static JFrame jframe;
+    static Random randomizar = new Random();
+    static JFrame jframe, framePergunta;
     static JTextField jtxtfd;
     static JTextArea txtarea;
-    public static Player obj;  // cria uma instancia do Player
     public static boolean running = false;
-    private static String[] commands;
-    public static int characterPosition[][], vila[][],floresta[][];
-    public static int posX=0, posY=0; //0 vila, 1 floresta, 2 caverna
+    static String commands[], nomePlayer;
+    //public static int characterPosition[][], vila[][],floresta[][];
+    static int posX = 0, posY = 0, perguntaEscolhida, tentativas;
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         // TODO code application logic here
         keyBoardInput();  // chama o metodo de Input
@@ -44,19 +44,20 @@ public class RPGGame {
     }
 
     public static void start() {
-        createJFrame(); // chama o metodo que ir� criar a janela
-        obj = new Player();  // cria uma instancia do Player
-        txtarea.setText("Digite seu nome nessa aventura:" + "\n");
+        createJFrame(); // chama o metodo que ira criar a janela
+        //menu
+
+        txtarea.setText("Digite seu nome nessa aventura:\n");
 
     }
 
     public static void run() {
         running = true;
         while (running) {
-                       
+
             gameOver();
 
-            if (obj.getHp() < 1) {
+            if (false) {
                 txtarea.append("you're dead game is over");
             }
         }
@@ -69,7 +70,7 @@ public class RPGGame {
 
     public static void keyBoardInput() {
         commands = new String[]{"w", "s", "a", "d", "meu nome", "/comandos", "ir para flroesta", "ir para vila", "ir para caverna",
-            "atacar", "ver", "abrir","pos"};
+            "atacar", "ver", "abrir", "pos"};
         jtxtfd = new JTextField("Digite o comando aqui", 62);
         jtxtfd.setFocusable(true);
         jtxtfd.addActionListener(new ActionListener() {
@@ -81,31 +82,31 @@ public class RPGGame {
                 if (Arrays.asList(commands).contains(str)) { // verifica se o comando digitado ( str ) está dentro do array de comandos 
                     switch (str) {  // troca para cada caso dependendo do comando digitado
                         case "meu nome":
-                            if (obj.getNomePlayer() == null) {
+                            if (nomePlayer == null) {
                                 txtarea.append("você nao tem nome");
                             } else {
-                                txtarea.append("seu nome é " + obj.getNomePlayer());
+                                txtarea.append("seu nome é " + nomePlayer);
                             }
                             break;
                         case "w":
-                            posX+=0;
-                            posY+=1;
+                            posX += 0;
+                            posY += 1;
                             //characterPosition = [posX][posY];
                             txtarea.append("voce andou pra cima");
                             break;
                         case "s":
-                            posX+=0;
-                            posY-=1;
+                            posX += 0;
+                            posY -= 1;
                             txtarea.append("voce andou pra baixo");
                             break;
                         case "a":
-                            posX-=1;
-                            posY+=0;
+                            posX -= 1;
+                            posY += 0;
                             txtarea.append("voce andou pra esquerda");
                             break;
                         case "d":
-                            posX+=1;
-                            posY+=0;
+                            posX += 1;
+                            posY += 0;
                             txtarea.append("voce andou pra direita");
                             break;
                         case "/comandos":
@@ -126,6 +127,7 @@ public class RPGGame {
                         case "atacar":
                             break;
                         case "ver":
+                            criaPergunta();//geraPergunta('f');
                             break;
                         case "abrir":
                             break;
@@ -133,8 +135,8 @@ public class RPGGame {
                             txtarea.append("X: " + posX + "Y: " + posY);
                             break;
                     }
-                } else if (obj.getNomePlayer() == null) {
-                    generatePlayer(str);
+                } else if (nomePlayer == null) {
+                    nomePlayer = str;
                     txtarea.append("Nome salvo com sucesso!");
                 } else {
                     txtarea.append("Comando inválido, por favor digita um comando válido!"
@@ -164,42 +166,49 @@ public class RPGGame {
         );
     }
 
-    public static void generatePlayer(String nome) {
-        obj.setNomePlayer(nome);
-        obj.setHp(50);
-        obj.setMp(60);
-        obj.setOuro(150);
-        obj.setAtq(35);
-        obj.setDef(40);
-        obj.setPeso(15);
+    public static void geradorMapa(int mapa) {
+
     }
 
-    public static void geradorMapa(int mapa) {
-        if (mapa == 1) { //floresta
-            for (int x = 0; x < 10; x++) {
-                for (int y = 0; y < 10; y++) {
-                       floresta = new int[x][y];
-                }
-            }
-        } /*else if(mapa == 2){
-            for(int x=0;x<10;x++){
-            for(int y=0;y<10;y++){
-                 = new int[x][y];
-            }
+    public static void geraPergunta(char dificuldade) { //gerador de perguntas baseado em uma certa dificuldade
+        criaPergunta();
+        String perguntasFaceis[] = {"1", "2", "3"}, perguntasMedias[] = {"1", "2"}, perguntasDificeis[] = {"1", "2"};
+        if (dificuldade == 'f' || dificuldade == 'F') {
+            perguntaEscolhida = randomizar.nextInt(perguntasFaceis.length);
+            txtarea.append(perguntasFaceis[perguntaEscolhida]);
+        } else if (dificuldade == 'm' || dificuldade == 'M') {
+            perguntaEscolhida = randomizar.nextInt(perguntasMedias.length);
+            txtarea.append(perguntasMedias[perguntaEscolhida]);
+        } else {
+            perguntaEscolhida = randomizar.nextInt(perguntasDificeis.length);
+            txtarea.append(perguntasDificeis[perguntaEscolhida]);
         }
-        }     nao sei se vai dar certo com matriz      */ else {
-            for (int x = 0; x < 4; x++) {  //vila
-                for (int y = 0; y < 4; y++) {
-                    vila = new int[x][y];
-                }
-            }
-        }
+        //Perguntas.pergunta01();
+    }
+
+    public static void criaPergunta() {
+        framePergunta = new JFrame();
+        framePergunta.setTitle("Enigma");
+        framePergunta.setSize(500, 350);
+        framePergunta.setResizable(false);
+        framePergunta.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JTextPane panelPergunta = new JTextPane();
+        panelPergunta.setText("aehasuiehasiehuiashueiasuieas");
+
+        JButton botao1 = new JButton();
+        botao1.setBounds(5, 20, 100, 50);
+        botao1.setText("zsadas");
+        framePergunta.add(botao1);
+        framePergunta.add(panelPergunta);
+
+        framePergunta.setVisible(true);
     }
 
     public static void createJFrame() {
         jframe = new JFrame(); // cria a janela do jogo
         jframe.setSize(1280, 720); // define o tamanho da janela a ser criada
-        jframe.setTitle("RPG-MUD"); // define o nome que aparece no superior da janela
+        jframe.setTitle("Beyond the Earth"); // define o nome que aparece no superior da janela
         jframe.setResizable(false); // impede a janela de sofrer altera�ao de tamanho
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // permite fechar a janela
 
@@ -229,45 +238,26 @@ public class RPGGame {
         txtarea.setEditable(false);
         txtarea.requestFocus();
 
-        JLabel labelhp = new JLabel("HP: "); //criação dos Labels de informações do personagem
-        labelhp.setForeground(Color.black); //define a cor dos Labels
-        JLabel labelHP = new JLabel("99/99");
-        labelHP.setForeground(Color.black);
-        JLabel labelgold = new JLabel("Ouro: ");
-        labelgold.setForeground(Color.black);
-        JLabel labelOuro = new JLabel("999,999");
-        labelOuro.setForeground(Color.black);
-        JLabel labelatq = new JLabel("Ataque: ");
-        labelatq.setForeground(Color.black);
-        JLabel labelATQ = new JLabel("25");
-        labelATQ.setForeground(Color.black);
-        JLabel labeldef = new JLabel("Defesa: ");
-        labeldef.setForeground(Color.black);
-        JLabel labelDEF = new JLabel("17");
-        labelDEF.setForeground(Color.black);
-        JLabel labelweight = new JLabel("Peso: ");
-        labelweight.setForeground(Color.black);
-        JLabel labelPeso = new JLabel("5kg");
-        labelPeso.setForeground(Color.black);
-
         jframe.add(jpnl1); //adicionando os paineis e labels ao devido lugar no JFrame
         jframe.add(jpnl2);
         jframe.add(jpnl3);
         jframe.add(jpnl4);
         jframe.add(jpnl0);
-        jpnl4.add(labelhp);
-        jpnl4.add(labelHP);
-        jpnl4.add(labelgold);
-        jpnl4.add(labelOuro);
-        jpnl4.add(labelatq);
-        jpnl4.add(labelATQ);
-        jpnl4.add(labeldef);
-        jpnl4.add(labelDEF);
-        jpnl4.add(labelweight);
-        jpnl4.add(labelPeso);
         jpnl3.add(jtxtfd);
         jpnl1.add(txtarea);
         jframe.setVisible(true); // mostra a janela
     }
 
+}
+
+class Perguntas {
+
+    public static void pergunta01() {
+        //texto = O conjunto {x (pertence) R / 2,5 < x <= 15} pode ser representado pelo seguinte intervalo:
+        //button1 = a) [ 10/4 ; 15 ]
+        //button2 = b) [ 2,5 ; 15 [
+        //button3 = c) ] 10/4 ; 15 ] x
+        //button4 = d) ] 2,5 ; 15 [
+        
+    }
 }
