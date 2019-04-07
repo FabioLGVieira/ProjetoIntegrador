@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Arrays;
 import java.util.Random;
 import javax.swing.JButton;
@@ -29,38 +31,31 @@ import javax.swing.JTextPane;
 public class RPGGame {
 
     static Random randomizar = new Random();
+    static JTextPane panelPergunta = new JTextPane();
+    static JButton botao1 = new JButton(), botao2 = new JButton(), botao3 = new JButton(), botao4 = new JButton();
     static JFrame jframe, framePergunta;
     static JTextField jtxtfd;
     static JTextArea txtarea;
-    public static boolean running = false;
-    static String commands[], nomePlayer;
-    //public static int characterPosition[][], vila[][],floresta[][];
+    static boolean running = false;
+    static String commands[], nomePlayer, correta = "", inventario[];
     static int posX = 0, posY = 0, perguntaEscolhida, tentativas;
 
     public static void main(String[] args) {
         // TODO code application logic here
         keyBoardInput();  // chama o metodo de Input
-        start(); // chama o metodo start()
+        menu(); // chama o metodo start()
     }
 
-    public static void start() {
+    public static void menu() {
         createJFrame(); // chama o metodo que ira criar a janela
         //menu
-
-        txtarea.setText("Digite seu nome nessa aventura:\n");
-
+        //txtarea.setText("Digite seu nome nessa aventura:\n");
     }
 
-    public static void run() {
-        running = true;
-        while (running) {
-
-            gameOver();
-
-            if (false) {
-                txtarea.append("you're dead game is over");
-            }
-        }
+    public static void game() {
+        txtarea.append("Segurança do Senac - Bom dia jovem estudante, ja viu sobre o Concurso Espacial? Deixe-me primeiramente"
+                + "lhe dizer sobre os comandos. A barra de comando abaixo serve para movimentaçao e açoes. Voce pode digitar "
+                + "/comandos para ver todos os comandos validos do jogo. Agora se dirija ate a biblioteca para saber sobre o Concurso!");
     }
 
     public static void gameOver() {
@@ -127,7 +122,7 @@ public class RPGGame {
                         case "atacar":
                             break;
                         case "ver":
-                            criaPergunta();//geraPergunta('f');
+                            geraPergunta('f');
                             break;
                         case "abrir":
                             break;
@@ -171,37 +166,56 @@ public class RPGGame {
     }
 
     public static void geraPergunta(char dificuldade) { //gerador de perguntas baseado em uma certa dificuldade
-        criaPergunta();
-        String perguntasFaceis[] = {"1", "2", "3"}, perguntasMedias[] = {"1", "2"}, perguntasDificeis[] = {"1", "2"};
-        if (dificuldade == 'f' || dificuldade == 'F') {
+        String pergunta = "", alternativaA = "", alternativaB = "", alternativaC = "", alternativaD = "",
+                perguntasFaceis[] = {"O conjunto {x (pertence) R / 2,5 < x <= 15} pode ser representado pelo seguinte intervalo:", "2"},
+                perguntasMedias[] = {"1", "2"},
+                perguntasDificeis[] = {"1", "2"},
+                respostasFaceis[][] = {{"[ 10/4 ; 15 ]", "[ 2,5 ; 15 [", "] 10/4 ; 15 ]", "] 2,5 ; 15 ["}, {"e", "f", "g", "h"}},
+                respostasMedias[][] = {{}, {}},
+                respostasDificeis[][] = {{}, {}},
+                corretaFaceis[] = {"] 10/4 ; 15 ]", "asd"},
+                corretaMedias[] = {""},
+                corretaDificeis[] = {""};
+        if (dificuldade == 'f') {
             perguntaEscolhida = randomizar.nextInt(perguntasFaceis.length);
-            txtarea.append(perguntasFaceis[perguntaEscolhida]);
-        } else if (dificuldade == 'm' || dificuldade == 'M') {
+            pergunta = perguntasFaceis[perguntaEscolhida];
+            alternativaA = respostasFaceis[perguntaEscolhida][0];
+            alternativaB = respostasFaceis[perguntaEscolhida][1];
+            alternativaC = respostasFaceis[perguntaEscolhida][2];
+            alternativaD = respostasFaceis[perguntaEscolhida][3];
+            correta = corretaFaceis[perguntaEscolhida];
+        } else if (dificuldade == 'm') {
             perguntaEscolhida = randomizar.nextInt(perguntasMedias.length);
             txtarea.append(perguntasMedias[perguntaEscolhida]);
         } else {
             perguntaEscolhida = randomizar.nextInt(perguntasDificeis.length);
             txtarea.append(perguntasDificeis[perguntaEscolhida]);
         }
-        //Perguntas.pergunta01();
+        criaPergunta(pergunta, alternativaA, alternativaB, alternativaC, alternativaD);
+
     }
 
-    public static void criaPergunta() {
+    public static void criaPergunta(String pergunta, String letraA, String letraB, String letraC, String letraD) {
         framePergunta = new JFrame();
         framePergunta.setTitle("Enigma");
         framePergunta.setSize(500, 350);
         framePergunta.setResizable(false);
         framePergunta.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        JTextPane panelPergunta = new JTextPane();
-        panelPergunta.setText("aehasuiehasiehuiashueiasuieas");
-
-        JButton botao1 = new JButton();
         botao1.setBounds(5, 20, 100, 50);
-        botao1.setText("zsadas");
+        botao1.setText(letraA);
+        botao2.setBounds(150, 20, 100, 50);
+        botao2.setText(letraB);
+        botao3.setBounds(5, 100, 100, 50);
+        botao3.setText(letraC);
+        botao4.setBounds(150, 100, 100, 50);
+        botao4.setText(letraD);
+        panelPergunta.setText(pergunta);
         framePergunta.add(botao1);
+        framePergunta.add(botao2);
+        framePergunta.add(botao3);
+        framePergunta.add(botao4);
         framePergunta.add(panelPergunta);
-
         framePergunta.setVisible(true);
     }
 
@@ -246,18 +260,5 @@ public class RPGGame {
         jpnl3.add(jtxtfd);
         jpnl1.add(txtarea);
         jframe.setVisible(true); // mostra a janela
-    }
-
-}
-
-class Perguntas {
-
-    public static void pergunta01() {
-        //texto = O conjunto {x (pertence) R / 2,5 < x <= 15} pode ser representado pelo seguinte intervalo:
-        //button1 = a) [ 10/4 ; 15 ]
-        //button2 = b) [ 2,5 ; 15 [
-        //button3 = c) ] 10/4 ; 15 ] x
-        //button4 = d) ] 2,5 ; 15 [
-        
     }
 }
