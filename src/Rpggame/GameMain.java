@@ -66,28 +66,29 @@ public class GameMain {
 
     public static void perguntaFacil() {
         int tentativas = 3;
-        int rnd = randomico.nextInt(2);
+        int rnd = randomico.nextInt(2); //perguntas
         String perguntas[] = {"O conjunto {x (pertence) R / 2,5 < x <= 15} pode ser representado pelo seguinte intervalo",
             "O número 255 na base decimal, pode ser representado, respectivamente, nas bases Binária, Octal e Hexadecimal por",
-            "Quantos bits há em 2 bytes", "A expressão (a-b)³ pode ser representada por"},
-                respostasFaceis[][] = {{"[ 10/4 ; 15 ]", "[ 2,5 ; 15 [", "] 10/4 ; 15 ]", "] 2,5 ; 15 ["},
+            "Quantos bits há em 2 bytes", "A expressão (a-b)³ pode ser representada por",
+            " Para executar um mesmo bloco de código por determinadas vezes, o melhor a se fazer é: "},
+                respostasFaceis[][] = {{"[ 10/4 ; 15 ]", "[ 2,5 ; 15 [", "] 10/4 ; 15 ]", "] 2,5 ; 15 ["}, //respostas das perguntas
                 {"01100110, 356 ,EE", "00001111, 380, EF", "11111111, 377, FF", "11110000, 374, FE"},
                 {"8", "16", "32", "64"}, {"a³ - 3a³b + 3ab³ + b³", "a³ + 3a³b + 3ab³ + b³", "a³ - 3a³b - 3ab³ - b³", "a³ - 3a³b - 3ab³ + b³"}
-                },
+                ,{" while " , " if ", " do while ", " for "}},
                 alternativaA, alternativaB, alternativaC, alternativaD;
-        char resposta, corretaFaceis[] = {'c', 'c', 'b', 'a'};
-        alternativaA = respostasFaceis[rnd][0];
+        char resposta, corretaFaceis[] = {'c', 'c', 'b', 'a', 'd'}; //verificação das respostas
+        alternativaA = respostasFaceis[rnd][0]; //recebe a resposta da pergunta
         alternativaB = respostasFaceis[rnd][1];
         alternativaC = respostasFaceis[rnd][2];
         alternativaD = respostasFaceis[rnd][3];
 
-        System.out.println(perguntas[rnd] + ":");
+        System.out.println(perguntas[rnd] + ":"); //imprime a pergunta e as respostas
         System.out.println("a)" + alternativaA);
         System.out.println("b)" + alternativaB);
         System.out.println("c)" + alternativaC);
         System.out.println("d)" + alternativaD);
         do {
-            System.out.println("Voce tem " + tentativas + "tentativas");
+            System.out.println("Voce tem " + tentativas + "tentativas"); //tentativas de resposta
             resposta = sc.next().toLowerCase().charAt(0);
             if (resposta != corretaFaceis[rnd]) {
                 System.out.println("Voce errou tente denovo");
