@@ -70,13 +70,23 @@ public class GameMain {
         String perguntas[] = {"O conjunto {x (pertence) R / 2,5 < x <= 15} pode ser representado pelo seguinte intervalo",
             "O número 255 na base decimal, pode ser representado, respectivamente, nas bases Binária, Octal e Hexadecimal por",
             "Quantos bits há em 2 bytes", "A expressão (a-b)³ pode ser representada por",
-            " Para executar um mesmo bloco de código por determinadas vezes, o melhor a se fazer é: "},
+            " Para executar um mesmo bloco de código por determinadas vezes, o melhor a se fazer é: ", "Para executar o conteúdo de array: \n "
+                + " char vogais[] = {'a','e','i','o','u'} o certo seria: ", "Um vendedor recebe mensalmente um salário composto de duas partes: uma\n" +
+                "fixa, no valor de R$ 350,00, e uma parte variável, que corresponde a uma\n comissão de 8% do total de vendas que ele fez durante \n"
+                + "o mês. Qual das alternativas \n representa a função do seu salário?" , "Um produtor de leite diz que uma vaca leiteira produz 4500 "
+                + "litros de leite por\n ano, em média, que é vendido por 0,20 dólares o litro. Este produtor tem um gasto\n fixo anual de 20.000 dólares "
+                + "para a manutenção das instalações. Qual das alternativas\n expressa o ganho anual do produtor de leite em função do número de vacas que ele cria?",
+                "Uma vendedora recebe R$ 1.000,00 fixos e mais 10% de comissão sobre o\n total que vende no mês. Supondo que em determinado mês ela tenha vendido R$\n" +
+                "30.000,00, quanto recebeu de salário nesse mês?"},
                 respostasFaceis[][] = {{"[ 10/4 ; 15 ]", "[ 2,5 ; 15 [", "] 10/4 ; 15 ]", "] 2,5 ; 15 ["}, //respostas das perguntas
                 {"01100110, 356 ,EE", "00001111, 380, EF", "11111111, 377, FF", "11110000, 374, FE"},
                 {"8", "16", "32", "64"}, {"a³ - 3a³b + 3ab³ + b³", "a³ + 3a³b + 3ab³ + b³", "a³ - 3a³b - 3ab³ - b³", "a³ - 3a³b - 3ab³ + b³"}
-                ,{" while " , " if ", " do while ", " for "}},
-                alternativaA, alternativaB, alternativaC, alternativaD;
-        char resposta, corretaFaceis[] = {'c', 'c', 'b', 'a', 'd'}; //verificação das respostas
+                ,{" while " , " if ", " do while ", " for "}, {"Do {print(vogais[contador])}","for(long letra = 0; letra > vogais.lenght; i--",
+                    "while(contador < 5) {print(vogais[contador]; contador-- ", "for(chat item : vogais { print(vogais[item];} ",}, {"S(x) = 689 + 0,1x", 
+                    "S(x) = 350 + 0,08x", "S(x) = 123 + 0,25x", "S(x) = 369 + 0,12x"},{"y = 200x - 90.000","y = 450x - 20.000","y = 900x - 20.000 ","y = 600x - 15.000"},
+                    {"R$4.000,00" , "R$25.000,00", "R$8.000,00", "R$10.000,00"}}, 
+        alternativaA, alternativaB, alternativaC, alternativaD;
+        char resposta, corretaFaceis[] = {'c', 'c', 'b', 'a', 'd' , 'd','b','d','a',}; //verificação das respostas
         alternativaA = respostasFaceis[rnd][0]; //recebe a resposta da pergunta
         alternativaB = respostasFaceis[rnd][1];
         alternativaC = respostasFaceis[rnd][2];
