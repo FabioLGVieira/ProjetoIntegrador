@@ -11,7 +11,7 @@ public class GameMain {
     static Scanner sc = new Scanner(System.in);
     static boolean running = false;
     static String nome, pegaComando;
-    static int senha;
+    static int senha, progrssoJogo = 0;
 
     public static void main(String[] args) {
         menu();
@@ -26,11 +26,12 @@ public class GameMain {
                 + " esta sendos realizada la na frente, voce pode pegar um atalho pela bilbioteca."
                 + "\nA proposito qual é o seu nome ?");
         sc.nextLine();
-        String nome = sc.nextLine();//IMPORTANTE: o nextLine come a quebra de linha do scanner anterior, por isso, é necessário fazer o comando acima para que funcione corretamente.
+        nome = sc.nextLine();//IMPORTANTE: o nextLine come a quebra de linha do scanner anterior, por isso, é necessário fazer o comando acima para que funcione corretamente.
         System.out.println("Muito bem, " + nome + ". boa sorte");
         System.out.println("Comandos disponiveis: biblioteca | salas");
 
         //tutorial pro player aprender alguns comandos
+        //dizer tbm que se o comando disponivel for masi de uma palavra, o player pode digitar apenas a primeira
         strNext();
         while (!pegaComando.equals("biblioteca")) {
             System.out.println("as salas estao vazias");
@@ -44,7 +45,7 @@ public class GameMain {
             System.out.println("Julia: Quem se inscrever tem que fazer um projeto de alguma atividade fora da Terra, como "
                     + "viagens espaciais, atividades de pesquisa, ou evolução tecnológica!\n Por exemplo, alguns alunos ja pensaram "
                     + "em criar cidades-bolha, casas ou edifícios em outros planetas, carros flutuantes, robôs operários,"
-                    + "super proteses, entre outros. E voce, vai ficar de fora?"
+                    + "\nsuper proteses, entre outros. E voce, vai ficar de fora?"
                     + "Comandos disponiveis: S | N");
             strNext();
             if (pegaComando.equals("s")) {
@@ -61,18 +62,40 @@ public class GameMain {
         }
         System.out.println("O que é esse papel amassado no chao?");
         System.out.println("Comandos disponiveis: Pegar | Ignorar");
+        strNext();
         if (pegaComando.equals("pegar")) {
-            System.out.println("Wow é um projeto detalhado de um Foguete Espacial, quem deixaria isso aqui?");
+            System.out.println("Wow é um projeto detalhado de um Foguete Espacial, quem deixaria isso aqui?"
+                    + "\n Bom vou guarda-lo e ir falar com o professor ??? se pode me ajudar");
         } else {
             System.out.println("Vou pegar esse livro de Java e reprovar na prova mesmo!");
+            gameOver();
         }
+        System.out.println("Bom acho que vou la procurar o professor ???.");
         pracaAlimentacao1();
     }
 
+    //template pra progresso do jogo 
+    /*if(progrssoJogo == 0){
+
+} else if(progrssoJogo == 1){
+
+} else if(progrssoJogo == 2){
+
+} else if(progrssoJogo == 3){
+
+} else if(progrssoJogo == 4){
+
+} else if(progrssoJogo == 5){
+
+} else if(progrssoJogo == 6){
+
+} else if(progrssoJogo == 7){
+
+} else{}*/
     public static void perguntaFacil() {
         int tentativas = 3;
         int rnd = randomico.nextInt(2); //perguntas
-        String perguntas[] = {"O conjunto {x "+(char)8712+" R / 2,5 < x <= 15} pode ser representado pelo seguinte intervalo",
+        String perguntas[] = {"O conjunto {x " + (char) 8712 + " R / 2,5 < x <= 15} pode ser representado pelo seguinte intervalo",
             "O número 255 na base decimal, pode ser representado, respectivamente, nas bases Binária, Octal e Hexadecimal por",
             "Quantos bits há em 2 bytes", "A expressão (a-b)³ pode ser representada por",
             " Para executar um mesmo bloco de código por determinadas vezes, o melhor a se fazer é: "},
@@ -104,68 +127,129 @@ public class GameMain {
             System.out.println("resposta certa");
         } else {
             System.out.println("Gostaria de tentar outra pergunta? S/ N");
-        
-        resposta = sc.next().toLowerCase().charAt(0);
-        if (resposta == 's') {
-            perguntaFacil();
-        }
+
+            resposta = sc.next().toLowerCase().charAt(0);
+            if (resposta == 's') {
+                perguntaFacil();
+            }
         }
     }
 
     public static void pracaAlimentacao1() {
+        if (progrssoJogo == 0) {
+            System.out.println(nome + " : Hey Paulo, voce também está participando do  ");
+            System.out.println(" projeto espacial ? ");
+            System.out.println(" Paulo: estou sim, " + nome + " , qual que é o seu projeto ? ");
+            System.out.println(nome + " : não posso contar, caso alguém fique sabendo podem copiar minha idéia. ");
+            System.out.println(" Aliás, voce viu o professor Gilberto ? ");
+            System.out.println(" Paulo: ele fica no laboratório de mecanica normalmete ");
+            System.out.println(nome + " : obrigado paulo vou procura - lo ");
+            System.out.println("Para onde deseja ir?");
+            System.out.println("Disponiveis: Laboratorio | Sala | Biblioteca");
+            strNext();
+            if (pegaComando.equals("laboratorio")) {
+                labMecanica();
+            } else if (pegaComando.equals("sala")) {
+                salaDeAula();
+            } else if (pegaComando.equals("biblioteca")) {
+                biblioteca();
+            }
+        } else if (progrssoJogo == 1) {
 
-        System.out.println(nome + " : Hey Paulo, voce também está participando do  ");
-        System.out.println(" projeto espacial ? ");
-        System.out.println(" Paulo: estou sim, " + nome + " , qual que é o seu projeto ? ");
-        System.out.println(nome + " : não posso contar, caso alguém fique sabendo podem copiar minha idéia. ");
-        System.out.println(" Aliás, voce viu o professor Gilberto ? ");
-        System.out.println(" Paulo: ele fica no laboratório de mecanica normalmete ");
-        System.out.println(nome + " : obrigado paulo vou procura - lo ");
+        } else if (progrssoJogo == 2) {
 
-        labMecanica();
+        } else if (progrssoJogo == 3) {
+
+        } else if (progrssoJogo == 4) {
+
+        } else if (progrssoJogo == 5) {
+
+        } else if (progrssoJogo == 6) {
+
+        } else if (progrssoJogo == 7) {
+
+        } else {
+        }
+
+    }
+
+    static void salaDeAula() {
+        if (progrssoJogo == 0) {
+
+        } else if (progrssoJogo == 1) {
+
+        } else if (progrssoJogo == 2) {
+
+        } else if (progrssoJogo == 3) {
+
+        } else if (progrssoJogo == 4) {
+
+        } else if (progrssoJogo == 5) {
+
+        } else if (progrssoJogo == 6) {
+
+        } else if (progrssoJogo == 7) {
+
+        } else {
+        }
 
     }
 
     public static void labMecanica() {
+        if (progrssoJogo == 0) {
+            System.out.println(nome + " : segunrança, preciso entrar no laboratório pra falar com o ");
+            System.out.println(" professor Gilberto, voce poderia me passar a senha de acesso do laboratótio ? ");
+            System.out.println(" Não posso te passar a senha, mas posso te dar algumas dicas:\n"
+                    + "Ela é um numero de 4 digitos e estah* em binário: ");
+            System.out.println(" 111 100 100 110‬ ");
 
-        System.out.println(nome + " : segunrança, preciso entrar no laboratório pra falar com o ");
-        System.out.println(" professor Gilberto, voce poderia me passar a senha de acesso do laboratótio ? ");
-        System.out.println(" Não posso te passar a senha, mas posso te informar como ela é em binário: ");
-        System.out.println(" ‭0001110100010110‬ ");
-
-        System.out.println(" Teclado da fechadura ");
-        System.out.println(" Digite a senha: ");
-        senha = sc.nextInt();
-
-        while (senha != 7446) {
-
+            System.out.println(" Teclado da fechadura ");
             System.out.println(" Digite a senha: ");
             senha = sc.nextInt();
-
-        }
-
-        if (senha == 7446) {
-
-            System.out.println(" Acesso liberado ");
-
-            System.out.println(" Professor Gilberto: muito bem " + nome + " , parece que voce me encontrou ");
-            System.out.println(" como posso te ajudar ? ");
-            System.out.println(nome + " estou precisando de peças para montar meu projeto espacial ");
-            System.out.println(" creio que o senhor poderia me ajudar ");
-            System.out.println(" Professor Gilberto: posso te ajudar sim " + nome + " porém voce terá ");
-            System.out.println(" de me responder uma pergunta ");
-
-            perguntaFacil();
+            while (senha != 7446) {
+                System.out.println(" Digite a senha: ");
+                senha = sc.nextInt();
+            }
+            if (senha == 7446) {
+                System.out.println(" Acesso liberado ");
+                System.out.println(" Professor Gilberto: muito bem " + nome + " , parece que voce me encontrou ");
+                System.out.println(" como posso te ajudar ? ");
+                System.out.println("disponiveis: pedir ajuda | perguntar se vai ter prova");
+                strNext();
+                if(pegaComando.equals("pedir")){
+                System.out.println(nome + " estou precisando de peças para montar meu projeto espacial ");
+                System.out.println(" creio que o senhor poderia me ajudar ");
+                System.out.println(" Professor Gilberto: posso te ajudar sim " + nome + " porém voce terá ");
+                System.out.println(" de me responder uma pergunta. Voce esta* de acordo? ");
+                    System.out.println("Disponiveis S | N");
+                    if(pegaComando.equals("s")){
+                perguntaFacil();}
+                    else{
+                        gameOver();
+                    }
+                System.out.println(" Parabéns " + nome + " com essa resposta certa voce ganha um item para o seu projeto ");}
             
-            System.out.println(" Parabéns " + nome + " com essa resposta certa voce ganha um item para o seu projeto ");
-            
-        }
+            }
+        } else if (progrssoJogo == 1) {
 
+        } else if (progrssoJogo == 2) {
+
+        } else if (progrssoJogo == 3) {
+
+        } else if (progrssoJogo == 4) {
+
+        } else if (progrssoJogo == 5) {
+
+        } else if (progrssoJogo == 6) {
+
+        } else if (progrssoJogo == 7) {
+
+        } else {
+        }
     }
 
-
     public static void pracaAlimentacao2() {
-
+if(progrssoJogo == 0){
         System.out.println(" André: fala " + nome + " fiquei sabendo que voce está ");
         System.out.println(" participando do projeto espacial, o que voce está fazendo ? ");
         System.out.println(nome + " : não posso contar de jeito nenhum. ");
@@ -173,17 +257,27 @@ public class GameMain {
         System.out.println(nome + " : voce pegou meu projeto devolva agora ");
         System.out.println(" Só se voce me pagar um lanche ");
         System.out.println(" Deseja pagar um lanche para ter seu projeto de volta ? Sim (S) | Não (N) ");
-
         if (pegaComando.equals("S")) {
-
             System.out.println(" Conseguiu seu projeto de volta ");
-
         } else if (pegaComando.equals("N")) {
-
             gameOver();
 
         }
+    } else if(progrssoJogo == 1){
 
+} else if(progrssoJogo == 2){
+
+} else if(progrssoJogo == 3){
+
+} else if(progrssoJogo == 4){
+
+} else if(progrssoJogo == 5){
+
+} else if(progrssoJogo == 6){
+
+} else if(progrssoJogo == 7){
+
+} else{}   
     }
 
     public static void labDesign() {
