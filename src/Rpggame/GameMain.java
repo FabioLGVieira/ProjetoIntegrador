@@ -277,7 +277,7 @@ public class GameMain {
 
     public static void labMecanica() {
         senha = 0;
-        System.out.println("\n====================\n" + salaAtual("labMec"));
+        System.out.println("\n====================\n" + salaAtual("labDesign"));
         if (progressoJogo == 0) {
             System.out.println(nome + " : segunrança, preciso entrar no laboratório pra falar com o ");
             System.out.println(" professor Gilberto, voce poderia me passar a senha de acesso do laboratótio ? ");
@@ -308,6 +308,7 @@ public class GameMain {
                     charNext();
                     if (resposta == 's') {
                         perguntaFacil();
+                        pracaAlimentacao2();
                     } else {
                         gameOver();
                     }
@@ -356,8 +357,10 @@ public class GameMain {
             System.out.println(nome + " : voce pegou meu projeto devolva agora ");
             System.out.println(" Só se voce me pagar um lanche ");
             System.out.println(" Deseja pagar um lanche para ter seu projeto de volta ? Sim (S) | Não (N) ");
-            if (pegaComando.equals("S")) {
+            charNext();
+                    if (pegaComando.equals("S")) {
                 System.out.println(" Conseguiu seu projeto de volta ");
+                nasa();
             } else if (pegaComando.equals("N")) {
                 gameOver();
             }
@@ -378,10 +381,47 @@ public class GameMain {
         } else {
         }
     }
-
-    public static void labDesign() {
+    
+    public static void nasa(){
         System.out.println("\n====================\n" + salaAtual("labDesign"));
-    }
+        if(progressoJogo == 0){
+            
+            System.out.println(nome + " Preciso usar um dos computadores para  ");
+            System.out.println(" fazer uma pesquisa para meu projeto ");
+            System.out.println(" parece que não estou conseguindo ligar ");
+            System.out.println(" Eduardo: tirei o cabo de enrgia do seu computador ");
+            System.out.println(" Voce vai ter que me ajudar pra ter de volta");
+            System.out.println(nome + " O que voce precisa? ");
+            System.out.println(" Eduardo: preciso de uma dica para meu projeto ");
+            System.out.println(" Dar a dica | Não dar a dica ");
+            if (pegaComando.equals("Sim")){                    
+                System.out.println(" Voce conseguiu ligar o computador ");
+                System.out.println(nome + " agora só estudar e responder alguma pergunta ");
+                perguntaFacil();               
+            }else{                
+                System.out.println(" Não conseguiu ligar o computador ");
+                gameOver();              
+            }         
+        } else if(progressoJogo == 1){
+
+        } else if(progressoJogo == 2){
+
+        } else if(progressoJogo == 3){
+
+        } else if(progressoJogo == 4){
+
+        } else if(progressoJogo == 5){
+
+        } else if(progressoJogo == 6){
+
+        } else if(progressoJogo == 7){
+
+        } else{}
+        
+        }
+        
+        
+    
 
     static char charNext() {
         resposta = sc.next().toLowerCase().charAt(0);
@@ -450,3 +490,4 @@ public class GameMain {
     }
 
 }
+
