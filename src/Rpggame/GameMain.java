@@ -2,8 +2,13 @@ package Rpggame;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GameMain {
+    //Aprendizagem 
+    static boolean gravidade0 = false;
+    
 
     static Random randomico = new Random();
     static Scanner sc = new Scanner(System.in);
@@ -254,12 +259,18 @@ public class GameMain {
         switch (sala) {
             case "labMec":
                 sala = "Laboratorio de Mecanica";
+                nasa();
                 break;
             case "labDesign":
                 sala = "Laboratorio de Design";
+                centroEsportivo();
                 break;
             case "praca01":
                 sala = "Praca de Alimentacao 01";
+                break;
+            case "centroesportivo":
+                sala = "centroesportivo";
+                centroEsportivo();
                 break;
             case "praca02":
                 sala = "Praca de Alimentacao 02";
@@ -419,10 +430,41 @@ public class GameMain {
         } else{}
         
         }
-        
-        
     
-
+    // O jogador vai fazer treinamentos de gravidade 0 na piscina
+    
+    public static void centroEsportivo(){
+        System.out.println("Você está agora no centro esportivo :"
+                + "\nprocure Paula, ela terá uma tarefa para você "
+                + "\n\nAções disponiveis  | procurar paula | sair |");
+        strNext();
+        if(pegaComando.equals("procurar paula")){
+            System.out.println("Paula - Olá "+nome+" veio fazer o treinamento de gravidade 0 ?"
+                    + "\nbom então vamos lá");
+            try {
+                Thread.sleep(1000);
+                System.out.println("Pronto, agora você está preparado para gravidade 0");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GameMain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }if(pegaComando.equals("sair")){
+            System.out.println("Onde deseja ir ? "
+                    + "\nlugares disponiveis  | lab mecanica");
+            strNext();
+            if(pegaComando.equals("lab mecanica")){
+                salaAtual("labMec");
+            }
+            
+        }
+        
+    }
+    
+    //Aqui é onde o player vai desenvolver comida em tubo
+    static void centroGastronomico(){
+        System.out.println("Você chegou no centro gastronomico "
+                + "\naqui você pode sensenvolver a comida em tubo ");
+    }
+    
     static char charNext() {
         resposta = sc.next().toLowerCase().charAt(0);
         sc.nextLine();
