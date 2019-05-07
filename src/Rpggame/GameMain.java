@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 public class GameMain {
     //Aprendizagem 
     static boolean gravidade0 = false;
+    static boolean panfleto = false;
     
 
     static Random randomico = new Random();
@@ -41,9 +42,13 @@ public class GameMain {
             strNext();
             if (pegaComando.equals("sala")) {
                 System.out.println("Ue cade o professor e todo mundo. Será que estao Biblioteca?");
-            } else {
+            }
+            if(!panfleto&&pegaComando.equals("pegar")){
                 System.out.println("Acho que vou pegar esse panfleto.\n"
                         + "Esta dizendo sobre um Concurso... Mais informações na Biblioteca.");
+                panfleto = true;
+            }else{
+                System.out.println("Você já pegou o panfleto");
             }
         } while (!pegaComando.equals("biblioteca"));
         biblioteca();
@@ -66,7 +71,7 @@ public class GameMain {
 
             System.out.println(nome + ": O que é esse concurso?");
             System.out.println("Julia: Quem se inscrever tem que fazer um projeto de alguma atividade fora da Terra, como "
-                    + "viagens espaciais, atividades de pesquisa, ou evolução tecnológica!\n Por exemplo, alguns alunos ja pensaram "
+                    + "viagens espaciais, atividades de pesquisa, ou evolução tecnológica!\nPor exemplo, alguns alunos ja pensaram "
                     + "em criar cidades-bolha, casas ou edifícios em outros planetas, carros flutuantes, robôs operários,"
                     + "\nsuper proteses, entre outros. E voce, vai participar?\n"
                     + "Comandos disponiveis: S | N");
@@ -92,10 +97,24 @@ public class GameMain {
             //System.out.println("Bom acho que vou la procurar o professor ???.");}
             System.out.println("Comandos disponiveis: Praca01 de alimentacao | Sala de Aula");
             strNext();
-            if (pegaComando.equals("praca01")) {
-                pracaAlimentacao1();
-            } else {
-                salaDeAula();
+            if (pegaComando.equals("praca01")||pegaComando.equals("sala")) {
+                System.out.println(nome+"Bom, pensando bem ... é um foguete."
+                        + "\nAcho que vou conseguir mais informações no laboratório de mecanica\n"
+                        + "Olá meu nome é "+nome+" estou procurando o professor de mecanica"
+                        + "\nAmanda : Olá eu sou Amanda muito prazer , você esta atras do professor Claudio ele fica naquela sala "
+                        + "\nvem comigo ..."
+                        + "\nO que você tem em mãos ? posso ver ?"
+                        + "\ncomandos disponiveis  s | n");
+                strNext();
+                if(pegaComando.equals("s")){
+                    System.out.println(nome+": Sim claro , esse é um ..."
+                            + "Amanda : É um projeto completo de um foguete com motor de fusão nuclear "
+                            + "e uma EMU Extravehicular Mobility Unit ! incrivel !!"
+                            + "\nVocê vai montar isso ?");
+                }else{
+                    System.out.println(nome+" : Nem te conheço, vai com calma ai ");
+                }
+                
             }
         }
     }
@@ -463,6 +482,11 @@ public class GameMain {
     static void centroGastronomico(){
         System.out.println("Você chegou no centro gastronomico "
                 + "\naqui você pode sensenvolver a comida em tubo ");
+    }
+    
+    //Area de lançamento
+    static void Teletubbies(){
+        
     }
     
     static char charNext() {
