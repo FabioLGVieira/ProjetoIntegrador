@@ -6,10 +6,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GameMain {
+
     //Aprendizagem 
     static boolean gravidade0 = false;
     static boolean panfleto = false;
-    
 
     static Random randomico = new Random();
     static Scanner sc = new Scanner(System.in);
@@ -24,40 +24,38 @@ public class GameMain {
 
     public static void inicioGame() {
         //running = true;
-        System.out.println("\n\n\n\n======================================================================================================================");
+        System.out.println("\n\n======================================================================================================================\n");
         System.out.println("Voce esta chegando na universidade Senac, e agora sua aventura comeca ...\n\n");
         System.out.println("Ao chegar no Senac, um dos Seguranças quer falar com você.");
-        System.out.println("Segurança do Senac - Bom dia jovem estudante seja bem vindo ao Senac, hoje tem inicio"
-                + "o Concurso do Senac. Primeiramente, devo te ensinar como jogar."
-                + "\nA proposito qual é o seu nome ?");
+        System.out.println("Segurança do Senac: Bom dia, jovem estudante! Como se chama?");
         sc.nextLine();
         nome = sc.nextLine();//IMPORTANTE: o nextLine come a quebra de linha do scanner anterior, por isso, é necessário fazer o comando acima para que funcione corretamente.
         //tutorial pro player aprender alguns comandos
-        System.out.println("Muito bem, " + nome + ". Para conseguir jogar, voce deve digitar os COMANDOS DISPONIVEIS "
-                + "para interagir com ações ou mudando de salas. Por exemplo, se aparecer:  Pegar item | Biblioteca\n"
-                + "Você pode digitar apenas 'pegar' para executar a ação, ou 'biblioteca' para se dirigir até a sala.\n"
-                + "Acho que por enquanto é só isso que você precisa, vamos testar se voce entendeu.");
+        System.out.println("Seja bem-vindo ao Senac, " + nome + "! Ficou sabendo do concurso que irá acontecer aqui no campus? Dirija-se até a biblioteca para saber mais!");
+        System.out.println("Comandos disponíveis: depois eu vou | biblioteca");
+
         do {
-            System.out.println("Comandos disponíveis: Biblioteca | Sala de Aula | Pegar panfleto");
             strNext();
-            if (pegaComando.equals("sala")) {
-                System.out.println("Ue cade o professor e todo mundo. Será que estao Biblioteca?");
+            if (pegaComando.equals("depois")) {
+                System.out.printf("%s: Obrigado por avisar, mas estou atrasado para a aula. Depois eu vou!", nome);
+                System.out.println("Segurança do Senac: Tudo bem! Boa aula!");
+                salavazia();
+
+            } else if (pegaComando.equals("biblioteca")) {
+                System.out.println("Vou lá dar uma olhada. Aí eu aproveito e pego um livro que o professor recomendou. Obrigado!");
+                biblioteca();
+
+            } else {
+                System.out.println("Comando inválido.");
             }
-            if(!panfleto&&pegaComando.equals("pegar")){
-                System.out.println("Acho que vou pegar esse panfleto.\n"
-                        + "Esta dizendo sobre um Concurso... Mais informações na Biblioteca.");
-                panfleto = true;
-            }else{
-                System.out.println("Você já pegou o panfleto");
-            }
-        } while (!pegaComando.equals("biblioteca"));
-        biblioteca();
+
+        } while (!(pegaComando.equals("depois") && pegaComando.equals("biblioteca")));
     }
 
     static void biblioteca() {
-        System.out.println("\n====================\n" + salaAtual("biblioteca"));
+        System.out.println("\n==============================\n" + salaAtual("biblioteca") + "\n");
         if (progressoJogo == 0) {
-            System.out.println("Logo percebe outros alunos conversando sobre projetos para o Concurso.");
+            System.out.println("Você chega na biblioteca e logo percebe outros alunos conversando sobre projetos para o Concurso...");
             do {
                 System.out.println("Comandos disponiveis: Conversar a Balconista | Sul | Norte");
                 strNext();
@@ -70,7 +68,7 @@ public class GameMain {
             } while (!pegaComando.equals("conversar"));
 
             System.out.println(nome + ": O que é esse concurso?");
-            System.out.println("Julia: Quem se inscrever tem que fazer um projeto de alguma atividade fora da Terra, como "
+            System.out.println("Balconista: Quem se inscrever tem que fazer um projeto sobre atividades fora da Terra, como: "
                     + "viagens espaciais, atividades de pesquisa, ou evolução tecnológica!\nPor exemplo, alguns alunos ja pensaram "
                     + "em criar cidades-bolha, casas ou edifícios em outros planetas, carros flutuantes, robôs operários,"
                     + "\nsuper proteses, entre outros. E voce, vai participar?\n"
@@ -78,7 +76,7 @@ public class GameMain {
             charNext();
             if (resposta == 's') {
                 System.out.println("Gostei muito da ideia, mas nao sei ainda o que fazer, vou pensar mais! "
-                        + "Agora preciso pegar um livro pra prova!");
+                        + "Agora preciso pegar o livro que o professor pediu!");
             } else {
                 System.out.println("Por enquanto nao");
                 gameOver();
@@ -88,8 +86,8 @@ public class GameMain {
             System.out.println("Comandos disponiveis: Pegar o papel | Ignorar");
             strNext();
             if (pegaComando.equals("pegar")) {
-                System.out.println("Wow é um projeto detalhado de um Foguete Espacial, quem deixaria isso aqui?"
-                        + "\nBom vou guarda-lo e ir falar com o professor ??? se pode me ajudar.");
+                System.out.println("Wow! É um projeto detalhado de um Foguete Espacial! Quem jogaria isso fora?"
+                        + "\nBom, vou guardar... Quem sabe não será útil mais tarde?!");
             } else {
                 System.out.println("To nem ai. Vou pegar esse livro de Java e reprovar na prova mesmo!");
                 gameOver();
@@ -97,24 +95,24 @@ public class GameMain {
             //System.out.println("Bom acho que vou la procurar o professor ???.");}
             System.out.println("Comandos disponiveis: Praca01 de alimentacao | Sala de Aula");
             strNext();
-            if (pegaComando.equals("praca01")||pegaComando.equals("sala")) {
-                System.out.println(nome+"Bom, pensando bem ... é um foguete."
+            if (pegaComando.equals("praca01") || pegaComando.equals("sala")) {
+                System.out.println(nome + "Bom, pensando bem ... é um foguete."
                         + "\nAcho que vou conseguir mais informações no laboratório de mecanica\n"
-                        + "Olá meu nome é "+nome+" estou procurando o professor de mecanica"
+                        + "Olá meu nome é " + nome + " estou procurando o professor de mecanica"
                         + "\nAmanda : Olá eu sou Amanda muito prazer , você esta atras do professor Claudio ele fica naquela sala "
                         + "\nvem comigo ..."
                         + "\nO que você tem em mãos ? posso ver ?"
                         + "\ncomandos disponiveis  s | n");
                 strNext();
-                if(pegaComando.equals("s")){
-                    System.out.println(nome+": Sim claro , esse é um ..."
+                if (pegaComando.equals("s")) {
+                    System.out.println(nome + ": Sim claro , esse é um ..."
                             + "Amanda : É um projeto completo de um foguete com motor de fusão nuclear "
                             + "e uma EMU Extravehicular Mobility Unit ! incrivel !!"
                             + "\nVocê vai montar isso ?");
-                }else{
-                    System.out.println(nome+" : Nem te conheço, vai com calma ai ");
+                } else {
+                    System.out.println(nome + " : Nem te conheço, vai com calma ai ");
                 }
-                
+
             }
         }
     }
@@ -122,21 +120,21 @@ public class GameMain {
     //template pra progresso do jogo 
     /*if(progrssoJogo == 0){
 
-} else if(progressoJogo == 1){
+     } else if(progressoJogo == 1){
 
-} else if(progressoJogo == 2){
+     } else if(progressoJogo == 2){
 
-} else if(progressoJogo == 3){
+     } else if(progressoJogo == 3){
 
-} else if(progressoJogo == 4){
+     } else if(progressoJogo == 4){
 
-} else if(progressoJogo == 5){
+     } else if(progressoJogo == 5){
 
-} else if(progressoJogo == 6){
+     } else if(progressoJogo == 6){
 
-} else if(progressoJogo == 7){
+     } else if(progressoJogo == 7){
 
-} else{}*/
+     } else{}*/
     //passar array pra lista 
     static void perguntaMedia() {
         int tentativas = 3;
@@ -388,7 +386,7 @@ public class GameMain {
             System.out.println(" Só se voce me pagar um lanche ");
             System.out.println(" Deseja pagar um lanche para ter seu projeto de volta ? Sim (S) | Não (N) ");
             charNext();
-                    if (pegaComando.equals("S")) {
+            if (pegaComando.equals("S")) {
                 System.out.println(" Conseguiu seu projeto de volta ");
                 nasa();
             } else if (pegaComando.equals("N")) {
@@ -411,11 +409,11 @@ public class GameMain {
         } else {
         }
     }
-    
-    public static void nasa(){
+
+    public static void nasa() {
         System.out.println("\n====================\n" + salaAtual("labDesign"));
-        if(progressoJogo == 0){
-            
+        if (progressoJogo == 0) {
+
             System.out.println(nome + " Preciso usar um dos computadores para  ");
             System.out.println(" fazer uma pesquisa para meu projeto ");
             System.out.println(" parece que não estou conseguindo ligar ");
@@ -424,41 +422,41 @@ public class GameMain {
             System.out.println(nome + " O que voce precisa? ");
             System.out.println(" Eduardo: preciso de uma dica para meu projeto ");
             System.out.println(" Dar a dica | Não dar a dica ");
-            if (pegaComando.equals("Sim")){                    
+            if (pegaComando.equals("Sim")) {
                 System.out.println(" Voce conseguiu ligar o computador ");
                 System.out.println(nome + " agora só estudar e responder alguma pergunta ");
-                perguntaFacil();               
-            }else{                
+                perguntaFacil();
+            } else {
                 System.out.println(" Não conseguiu ligar o computador ");
-                gameOver();              
-            }         
-        } else if(progressoJogo == 1){
+                gameOver();
+            }
+        } else if (progressoJogo == 1) {
 
-        } else if(progressoJogo == 2){
+        } else if (progressoJogo == 2) {
 
-        } else if(progressoJogo == 3){
+        } else if (progressoJogo == 3) {
 
-        } else if(progressoJogo == 4){
+        } else if (progressoJogo == 4) {
 
-        } else if(progressoJogo == 5){
+        } else if (progressoJogo == 5) {
 
-        } else if(progressoJogo == 6){
+        } else if (progressoJogo == 6) {
 
-        } else if(progressoJogo == 7){
+        } else if (progressoJogo == 7) {
 
-        } else{}
-        
+        } else {
         }
-    
+
+    }
+
     // O jogador vai fazer treinamentos de gravidade 0 na piscina
-    
-    public static void centroEsportivo(){
+    public static void centroEsportivo() {
         System.out.println("Você está agora no centro esportivo :"
                 + "\nprocure Paula, ela terá uma tarefa para você "
                 + "\n\nAções disponiveis  | procurar paula | sair |");
         strNext();
-        if(pegaComando.equals("procurar paula")){
-            System.out.println("Paula - Olá "+nome+" veio fazer o treinamento de gravidade 0 ?"
+        if (pegaComando.equals("procurar paula")) {
+            System.out.println("Paula - Olá " + nome + " veio fazer o treinamento de gravidade 0 ?"
                     + "\nbom então vamos lá");
             try {
                 Thread.sleep(1000);
@@ -466,29 +464,30 @@ public class GameMain {
             } catch (InterruptedException ex) {
                 Logger.getLogger(GameMain.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }if(pegaComando.equals("sair")){
+        }
+        if (pegaComando.equals("sair")) {
             System.out.println("Onde deseja ir ? "
                     + "\nlugares disponiveis  | lab mecanica");
             strNext();
-            if(pegaComando.equals("lab mecanica")){
+            if (pegaComando.equals("lab mecanica")) {
                 salaAtual("labMec");
             }
-            
+
         }
-        
+
     }
-    
+
     //Aqui é onde o player vai desenvolver comida em tubo
-    static void centroGastronomico(){
+    static void centroGastronomico() {
         System.out.println("Você chegou no centro gastronomico "
                 + "\naqui você pode sensenvolver a comida em tubo ");
     }
-    
+
     //Area de lançamento
-    static void Teletubbies(){
-        
+    static void Teletubbies() {
+
     }
-    
+
     static char charNext() {
         resposta = sc.next().toLowerCase().charAt(0);
         sc.nextLine();
@@ -507,11 +506,29 @@ public class GameMain {
 
     //implementar imagem ascii
     public static void salavazia() {
+        System.out.println("=====================================\n");
+        System.out.println("Você chega na sala e não tem ninguém, só o professor...\n");
+        System.out.println("Comando disponível: Perguntar");
+        strNext();
+        System.out.printf("%s: Com licença, é aqui a sala de TADS?\n", nome);
+        System.out.println("Alexandre: É sim! Mas os alunos estão na biblioteca pegando o livro que pedi e vendo informações sobre o concurso que vai ter no Campus.");
+        System.out.println("Comando disponível: Ir até lá");
+        strNext();
+        System.out.printf("%s: O segurança me falou sobre esse concurso, vou lá dar uma olhada!\n", nome);
+        System.out.println("Alexandre: Pode ir! Só não esqueça do livro, o nome do livro é 'Java para iniciantes'.");
+        System.out.printf("%s: Pode deixar, obrigado!\n", nome);
+        System.out.println("Comandos disponível: biblioteca");
+        strNext();
+        while (!pegaComando.equals("biblioteca")) {
+            System.out.println("Comando inválido.");
+            strNext();
+        }
+        biblioteca();
 
     }
 
     public static void menu() {
-        System.out.println("      Beyond the earth   \n"
+        System.out.println("      Beyond the earth   "
                 + "\n --------------------------"
                 + "\n|       --> Menu <--       |"
                 + "\n| 1- Instruções            |"
@@ -524,16 +541,8 @@ public class GameMain {
         int option = sc.nextInt();
         switch (option) {
             case 1:
-                System.out.println("Instruções: \n"
-                        + "Você pode jogar digitando comandos especificados em cada sala e assim progredir no Jogo."
-                        + "Para terminar o jogo é necessario juntar todas as partes do projeto.");
-                System.out.println("Gostaria de começar o jogo? S/N");
-                pegaComando = sc.next();
-                if (pegaComando.equals("s")) {
-                    inicioGame();
-                } else {
-                    menu();
-                }
+                instrucoes();
+
                 break;
             case 2:
                 inicioGame();
@@ -555,5 +564,31 @@ public class GameMain {
         }
     }
 
-}
+    public static void instrucoes() {
+        System.out.println("Para conseguir jogar, voce deve digitar um dos COMANDOS DISPONÍVEIS "
+                + "para interagir com ações ou mudando de salas. Por exemplo, se aparecer:  Pegar item | Biblioteca\n"
+                + "Você pode digitar apenas 'pegar' para executar a ação, ou 'biblioteca' para se dirigir até a sala.\n"
+                + "Acho que por enquanto é só isso que você precisa, vamos testar se voce entendeu.");
+        sc.nextLine();
+        do {
+            System.out.println("Comandos disponíveis: Jogar | Voltar ao menu ");
+            strNext();
+            if (pegaComando.equals("jogar")) {
+                System.out.println("Vamos começar nossa aventura!");
 
+            } else if (pegaComando.equals("voltar ao menu")) {
+                System.out.println("Hmmm, tente digitar somente a primeira palavra");
+
+            } else if (pegaComando.equals("voltar")) {
+                menu();
+
+            } else {
+                System.out.println("Comando inválido.\n");
+            }
+
+        } while (!pegaComando.equals("jogar"));
+        inicioGame();
+
+    }
+
+}
