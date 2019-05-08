@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Arrays;
 
 public class GameMain {
 
@@ -32,24 +33,70 @@ public class GameMain {
         nome = sc.nextLine();//IMPORTANTE: o nextLine come a quebra de linha do scanner anterior, por isso, é necessário fazer o comando acima para que funcione corretamente.
         //tutorial pro player aprender alguns comandos
         System.out.println("Seja bem-vindo ao Senac, " + nome + "! Ficou sabendo do concurso que irá acontecer aqui no campus? Dirija-se até a biblioteca para saber mais!");
-        System.out.println("Comandos disponíveis: depois eu vou | biblioteca");
-
+        comandosDisponiveis("depois eu vou", "bibliotca", "", "");
         do {
-            strNext();
+            verificaComando();
             if (pegaComando.equals("depois")) {
                 System.out.printf("%s: Obrigado por avisar, mas estou atrasado para a aula. Depois eu vou!", nome);
                 System.out.println("Segurança do Senac: Tudo bem! Boa aula!");
                 salavazia();
-
             } else if (pegaComando.equals("biblioteca")) {
                 System.out.println("Vou lá dar uma olhada. Aí eu aproveito e pego um livro que o professor recomendou. Obrigado!");
                 biblioteca();
-
             } else {
                 System.out.println("Comando inválido.");
             }
-
         } while (!(pegaComando.equals("depois") && pegaComando.equals("biblioteca")));
+    }
+
+    static void comandosDisponiveis(String t1, String t2, String t3, String t4) {
+        String disponiveis = "";
+        if (t2.equals("")) {
+            disponiveis = t1;
+        } else if (t3.equals("")) {
+            disponiveis = t1 + " | " + t2;
+        } else if (t4.equals("")) {
+            disponiveis = t1 + " | " + t2 + " | " + t3;
+        } else {
+            disponiveis = t1 + " | " + t2 + " | " + t3 + " | " + t4;
+        }
+        System.out.println("Comandos Disponíveis: " + disponiveis);;
+    }
+
+    static String verificaComando() {
+        String comandos[] = {"biblioteca", "ali01", "nasa", "labdes", "ali03", "sala", "conversar", "pegar", "s", "n", "sim", "nao",
+            "ignorar", "depois","sair","procurar"};
+        strNext();
+        if (Arrays.asList(comandos).contains(pegaComando)) {
+            switch (pegaComando) {
+                case "biblioteca":
+                    biblioteca();
+                    break;
+                case "ali01":
+                    pracaAlimentacao1();
+                    break;
+                case "ali03":
+                    pracaAlimentacao3();
+                    break;
+                case "nasa":
+                    nasa();
+                    break;
+                case "sala":
+                    salaDeAula();
+                    break;
+                case "labdes":
+                    labDesign();
+                    break;
+                case "procurar":
+                    break;
+                case "sair":
+                    System.exit(1);
+                    break;
+            }
+        } else {
+            System.out.println("Comando inválido");
+        }
+        return pegaComando;
     }
 
     static void biblioteca() {
@@ -57,13 +104,15 @@ public class GameMain {
         if (progressoJogo == 0) {
             System.out.println("Você chega na biblioteca e logo percebe outros alunos conversando sobre projetos para o Concurso...");
             do {
-                System.out.println("Comandos disponiveis: Conversar a Balconista | Sul | Norte");
-                strNext();
-                if (pegaComando.equals("sul")) {
+                comandosDisponiveis("Conversar com a balconista", "Sair da Biblioteca", "Procurar o livro", "");
+                //System.out.println("Comandos disponiveis: Conversar a Balconista | sair da biblioteca | Procurar o Livro");
+                verificaComando();
+                if (pegaComando.equals("sair")) {
                     gameOver();
                     //System.out.println("Nao desista do concurso!(Voz interior)");
-                } else if (pegaComando.equals("norte")) {
+                } else if (pegaComando.equals("procurar")) {
                     System.out.println(nome + "Onde vou achar esse livro de Java?");
+                    System.out.println("Talvez devesse ver sobre o concurso...");
                 }
             } while (!pegaComando.equals("conversar"));
 
@@ -225,7 +274,7 @@ public class GameMain {
             System.out.println("Disponiveis: Laboratorio | Sala | Biblioteca");
             strNext();
             if (pegaComando.equals("laboratorio")) {
-                labMecanica();
+                labDesign();
             } else if (pegaComando.equals("sala")) {
                 salaDeAula();
             } else if (pegaComando.equals("biblioteca")) {
@@ -303,7 +352,7 @@ public class GameMain {
         return "Ambiente atual: " + sala;
     }
 
-    public static void labMecanica() {
+    public static void labDesign() {
         senha = 0;
         System.out.println("\n====================\n" + salaAtual("labDesign"));
         if (progressoJogo == 0) {
@@ -336,7 +385,7 @@ public class GameMain {
                     charNext();
                     if (resposta == 's') {
                         perguntaFacil();
-                        pracaAlimentacao2();
+                        pracaAlimentacao3();
                     } else {
                         gameOver();
                     }
@@ -375,7 +424,7 @@ public class GameMain {
         }
     }
 
-    public static void pracaAlimentacao2() {
+    public static void pracaAlimentacao3() {
         System.out.println("\n====================\n" + salaAtual("praca02"));
         if (progressoJogo == 0) {
             System.out.println(" André: fala " + nome + " fiquei sabendo que voce está ");
@@ -581,7 +630,6 @@ public class GameMain {
 
             } else if (pegaComando.equals("voltar")) {
                 menu();
-
             } else {
                 System.out.println("Comando inválido.\n");
             }
