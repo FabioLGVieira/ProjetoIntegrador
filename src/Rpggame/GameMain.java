@@ -35,91 +35,80 @@ public class GameMain {
         //tutorial pro player aprender alguns comandos
         System.out.println("Seja bem-vindo ao Senac, " + nome + "! Ficou sabendo do concurso que irá acontecer aqui no campus? Dirija-se até a biblioteca para saber mais!");
         comandosDisponiveis("depois eu vou", "bibliotca", "", "");
-        do {           
-                    verificaComando();
-                    if (pegaComando.equals("depois")) {
-                        System.out.printf("%s: Obrigado por avisar, mas estou atrasado para a aula. Depois eu vou! \n", nome);
-                        System.out.println("Segurança do Senac: Tudo bem! Boa aula!");
-                        strNext();
-                        salavazia();
-                    } else if (pegaComando.equals("biblioteca")) {
-                        System.out.println("Vou lá dar uma olhada. Aí eu aproveito e pego um livro que o professor recomendou. Obrigado!");
-                        strNext();
-                        biblioteca();
-                    } else {
-                        System.out.println("Comando inválido.");
-
-                    }
-        } while (!(pegaComando.equals("depois") && pegaComando.equals("biblioteca")));
+        verificaComando(1);
+        if (resposta == 'a') {
+            System.out.printf("%s: Obrigado por avisar, mas estou atrasado para a aula. Depois eu vou! \n", nome);
+            System.out.println("Segurança do Senac: Tudo bem! Boa aula!");
+            strNext();
+            salavazia();
+        } else if (resposta == 'b') {
+            System.out.println("Vou lá dar uma olhada. Aí eu aproveito e pego um livro que o professor recomendou. Obrigado!");
+            strNext();
+            biblioteca();
+        }
     }
 
     static void comandosDisponiveis(String t1, String t2, String t3, String t4) {
         String disponiveis = "";
         if (t2.equals("")) {
-            disponiveis ="a) " +t1;
+            disponiveis = "a) " + t1;
         } else if (t3.equals("")) {
             disponiveis = "a) " + t1 + " | b) " + t2;
         } else if (t4.equals("")) {
             disponiveis = "a) " + t1 + " | b) " + t2 + " | c) " + t3;
         } else {
-            disponiveis ="a) " + t1 + " | b) " + t2 + " | c) " + t3 + " | d) " + t4;
+            disponiveis = "a) " + t1 + " | b) " + t2 + " | c) " + t3 + " | d) " + t4;
         }
         System.out.println("Comandos Disponíveis: " + disponiveis);;
     }
 
-    static String verificaComando() {
-        String comandos[] = {"biblioteca", "p1", "nasa", "labdes", "p3", "sala", "conversar", "pegar", "s", "n", "sim", "nao",
-            "ignorar", "depois", "sair", "procurar"};
-        strNext();
-        if (Arrays.asList(comandos).contains(pegaComando)) {
-            switch (pegaComando) {
-                case "biblioteca":
-                    biblioteca();
-                    break;
-                case "p1":
-                    pracaAlimentacao1();
-                    break;
-                case "p3":
-                    pracaAlimentacao3();
-                    break;
-                case "nasa":
-                    nasa();
-                    break;
-                case "sala":
-                    salaDeAula();
-                    break;
-                case "labdes":
-                    labDesign();
-                    break;
-                case "procurar":
-                    break;
-                case "sair":
-                    System.exit(1);
-                    break;
-            }
-        } else {
-            System.out.println("Comando inválido.");
+    static char verificaComando(int op) {
+        char[] comandos = {'a', 'b', 'c', 'd'}, comandosSN = {'s', 'n'};
+        charNext();
+        //if(!(Arrays.asList(comandos).contains(resposta)));
+        if (resposta == 'e') {
+            System.exit(1);
         }
-        return pegaComando;
+
+        if (op == 1) {
+            while (resposta != 'a' && resposta != 'b' && resposta != 'c' && resposta != 'd') {
+            //while ((Arrays.asList(comandos).contains(resposta))) {
+                System.out.println("Comando inválido.");
+                charNext();
+            }
+        }/*
+        switch (op) {
+            case 1:
+                //if(!Arrays.asList(comandos).contains(resposta))
+                while ((!(Arrays.asList(comandos).contains(resposta)))) {
+                    System.out.println("Comando inválido.");
+                    charNext();
+                }
+                break;
+            case 2: 
+                while (!(Arrays.asList(comandosSN).contains(resposta))) {
+                    System.out.println("Comando inválido.");
+                    charNext();
+                }
+                break;
+        }*/
+        return resposta;
     }
 
     static void biblioteca() {
         System.out.println("\n==============================\n" + salaAtual("biblioteca") + "\n");
         if (progressoJogo == 0) {
             System.out.println("Você chega na biblioteca e logo percebe outros alunos conversando sobre projetos para o Concurso...");
-            do {
-                comandosDisponiveis("Conversar com a balconista", "Sair da Biblioteca", "Procurar o livro", "");
+            comandosDisponiveis("Conversar com a balconista", "Sair da Biblioteca", "Procurar o livro", "");
 
-                verificaComando();
-                if (pegaComando.equals("sair")) {
-                    gameOver();
+            verificaComando(1);
+            if (resposta == 'b') {
+                gameOver();
 
-                } else if (pegaComando.equals("procurar")) {
-                    System.out.println(nome + ": Onde vou achar esse livro de Java?");
-                    System.out.println("Talvez devesse ver sobre o concurso...");
-                }
-            } while (!pegaComando.equals("conversar"));
-
+            } else if (resposta == 'c') {
+                System.out.println(nome + ": Onde vou achar esse livro de Java?");
+                System.out.println("Talvez devesse ver sobre o concurso...");
+            }
             System.out.println(nome + ": O que é esse concurso?");
             System.out.println("Balconista: Quem se inscrever tem que fazer um projeto sobre atividades fora da Terra, como: "
                     + "viagens espaciais, atividades de pesquisa, ou evolução tecnológica!\nPor exemplo, alguns alunos ja pensaram "
@@ -127,18 +116,17 @@ public class GameMain {
                     + "\nsuper proteses, entre outros. E voce, vai participar?\n"
                     + "Comandos disponiveis: S | N");
             charNext();
-            if (resposta == 's') {
-                System.out.println("Gostei muito da ideia, mas nao sei ainda o que fazer, vou pensar mais! "
-                        + "Agora preciso pegar o livro que o professor pediu!");
-            } else {
+            if (resposta == 'n') {
                 System.out.println("Por enquanto nao");
                 gameOver();
             }
+            System.out.println("Gostei muito da ideia, mas nao sei ainda o que fazer, vou pensar mais! "
+                    + "Agora preciso pegar o livro que o professor pediu!");
             System.out.println("....(procurando o livro nas estantes)");
             System.out.println("O que é esse papel amassado no chao?");
             comandosDisponiveis("Pegar o papel", "Ignorar", "", "");
 
-            verificaComando();
+            verificaComando(1);
             if (pegaComando.equals("pegar")) {
                 System.out.println("Wow! É um projeto detalhado de um Foguete Espacial! Quem jogaria isso fora?"
                         + "\nBom, vou guardar... Quem sabe não será útil mais tarde?!");
@@ -156,7 +144,7 @@ public class GameMain {
         }
         comandosDisponiveis("p1 ( Praça de alimentação 1", "Sala de Aula", "", "");
 
-        verificaComando();
+        verificaComando(1);
 
         if (pegaComando.equals("p1") || pegaComando.equals("sala")) {
             System.out.println(nome + "Bom, pensando bem ... é um foguete."
@@ -575,7 +563,6 @@ public class GameMain {
 
     static char charNext() {
         resposta = sc.next().toLowerCase().charAt(0);
-        sc.nextLine();
         return resposta;
     }
 
@@ -677,4 +664,3 @@ public class GameMain {
     }
 
 }
-
