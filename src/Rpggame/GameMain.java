@@ -29,7 +29,7 @@ public class GameMain {
         System.out.println("\n\n======================================================================================================================\n");
         System.out.println("Voce esta chegando na universidade Senac, e agora sua aventura comeca ...\n\n");
         System.out.println("Ao chegar no Senac, um dos Seguranças quer falar com você.");
-        System.out.println("Segurança do Senac: Bom dia, jovem estudante! Como se chama?");
+        System.out.print("Segurança do Senac: Bom dia, jovem estudante! Como se chama?\n");
         sc.nextLine();
         nome = sc.nextLine();//IMPORTANTE: o nextLine come a quebra de linha do scanner anterior, por isso, é necessário fazer o comando acima para que funcione corretamente.
         //tutorial pro player aprender alguns comandos
@@ -38,7 +38,7 @@ public class GameMain {
         do {           
                     verificaComando();
                     if (pegaComando.equals("depois")) {
-                        System.out.printf("%s: Obrigado por avisar, mas estou atrasado para a aula. Depois eu vou!", nome);
+                        System.out.printf("%s: Obrigado por avisar, mas estou atrasado para a aula. Depois eu vou! \n", nome);
                         System.out.println("Segurança do Senac: Tudo bem! Boa aula!");
                         strNext();
                         salavazia();
@@ -56,13 +56,13 @@ public class GameMain {
     static void comandosDisponiveis(String t1, String t2, String t3, String t4) {
         String disponiveis = "";
         if (t2.equals("")) {
-            disponiveis = t1;
+            disponiveis ="a) " +t1;
         } else if (t3.equals("")) {
-            disponiveis = t1 + " | " + t2;
+            disponiveis = "a) " + t1 + " | b) " + t2;
         } else if (t4.equals("")) {
-            disponiveis = t1 + " | " + t2 + " | " + t3;
+            disponiveis = "a) " + t1 + " | b) " + t2 + " | c) " + t3;
         } else {
-            disponiveis = t1 + " | " + t2 + " | " + t3 + " | " + t4;
+            disponiveis ="a) " + t1 + " | b) " + t2 + " | c) " + t3 + " | d) " + t4;
         }
         System.out.println("Comandos Disponíveis: " + disponiveis);;
     }
@@ -109,11 +109,11 @@ public class GameMain {
             System.out.println("Você chega na biblioteca e logo percebe outros alunos conversando sobre projetos para o Concurso...");
             do {
                 comandosDisponiveis("Conversar com a balconista", "Sair da Biblioteca", "Procurar o livro", "");
-                //System.out.println("Comandos disponiveis: Conversar a Balconista | sair da biblioteca | Procurar o Livro");
+
                 verificaComando();
                 if (pegaComando.equals("sair")) {
                     gameOver();
-                    //System.out.println("Nao desista do concurso!(Voz interior)");
+
                 } else if (pegaComando.equals("procurar")) {
                     System.out.println(nome + ": Onde vou achar esse livro de Java?");
                     System.out.println("Talvez devesse ver sobre o concurso...");
@@ -137,7 +137,7 @@ public class GameMain {
             System.out.println("....(procurando o livro nas estantes)");
             System.out.println("O que é esse papel amassado no chao?");
             comandosDisponiveis("Pegar o papel", "Ignorar", "", "");
-            //System.out.println("Comandos disponiveis: Pegar o papel | Ignorar");
+
             verificaComando();
             if (pegaComando.equals("pegar")) {
                 System.out.println("Wow! É um projeto detalhado de um Foguete Espacial! Quem jogaria isso fora?"
@@ -146,7 +146,7 @@ public class GameMain {
                 System.out.println("To nem ai. Vou pegar esse livro de Java e reprovar na prova mesmo!");
                 gameOver();
             }
-            //System.out.println("Bom acho que vou la procurar o professor ???.");}
+
             System.out.println("Comandos disponiveis: Praca01 de alimentacao | Sala de Aula");
             if (pegaComando.equals("Praca01")) {
                 pracaAlimentacao1();
@@ -155,9 +155,9 @@ public class GameMain {
             }
         }
         comandosDisponiveis("p1 ( Praça de alimentação 1", "Sala de Aula", "", "");
-        //System.out.println("Comandos disponiveis: Praca01 de alimentacao | Sala de Aula");
+
         verificaComando();
-        //strNext();
+
         if (pegaComando.equals("p1") || pegaComando.equals("sala")) {
             System.out.println(nome + "Bom, pensando bem ... é um foguete."
                     + "\nAcho que vou conseguir mais informações no laboratório de mecanica\n"
@@ -593,12 +593,10 @@ public class GameMain {
     public static void salavazia() {
         System.out.println("=====================================\n");
         System.out.println("Você chega na sala e não tem ninguém, só o professor...\n");
-        System.out.println("Comando disponível: Perguntar");
         strNext();
         System.out.printf("%s: Com licença, é aqui a sala de TADS?\n", nome);
         strNext();
         System.out.println("Alexandre: É sim! Mas os alunos estão na biblioteca pegando o livro que pedi e vendo informações sobre o concurso que vai ter no Campus.");
-        System.out.println("Comando disponível: Ir até lá");
         strNext();
         System.out.printf("%s: O segurança me falou sobre esse concurso, vou lá dar uma olhada!\n", nome);
         strNext();
