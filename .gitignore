@@ -1,5 +1,4 @@
 /build/
 /bin/
-/nbproject/private/
-*.classpath
-*.project
+/nbproject/*
+/dist/
