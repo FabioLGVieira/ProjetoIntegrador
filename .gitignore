@@ -1,6 +1,7 @@
-/build
-/bin
-/nbproject
-/dist
+/build/
+/bin/
+/nbproject/*
+/dist/*
+private.*
 *.classpath
 *.project

@@ -1,7 +1,5 @@
 package Rpggame;
 
-import static Rpggame.RPGGame.gameOver;
-import static Rpggame.RPGGame.menu;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -9,16 +7,15 @@ import java.util.logging.Logger;
 
 public class GameMain {
 
-    //Aprendizagem 
-    //static boolean gravidade0 = false;
     static Random randomico = new Random();
     static Scanner sc = new Scanner(System.in);
     static String nome;
-    static int progressoJogo;
+    static int progressoPlayer, progressoAdversários;
     static char resposta;
 
     public static void main(String[] args) {
-        progressoJogo = 0;
+        progressoPlayer = 0;
+        progressoAdversários = 0;
         menu();
     }
 
@@ -88,11 +85,11 @@ public class GameMain {
 
     static void biblioteca() {
         System.out.println("\n======================================================================================================================\n" + salaAtual("biblioteca") + "\n");
-        if (progressoJogo == 0) {
+        if (progressoPlayer == 0) {
             System.out.println("Você chega na biblioteca e logo percebe outros alunos conversando sobre projetos para o Concurso...");
             comandosDisponiveis(1, "Conversar com a balconista", "Sair da Biblioteca", "Procurar o livro", "");
             if (resposta == 'b') {
-                gameOver();
+                //gameOver();
             } else if (resposta == 'c') {
                 System.out.println(nome + ": Onde vou achar esse livro de Java?");
                 System.out.println("Talvez devesse ver sobre o concurso...");
@@ -109,7 +106,7 @@ public class GameMain {
             comandosDisponiveis(2, "S", "N", "", "");
             if (resposta == 'n') {
                 System.out.println("Por enquanto nao");
-                gameOver();
+                //gameOver();
             }
             System.out.print("Gostei muito da ideia, mas nao sei ainda o que fazer, vou pensar mais! "
                     + "Agora preciso pegar o livro que o professor pediu!");
@@ -124,7 +121,7 @@ public class GameMain {
                 System.out.print("Bom, vou guardar... Quem sabe não será útil mais tarde?!\n");
             } else {
                 System.out.print("To nem ai. Vou pegar esse livro de Java e ir para a prova mesmo!");
-                gameOver();
+                //gameOver();
             }
         }
         comandosDisponiveis(1, "Praça de alimentação 1", "Sala de Aula", "", "");
@@ -132,7 +129,7 @@ public class GameMain {
             pracaAlimentacao1();
         } else if (resposta == 'b') {
             intervaloC136();
-        } else if (progressoJogo == 1) {
+        } else if (progressoPlayer == 1) {
         }
     }
 
@@ -148,7 +145,7 @@ public class GameMain {
 
     public static void pracaAlimentacao1() {
         System.out.println("\n======================================================================================================================\n" + salaAtual("praca01"));
-        if (progressoJogo == 0) {
+        if (progressoPlayer == 0) {
             System.out.println(nome + " : Hey Paulo, quanto tempo não te vejo não lembrava que voce estudava aqui ");
             strNext();
             System.out.println(" Paulo: Sim, estudo aqui, estou no terceiro semestre de arquitetura ");
@@ -168,7 +165,7 @@ public class GameMain {
             } else if (resposta == 'b') {
                 nasa();
             } else if (resposta == 'c') {
-                gameOver();
+                //gameOver();
             }
 
         }
@@ -227,7 +224,7 @@ public class GameMain {
     }
 
     /*static void biblioteca() {
-        System.out.println("\n==============================\n" + salaAtual("biblioteca") + "\n");
+        System.out.println(salaAtual("biblioteca") + "\n");
         if (progressoJogo == 0) {
             System.out.println("Você chega na biblioteca e logo percebe outros alunos conversando sobre projetos para o Concurso...");
             comandosDisponiveis(1, "Conversar com a balconista", "Sair da Biblioteca", "Procurar o livro", "");
@@ -271,28 +268,47 @@ public class GameMain {
             pracaAlimentacao1();
         } else if (resposta == 'b') {
             nasa();
-        } else if (progressoJogo == 1) {
+        }switch (progressoPlayer) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+
         }
     }
      */
     //template pra progresso do jogo 
-    /*if(progrssoJogo == 0){
+    /*switch (progressoPlayer) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
 
-     } else if(progressoJogo == 1){
-
-     } else if(progressoJogo == 2){
-
-     } else if(progressoJogo == 3){
-
-     } else if(progressoJogo == 4){
-
-     } else if(progressoJogo == 5){
-
-     } else if(progressoJogo == 6){
-
-     } else if(progressoJogo == 7){
-
-     } else{}*/
+        }*/
     //passar array pra lista 
     /**
      *
@@ -373,7 +389,7 @@ public class GameMain {
     }
 
     /*public static void pracaAlimentacao1() {
-        System.out.println("\n====================\n" + salaAtual("praca01"));
+        System.out.println(salaAtual("praca01"));
         if (progressoJogo == 0) {
             String[] s = {nome + " : Hey Paulo, voce também está participando do projeto espacial?","Paulo: estou sim, " + nome + " , qual que é o seu projeto?",
             nome + " : não posso contar, caso alguém fique sabendo podem copiar minha idéia.","Aliás, voce viu o professor Gilberto?",
@@ -390,27 +406,30 @@ public class GameMain {
             } else if (resposta == 'c') {
                 biblioteca();
             }
-        } else if (progressoJogo == 1) {
+        } switch (progressoPlayer) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
 
-        } else if (progressoJogo == 2) {
-
-        } else if (progressoJogo == 3) {
-
-        } else if (progressoJogo == 4) {
-
-        } else if (progressoJogo == 5) {
-
-        } else if (progressoJogo == 6) {
-
-        } else if (progressoJogo == 7) {
-
-        } else {
         }
 
     }
      */
  /*static void labC136() {
-        System.out.println("\n====================\n" + salaAtual("lab136"));
+        System.out.println(salaAtual("lab136"));
         if (progressoJogo == 0) {
             System.out.print(nome + ": parece que a sala está fechada.");
             comandosDisponiveis(1, "Corredor", "Praça de alimentação 01", "Centro esportivo", "");
@@ -420,21 +439,24 @@ public class GameMain {
                 pracaAlimentacao1();
             else if(resposta =='c')
                 centroEsportivo();
-        } else if (progressoJogo == 1) {
+        }switch (progressoPlayer) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
 
-        } else if (progressoJogo == 2) {
-
-        } else if (progressoJogo == 3) {
-
-        } else if (progressoJogo == 4) {
-
-        } else if (progressoJogo == 5) {
-
-        } else if (progressoJogo == 6) {
-
-        } else if (progressoJogo == 7) {
-
-        } else {
         }
 
     }*/
@@ -458,8 +480,39 @@ public class GameMain {
             case "lab136":
                 sala = "Lab. C136";
                 break;
+            case "corredor":
+                sala = "Corredor";
+                break;
+            case "a125":
+                sala = "Sala A125";
+                break;
         }
-        return "\n====================\nAmbiente atual: " + sala;
+        return "\n================================\nAmbiente atual: " + sala;
+    }
+
+    static void verificaSituacaoJogo() {// verifica se o player ou o adversario completou o projeto primeiro, e retorna o tipo de fim do jogo
+        if (progressoPlayer == 7) {
+            System.out.println(EndGame(1));
+        }
+        if (progressoAdversários == 10) {
+            System.out.println(EndGame(3));
+        };
+    }
+
+    static String ganhaPeca(boolean ganhou) {// troca as peças de vetores, e mostra o avanço do adversario
+        String partes[] = {"Tanque de Combustível", "Combustível(hidrogenio)", "Fuselagem", "Comida Desidratada", "Turbina", "Estabilizadores", "Módulo de Comando", "Traje Espacial"},
+                inventario[] = new String[8], mensagem;
+        if (ganhou == true) {
+            inventario[progressoPlayer] = partes[progressoPlayer];
+            partes[progressoPlayer] = "";
+            progressoPlayer++;
+            mensagem = "Voce ganhou " + partes[progressoPlayer] + "!!";
+        } else {
+            progressoAdversários++;
+            mensagem = "Essa nao! Voce errou e o projeto adversário avançou para " + (progressoPlayer * 10) + "%";
+        }
+        verificaSituacaoJogo();
+        return mensagem;
     }
 
     static void acessoLiberado() {
@@ -469,17 +522,18 @@ public class GameMain {
         comandosDisponiveis(2, "Pedir ajuda", "outra opçao");
         //System.out.println("disponiveis: pedir ajuda | perguntar se vai ter prova");
         if (resposta == 'a') {
-            System.out.println(nome + " estou precisando de peças para montar meu projeto espacial ");
-            System.out.println(" creio que o senhor poderia me ajudar ");
-            System.out.println(" Prof. Gilberto: posso te ajudar sim " + nome + " porém voce terá ");
-            System.out.println(" de me responder uma pergunta. Voce está de acordo? ");
+            String[] s = {nome + ": estou precisando de peças para montar meu projeto espacial creio que o senhor poderia me ajudar.",
+                "Prof. Gilberto: posso te ajudar sim, " + nome + ", porém voce terá de me responder uma pergunta.", "Voce está de acordo?"};
+            imprimirTexto(s);
+            comandosDisponiveis(5, "Sim", "Nao");
             System.out.println("Comandos Disponiveis: S | N");
             charNext();
             if (resposta == 's') {
                 perguntaFacil();
-                pracaAlimentacao3();
+                System.out.println(ganhaPeca(true));
+                //pracaAlimentacao3();
             } else {
-                gameOver();
+                //gameOver();
             }
             System.out.println(" Parabéns " + nome + " com essa resposta certa voce ganha um item para o seu projeto ");
         } else if (resposta == 'b') {
@@ -500,134 +554,152 @@ public class GameMain {
 
     public static void labDesign() {
         int senha = 0;
-        System.out.println("\n====================\n" + salaAtual("labDesign"));
-        if (progressoJogo == 0) {
-            System.out.print(nome + ": Preciso falar com o prof Gilberto, mas o lab ta fechado e está pedindo uma senha.");
-            strNext();
-            System.out.println("  Teclado da fechadura ");
-            System.out.println("  Digite a senha: ");
-            senha = sc.nextInt();
-            if (senha != 7446) {
-                System.out.print(nome + ": Acho que eu devia falar com o segurança, ele deve ter a chave!");
-                sc.nextLine();
+        System.out.println(salaAtual("labDesign")); //mostra q o player foi para outro ambiente
+        switch (progressoPlayer) {
+            case 0:
+                System.out.print(nome + ": Preciso falar com o prof Gilberto, mas o lab ta fechado e está pedindo uma senha.");
                 strNext();
-            } else {
-                acessoLiberado();
-            }
-            System.out.print(nome + " : segunrança, preciso entrar no laboratório pra falar com o professor Gilberto.");
-            strNext();
-            System.out.print(nome + " : Voce poderia abrir o laboratótio para mim?");
-            strNext();
-            System.out.print("Segurança: Não posso te passar a senha, mas posso te dar algumas dicas:");
-            strNext();
-            System.out.println("Ela é um numero de 4 digitos e está em binário: ");
-            System.out.print(" 111 100 100 110‬ ");
-            strNext();
-            System.out.println("  Teclado da fechadura ");
-            System.out.println("  Digite a senha: ");
-            senha = sc.nextInt();
-            while (senha != 7446) {
+                System.out.println("  Teclado da fechadura ");
                 System.out.println("  Digite a senha: ");
                 senha = sc.nextInt();
-            }
-            acessoLiberado();
-        } else if (progressoJogo == 1) {
-
-        } else if (progressoJogo == 2) {
-
-        } else if (progressoJogo == 3) {
-
-        } else if (progressoJogo == 4) {
-
-        } else if (progressoJogo == 5) {
-
-        } else if (progressoJogo == 6) {
-
-        } else if (progressoJogo == 7) {
-
-        } else {
+                if (senha != 7446) {
+                    System.out.print(nome + ": Acho que eu devia falar com o segurança, ele deve ter a chave!");
+                    sc.nextLine();
+                    strNext();
+                } else {
+                    acessoLiberado();
+                }
+                String[] s = {nome + " : segunrança, preciso entrar no laboratório pra falar com o professor Gilberto.", nome + " : Voce poderia abrir o laboratótio para mim?",
+                    "Segurança: Não posso te passar a senha, mas posso te dar algumas dicas:", "Ela é um numero de 4 digitos e está em binário: ", " 111 100 100 110‬ "};
+                imprimirTexto(s);
+                System.out.println("  Teclado da fechadura ");
+                System.out.println("  Digite a senha: ");
+                senha = sc.nextInt();
+                while (senha != 7446) {
+                    System.out.println("  Digite a senha: ");
+                    senha = sc.nextInt();
+                }
+                acessoLiberado();
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+        }
+    }
+    
+    static void salaA125(){
+        System.out.println(salaAtual("a125")); 
+        switch(progressoPlayer){
+             case 0:
+                 break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
         }
     }
 
     static void corredor() {
-        if (progressoJogo == 0) {
+        System.out.println(salaAtual("corredor"));
+        switch (progressoPlayer) {
             //tem q arrumar essa bagaça aqui 
-            //if (pegaComando.equals("p1") || pegaComando.equals("sala")) {
-            System.out.println(nome + "Bom, pensando bem ... é um foguete."
-                    + "\nAcho que vou conseguir mais informações no laboratório de mecanica\n"
-                    + "Olá meu nome é " + nome + " estou procurando o professor de mecanica"
-                    + "\nAmanda : Olá eu sou Amanda muito prazer , você esta atras do professor Claudio ele fica naquela sala "
-                    + "\nvem comigo ...");
-            System.out.println(" O que você tem em mãos ? posso ver ? ");
-            System.out.println(" comandos disponiveis  s | n ");
-            if (resposta == 's') {
-                System.out.println(" voce mostrou seu projeto, tente não mostrar novamente ");
-                System.out.println(" Amanda é uma boa pessoa, tome cuidado com quem ve seu projeto ");
-                System.out.println(" Amanda : É um projeto completo de um foguete com motor de fusão nuclear ");
-                System.out.println(" Você vai montar isso S|N ? ");
+            case 0:
+                System.out.println(nome + "Bom, pensando bem ... é um foguete."
+                        + "\nAcho que vou conseguir mais informações no laboratório de mecanica\n"
+                        + "Olá meu nome é " + nome + " estou procurando o professor de mecanica"
+                        + "\nAmanda : Olá eu sou Amanda muito prazer , você esta atras do professor Claudio ele fica naquela sala "
+                        + "\nvem comigo ...");
+                System.out.println(" O que você tem em mãos ? posso ver ? ");
+                System.out.println(" comandos disponiveis  s | n ");
                 if (resposta == 's') {
-                    System.out.println(" vou sim ");
-                } else {
-                    System.out.println(" calma ai, não nos conhecemos direito ainda ");
+                    System.out.println(" voce mostrou seu projeto, tente não mostrar novamente ");
+                    System.out.println(" Amanda é uma boa pessoa, tome cuidado com quem ve seu projeto ");
+                    System.out.println(" Amanda : É um projeto completo de um foguete com motor de fusão nuclear ");
+                    System.out.println(" Você vai montar isso S|N ? ");
+                    if (resposta == 's') {
+                        System.out.println(" vou sim ");
+                    } else {
+                        System.out.println(" calma ai, não nos conhecemos direito ainda ");
+                    }
                 }
-            }
-            //}
-        } else if (progressoJogo == 1) {
-
-        } else if (progressoJogo == 2) {
-
-        } else if (progressoJogo == 3) {
-
-        } else if (progressoJogo == 4) {
-
-        } else if (progressoJogo == 5) {
-
-        } else if (progressoJogo == 6) {
-
-        } else if (progressoJogo == 7) {
-
-        } else {
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
         }
     }
 
     public static void pracaAlimentacao3() {
-        System.out.println("\n====================\n" + salaAtual("praca02"));
-        if (progressoJogo == 0) {
-            String[] s = {"André: fala " + nome + ", fiquei sabendo que voce está participando do projeto espacial.", "O que voce está fazendo? ",
-                nome + ": não posso contar de jeito nenhum.", "André: o que é isso no seu bolso ? (pega o projeto e sai correndo) ",
-                nome + ": voce pegou meu projeto devolva agora!", "André: Só se você me pagar um lanche."};
-            for (int i = 0; i < s.length; i++) {
-                System.out.print(s[i]);
-                strNext();
-            }
-            System.out.println("Deseja pagar um lanche para ter seu projeto de volta?");
-            comandosDisponiveis(1, "Sim", "Não", "", "");
-            if (resposta == 'a') {
-                System.out.println(" Conseguiu seu projeto de volta ");
-                nasa();
-            } else if (resposta == 'b') {
-                gameOver();
-            }
-        } else if (progressoJogo == 1) {
-
-        } else if (progressoJogo == 2) {
-
-        } else if (progressoJogo == 3) {
-
-        } else if (progressoJogo == 4) {
-
-        } else if (progressoJogo == 5) {
-
-        } else if (progressoJogo == 6) {
-
-        } else if (progressoJogo == 7) {
-
-        } else {
+        System.out.println(salaAtual("praca02"));
+        switch (progressoPlayer) {
+            case 0:
+                String[] s = {"André: fala " + nome + ", fiquei sabendo que voce está participando do projeto espacial.", "O que voce está fazendo? ",
+                    nome + ": não posso contar de jeito nenhum.", "André: o que é isso no seu bolso ? (pega o projeto e sai correndo) ",
+                    nome + ": voce pegou meu projeto devolva agora!", "André: Só se você me pagar um lanche."};
+                for (int i = 0; i < s.length; i++) {
+                    System.out.print(s[i]);
+                    strNext();
+                }
+                System.out.println("Deseja pagar um lanche para ter seu projeto de volta?");
+                comandosDisponiveis(1, "Sim", "Não", "", "");
+                if (resposta == 'a') {
+                    System.out.println(" Conseguiu seu projeto de volta ");
+                    nasa();
+                } else if (resposta == 'b') {
+                    EndGame(2);
+                }
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
         }
     }
 
     /*public static void nasa() {
-        System.out.println("\n====================\n" + salaAtual("labDesign"));
+        System.out.println(salaAtual("labDesign"));
         if (progressoJogo == 0) {
             String[] s = {nome + ": Preciso usar um dos computadores para fazer uma pesquisa para meu projeto.","Mas parece que não estou conseguindo ligar.",
             "Eduardo: tirei o cabo de enrgia do seu computador. Voce vai ter que me ajudar pra ter de volta.",nome + ": O que voce precisa? ",
@@ -647,21 +719,24 @@ public class GameMain {
                 System.out.println(" Não conseguiu ligar o computador ");
                 gameOver();
             }
-        } else if (progressoJogo == 1) {
+        } switch (progressoPlayer) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
 
-        } else if (progressoJogo == 2) {
-
-        } else if (progressoJogo == 3) {
-
-        } else if (progressoJogo == 4) {
-
-        } else if (progressoJogo == 5) {
-
-        } else if (progressoJogo == 6) {
-
-        } else if (progressoJogo == 7) {
-
-        } else {
         }
 
     }*/
@@ -685,8 +760,10 @@ public class GameMain {
             try {
                 Thread.sleep(1000);
                 System.out.println("Pronto, agora você está preparado para gravidade 0");
+
             } catch (InterruptedException ex) {
-                Logger.getLogger(GameMain.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GameMain.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
         if (resposta == 'a') {
@@ -698,7 +775,25 @@ public class GameMain {
             }
 
         }
+        switch (progressoPlayer) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
 
+        }
     }
 
     //Aqui é onde o player vai desenvolver comida em tubo
@@ -716,26 +811,48 @@ public class GameMain {
             inventario[i] = strNext();
 
         }
+        
+        //desenvolver alguma historia que aborde o processo de tirar 97% da agua dos alimentos
+        //de preferencia: fazer o player saber sobre isso antes do progresso estiver em 3 ou mais. Entao ele recebe a comida ja desidratada.
+        //pode ser na praça de alimentação 1 tbm, por estar perto do predio gastro
+switch (progressoPlayer) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
 
+        }
     }
-    
+
     static void comandosDisponiveis(int op, String t1, String t2) {
         String disponiveis = "";
         disponiveis = "a) " + t1 + " | b) " + t2;
-    System.out.println("Comandos Disponíveis: " + disponiveis);
+        System.out.println("Comandos Disponíveis: " + disponiveis);
         verificaComando(op);
     }
 
     static void comandosDisponiveis(int op, String t1, String t2, String t3) {
         String disponiveis = "";
         disponiveis = "a) " + t1 + " | b) " + t2 + " | c) " + t3;
-    System.out.println("Comandos Disponíveis: " + disponiveis);
+        System.out.println("Comandos Disponíveis: " + disponiveis);
         verificaComando(op);
     }
 
     static void comandosDisponiveis(int op, String t1, String t2, String t3, String t4) {//funçao para mostrar ao usuario a quantidade de opçoes diponiveis no momento
         String disponiveis = "";
-            disponiveis = "a) " + t1 + " | b) " + t2 + " | c) " + t3 + " | d) " + t4;
+        disponiveis = "a) " + t1 + " | b) " + t2 + " | c) " + t3 + " | d) " + t4;
         System.out.println("Comandos Disponíveis: " + disponiveis);
         verificaComando(op);
     }
@@ -752,13 +869,13 @@ public class GameMain {
                     charNext();//le o comando do usuario
                 }
                 break;
-                case 3://escolhas de opçoes ou salas                         opçao relativo a quantidade de opçoes disponiveis ( 3 )
+            case 3://escolhas de opçoes ou salas                         opçao relativo a quantidade de opçoes disponiveis ( 3 )
                 while (resposta != 'a' && resposta != 'b' && resposta != 'c') {
                     System.out.println("Comando inválido.");
                     charNext();//le o comando do usuario
                 }
                 break;
-                case 4://escolhas de opçoes ou salas                        opçao relativo a quantidade de opçoes disponiveis ( 4 )
+            case 4://escolhas de opçoes ou salas                        opçao relativo a quantidade de opçoes disponiveis ( 4 )
                 while (resposta != 'a' && resposta != 'b' && resposta != 'c' && resposta != 'd') {
                     System.out.println("Comando inválido.");
                     charNext();//le o comando do usuario
@@ -792,9 +909,21 @@ public class GameMain {
         return pegaComando;
     }
 
-    public static void gameOver() {//mostra q o usuario perdeu
-        System.out.println("Voce desistiu do projeto, PERDEU");
+    static String EndGame(int op) {// casos de fim de jogo
+        String fim = "";
+        switch (op) {
+            case 1:
+                fim = "Voce apresentou o Projeto no Centro de Convençoes e ganhou o Concurso Espacial!! Agora, só falta ir para Beyond the Earth!";
+                break;
+            case 2:
+                fim = "Voce desistiu do projeto, PERDEU";
+                break;
+            case 3:
+                fim = "Parece que você demorou demais, seus colegas já apresentaram o projeto ganhador do Concurso Espacial.";
+                break;
+        }
         System.exit(1);//termina o programa
+        return fim;
     }
 
     /*public static void salavazia() {//uma das salas iniciais para mostrar o caminho ao player caso ele nao vá ao lugar certo
