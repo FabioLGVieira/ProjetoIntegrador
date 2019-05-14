@@ -10,11 +10,11 @@ import java.util.logging.Logger;
 public class GameMain {
 
     //Aprendizagem 
-    static boolean gravidade0 = false;
+    //static boolean gravidade0 = false;
     static Random randomico = new Random();
     static Scanner sc = new Scanner(System.in);
-    static String nome, pegaComando;
-    static int senha, progressoJogo;
+    static String nome;
+    static int progressoJogo;
     static char resposta;
 
     public static void main(String[] args) {
@@ -54,7 +54,7 @@ public class GameMain {
         }*/
         salavazia();
     }
-    
+
     public static void salavazia() {//uma das salas iniciais para mostrar o caminho ao player caso ele nao vá ao lugar certo
         System.out.println("\n\n======================================================================================================================\n");
         System.out.print("Você chega na sala e não tem ninguém, só o professor...");
@@ -85,7 +85,7 @@ public class GameMain {
         strNext();
         biblioteca();
     }
-    
+
     static void biblioteca() {
         System.out.println("\n======================================================================================================================\n" + salaAtual("biblioteca") + "\n");
         if (progressoJogo == 0) {
@@ -100,7 +100,7 @@ public class GameMain {
             System.out.print(nome + ": O que é esse concurso?");
             strNext();
             System.out.print(" Balconista: É o Primeiro Concurso Esapacial do Centro Universitário Senac ");
-            System.out.println(" Quem se inscrever tem que realizar algum projeto sobre atividades fora da Terra ");        
+            System.out.println(" Quem se inscrever tem que realizar algum projeto sobre atividades fora da Terra ");
             System.out.println(" Como viagens espaciais, atividades de pesquisa, ou evolução tecnológica!");
             strNext();
             System.out.print("Por exemplo, alguns alunos ja pensaram "
@@ -135,18 +135,18 @@ public class GameMain {
         } else if (progressoJogo == 1) {
         }
     }
-    
-    public static void intervaloC136(){
-        
-         System.out.println("\n======================================================================================================================\n");
-         System.out.println(" ...voltando para sala após pegar o livro e voce se depara com a porta fechada e um aviso "
-                 + " sobre o intervalo e que o professor volta em breve ");
-         System.out.println("\n======================================================================================================================\n");
-        
-         pracaAlimentacao1();
+
+    public static void intervaloC136() {
+
+        System.out.println("\n======================================================================================================================\n");
+        System.out.println(" ...voltando para sala após pegar o livro e voce se depara com a porta fechada e um aviso "
+                + " sobre o intervalo e que o professor volta em breve ");
+        System.out.println("\n======================================================================================================================\n");
+
+        pracaAlimentacao1();
     }
-    
-      public static void pracaAlimentacao1() {
+
+    public static void pracaAlimentacao1() {
         System.out.println("\n======================================================================================================================\n" + salaAtual("praca01"));
         if (progressoJogo == 0) {
             System.out.println(nome + " : Hey Paulo, quanto tempo não te vejo não lembrava que voce estudava aqui ");
@@ -161,7 +161,7 @@ public class GameMain {
                     + " voce sabe onde é a Nasa, hoje é meu primeiro dia e estou meio perdido ainda, o campus é enorme ");
             strNext();
             System.out.println(" Ah, boa sorte em seu projeto, a Nasa fica logo ali, só seguir por aquele cooredor e entrar por uma porta de vidro ");
-                                    
+
             comandosDisponiveis(1, "Voltar para sala", "Nasa", "Biblioteca", "");
             if (resposta == 'a') {
                 voltadointervalo();
@@ -170,22 +170,22 @@ public class GameMain {
             } else if (resposta == 'c') {
                 gameOver();
             }
-      
+
         }
 
     }
-      
-      public static void voltadointervalo(){    
-       
-      System.out.println("\n======================================================================================================================\n");
-          System.out.println(" Alexandre: muito bem turma, já que todos voltaram vou fazer algumas perguntas sobre programação, quem acertar "
-                  + " terá alguma ajuda para o projeto do Concurso Espacial ");
-          strNext();
-          perguntaAlgoritimos();
-                    
-      }
-      
-        public static void perguntaAlgoritimos() {
+
+    public static void voltadointervalo() {
+
+        System.out.println("\n======================================================================================================================\n");
+        System.out.println(" Alexandre: muito bem turma, já que todos voltaram vou fazer algumas perguntas sobre programação, quem acertar "
+                + " terá alguma ajuda para o projeto do Concurso Espacial ");
+        strNext();
+        perguntaAlgoritimos();
+
+    }
+
+    public static void perguntaAlgoritimos() {
         int tentativas = 3;// numero de tentativas para acertar a pergunta e conseguir progredir
         String perguntas[] = {" Para executar um mesmo bloco de código por determinadas vezes, o melhor a se fazer é: "},
                 respostasFaceis[][] = {{" while ", " if ", " do while ", " for "}};
@@ -211,61 +211,19 @@ public class GameMain {
             System.out.println("Gostaria de tentar outra pergunta? S/ N");
             charNext();
             if (resposta == 's') {
-               perguntaAlgoritimos();
+                perguntaAlgoritimos();
             }
         }
     }
-      
-      
-      public static void nasa() {
-          
-          System.out.println("\n======================================================================================================================\n");
-          System.out.println(nome + " Vou pesquisar alguma coisa para meu projeto e assim que terminar volto pra sala ");
-           strNext();
-          voltadointervalo();
-          System.out.println("\n======================================================================================================================\n");
 
-    }
-      
-       
-  
-   static void comandosDisponiveis(int op, String t1, String t2, String t3, String t4) {//funçao para mostrar ao usuario a quantidade de opçoes diponiveis no momento
-        String disponiveis = "";
-        if (t2.equals("")) {
-            disponiveis = "a) " + t1;
-        } else if (t3.equals("")) {
-            disponiveis = "a) " + t1 + " | b) " + t2;
-        } else if (t4.equals("")) {
-            disponiveis = "a) " + t1 + " | b) " + t2 + " | c) " + t3;
-        } else {
-            disponiveis = "a) " + t1 + " | b) " + t2 + " | c) " + t3 + " | d) " + t4;
-        }
-        System.out.println("Comandos Disponíveis: " + disponiveis);
-        verificaComando(op);
-    }
+    public static void nasa() {
 
-    static char verificaComando(int op) {// 1 para respostas a, b ,c ,d   2 para s, n.  \ para finalizar o programa
-        //comandosDisponiveis(t1, t2, t3, t4);
-        //char[] comandos = {'a', 'b', 'c', 'd'}, comandosSN = {'s', 'n'};
-        charNext();//le o comando do usuario
-        if (resposta == '\\') {//para o comando \ funcionar precisa de duas(\\), \ é um escape character, com 2 eles se cancelam
-            System.exit(1);//termina o programa
-        }
-        switch (op) {// diferencia entre as opçoes de salas ou açoes do usuario, das opçoes de escolhas entre sim ou nao
-            case 1://escolhas de opçoes ou salas
-                while (resposta != 'a' && resposta != 'b' && resposta != 'c' && resposta != 'd') {
-                    System.out.println("Comando inválido.");
-                    charNext();//le o comando do usuario
-                }
-                break;
-            case 2://escolhas sim ou nao
-                while (resposta != 's' && resposta != 'n') {
-                    System.out.println("Comando inválido.");
-                    charNext();//le o comando do usuario
-                }
-                break;
-        }
-        return resposta;//retorna o input do usuario
+        System.out.println("\n======================================================================================================================\n");
+        System.out.println(nome + " Vou pesquisar alguma coisa para meu projeto e assim que terminar volto pra sala ");
+        strNext();
+        voltadointervalo();
+        System.out.println("\n======================================================================================================================\n");
+
     }
 
     /*static void biblioteca() {
@@ -316,8 +274,7 @@ public class GameMain {
         } else if (progressoJogo == 1) {
         }
     }
-    */
-
+     */
     //template pra progresso do jogo 
     /*if(progrssoJogo == 0){
 
@@ -451,9 +408,8 @@ public class GameMain {
         }
 
     }
-*/
-    
-    /*static void labC136() {
+     */
+ /*static void labC136() {
         System.out.println("\n====================\n" + salaAtual("lab136"));
         if (progressoJogo == 0) {
             System.out.print(nome + ": parece que a sala está fechada.");
@@ -482,7 +438,6 @@ public class GameMain {
         }
 
     }*/
-
     static String salaAtual(String sala) { // vai trocar o nome da sala ( e talvez as imagens de cada uma )
         switch (sala) {
             case "labDesign":
@@ -504,18 +459,16 @@ public class GameMain {
                 sala = "Lab. C136";
                 break;
         }
-        return "Ambiente atual: " + sala;
+        return "\n====================\nAmbiente atual: " + sala;
     }
 
     static void acessoLiberado() {
         System.out.println("== Acesso liberado ==");
         System.out.print("Prof. Gilberto: muito bem " + nome + " , parece que voce me encontrou, como posso te ajudar ? ");
         strNext();
-        comandosDisponiveis(1, "Pedir ajuda", "", nome, nome);
-        System.out.println("disponiveis: pedir ajuda | perguntar se vai ter prova");
-        sc.nextLine();
-        strNext();
-        if (pegaComando.equals("pedir")) {
+        comandosDisponiveis(2, "Pedir ajuda", "outra opçao");
+        //System.out.println("disponiveis: pedir ajuda | perguntar se vai ter prova");
+        if (resposta == 'a') {
             System.out.println(nome + " estou precisando de peças para montar meu projeto espacial ");
             System.out.println(" creio que o senhor poderia me ajudar ");
             System.out.println(" Prof. Gilberto: posso te ajudar sim " + nome + " porém voce terá ");
@@ -529,7 +482,7 @@ public class GameMain {
                 gameOver();
             }
             System.out.println(" Parabéns " + nome + " com essa resposta certa voce ganha um item para o seu projeto ");
-        } else if (pegaComando.equals("perguntar")) {
+        } else if (resposta == 'b') {
             System.out.println(nome + "Vai ter prova?");
             System.out.println("Prof. Gilberto: Vai sim, (completar com alguma materia aqui)");
             System.out.println("Você está com dúvida na matéria?");
@@ -546,7 +499,7 @@ public class GameMain {
     }
 
     public static void labDesign() {
-        senha = 0;
+        int senha = 0;
         System.out.println("\n====================\n" + salaAtual("labDesign"));
         if (progressoJogo == 0) {
             System.out.print(nome + ": Preciso falar com o prof Gilberto, mas o lab ta fechado e está pedindo uma senha.");
@@ -577,7 +530,7 @@ public class GameMain {
                 System.out.println("  Digite a senha: ");
                 senha = sc.nextInt();
             }
-                acessoLiberado();
+            acessoLiberado();
         } else if (progressoJogo == 1) {
 
         } else if (progressoJogo == 2) {
@@ -607,12 +560,12 @@ public class GameMain {
                     + "\nvem comigo ...");
             System.out.println(" O que você tem em mãos ? posso ver ? ");
             System.out.println(" comandos disponiveis  s | n ");
-            if (pegaComando.equals("s")) {
+            if (resposta == 's') {
                 System.out.println(" voce mostrou seu projeto, tente não mostrar novamente ");
                 System.out.println(" Amanda é uma boa pessoa, tome cuidado com quem ve seu projeto ");
                 System.out.println(" Amanda : É um projeto completo de um foguete com motor de fusão nuclear ");
                 System.out.println(" Você vai montar isso S|N ? ");
-                if (pegaComando.equals("s")) {
+                if (resposta == 's') {
                     System.out.println(" vou sim ");
                 } else {
                     System.out.println(" calma ai, não nos conhecemos direito ainda ");
@@ -640,9 +593,9 @@ public class GameMain {
     public static void pracaAlimentacao3() {
         System.out.println("\n====================\n" + salaAtual("praca02"));
         if (progressoJogo == 0) {
-            String[] s = {"André: fala " + nome + ", fiquei sabendo que voce está participando do projeto espacial.","O que voce está fazendo? ",
-            nome + ": não posso contar de jeito nenhum.","André: o que é isso no seu bolso ? (pega o projeto e sai correndo) ",
-            nome + ": voce pegou meu projeto devolva agora!","André: Só se você me pagar um lanche."};
+            String[] s = {"André: fala " + nome + ", fiquei sabendo que voce está participando do projeto espacial.", "O que voce está fazendo? ",
+                nome + ": não posso contar de jeito nenhum.", "André: o que é isso no seu bolso ? (pega o projeto e sai correndo) ",
+                nome + ": voce pegou meu projeto devolva agora!", "André: Só se você me pagar um lanche."};
             for (int i = 0; i < s.length; i++) {
                 System.out.print(s[i]);
                 strNext();
@@ -712,7 +665,6 @@ public class GameMain {
         }
 
     }*/
-
     static void sala2() {
         //boolean ganhou = false;   
         System.out.println(nome + " Olá professor, hoje que voce vai passar um questionario ");
@@ -727,7 +679,7 @@ public class GameMain {
                 + "\nprocure Paula, ela terá uma tarefa para você "
                 + "\n\nAções disponiveis  | procurar paula | sair |");
         strNext();
-        if (pegaComando.equals("procurar paula")) {
+        if (resposta == 'a') {
             System.out.println("Paula - Olá " + nome + " veio fazer o treinamento de gravidade 0 ?"
                     + "\nbom então vamos lá");
             try {
@@ -737,11 +689,11 @@ public class GameMain {
                 Logger.getLogger(GameMain.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if (pegaComando.equals("sair")) {
+        if (resposta == 'a') {
             System.out.println("Onde deseja ir ? "
                     + "\nlugares disponiveis  | lab mecanica");
             strNext();
-            if (pegaComando.equals("lab mecanica")) {
+            if (resposta == 'a') {
                 salaAtual("labMec");
             }
 
@@ -766,10 +718,67 @@ public class GameMain {
         }
 
     }
+    
+    static void comandosDisponiveis(int op, String t1, String t2) {
+        String disponiveis = "";
+        disponiveis = "a) " + t1 + " | b) " + t2;
+    System.out.println("Comandos Disponíveis: " + disponiveis);
+        verificaComando(op);
+    }
 
-    //Area de lançamento
-    static void Teletubbies() {
+    static void comandosDisponiveis(int op, String t1, String t2, String t3) {
+        String disponiveis = "";
+        disponiveis = "a) " + t1 + " | b) " + t2 + " | c) " + t3;
+    System.out.println("Comandos Disponíveis: " + disponiveis);
+        verificaComando(op);
+    }
 
+    static void comandosDisponiveis(int op, String t1, String t2, String t3, String t4) {//funçao para mostrar ao usuario a quantidade de opçoes diponiveis no momento
+        String disponiveis = "";
+            disponiveis = "a) " + t1 + " | b) " + t2 + " | c) " + t3 + " | d) " + t4;
+        System.out.println("Comandos Disponíveis: " + disponiveis);
+        verificaComando(op);
+    }
+
+    static char verificaComando(int op) {// 1 para respostas a, b ,c ,d   2 para s, n.  \ para finalizar o programa
+        charNext();//le o comando do usuario
+        if (resposta == '\\') {//para o comando \ funcionar precisa de duas(\\), \ é um escape character, com 2 eles se cancelam
+            System.exit(1);//termina o programa
+        }
+        switch (op) {// diferencia entre as opçoes de salas ou açoes do usuario, das opçoes de escolhas entre sim ou nao
+            case 2://escolhas de opçoes ou salas                        opçao relativo a quantidade de opçoes disponiveis ( 2 )
+                while (resposta != 'a' && resposta != 'b') {
+                    System.out.println("Comando inválido.");
+                    charNext();//le o comando do usuario
+                }
+                break;
+                case 3://escolhas de opçoes ou salas                         opçao relativo a quantidade de opçoes disponiveis ( 3 )
+                while (resposta != 'a' && resposta != 'b' && resposta != 'c') {
+                    System.out.println("Comando inválido.");
+                    charNext();//le o comando do usuario
+                }
+                break;
+                case 4://escolhas de opçoes ou salas                        opçao relativo a quantidade de opçoes disponiveis ( 4 )
+                while (resposta != 'a' && resposta != 'b' && resposta != 'c' && resposta != 'd') {
+                    System.out.println("Comando inválido.");
+                    charNext();//le o comando do usuario
+                }
+                break;
+            case 5://escolhas sim ou nao                        opçao relativo tipo de escolhas disponiveis ( Sim ou Nao )
+                while (resposta != 's' && resposta != 'n') {
+                    System.out.println("Comando inválido.");
+                    charNext();//le o comando do usuario
+                }
+                break;
+        }
+        return resposta;//retorna o input do usuario
+    }
+
+    static void imprimirTexto(String v[]) {//recebe o Vetor de Dialogo dos NPCs e imprime na tela
+        for (int i = 0; i < v.length; i++) {
+            System.out.print(v[i]);
+            strNext();
+        }// strNext() serve como pausa entre uma frase e outra
     }
 
     static char charNext() {//pega o input do usuario em todas as partes do jogo
@@ -779,7 +788,7 @@ public class GameMain {
     }
 
     public static String strNext() {//pega o input do usuario em todas as partes do jogo que nao sejam opçoes e mais de um caractere, e serve de pausa do dialogo
-        pegaComando = sc.nextLine().toLowerCase();
+        String pegaComando = sc.nextLine().toLowerCase();
         return pegaComando;
     }
 
@@ -817,7 +826,6 @@ public class GameMain {
         strNext();
         biblioteca();
     }*/
-
     public static void instrucoes() {//funcao que ensina o basico para o usuario
         System.out.println("================================  Instruções  ================================\n"
                 + "Para conseguir jogar, voce deve digitar um dos COMANDOS DISPONÍVEIS "
@@ -840,11 +848,11 @@ public class GameMain {
             }
         } while (resposta != 'a' && resposta != 'b');
     }
-    
+
     public static void menu() {//menu inicial responsavel por apresentar opçoes ao usuario
-        String[] s = {"      Beyond the earth   ","\n --------------------------","\n|       --> Menu <--       |","\n| 1- Instruções            |",
-        "\n| 2- Jogar                 |","\n| 3- Ir para o fim do jogo |","\n| 4- Créditos              |","\n| 5- Sair                  |",
-        "\n --------------------------\n"};
+        String[] s = {"      Beyond the earth   ", "\n --------------------------", "\n|       --> Menu <--       |", "\n| 1- Instruções            |",
+            "\n| 2- Jogar                 |", "\n| 3- Ir para o fim do jogo |", "\n| 4- Créditos              |", "\n| 5- Sair                  |",
+            "\n --------------------------\n"};
         for (int i = 0; i < s.length; i++) {
             System.out.print(s[i]);
         }
