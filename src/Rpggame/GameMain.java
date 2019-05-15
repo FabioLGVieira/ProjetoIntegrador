@@ -2,8 +2,6 @@ package Rpggame;
 
 import java.util.Random;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class GameMain {
 
@@ -40,10 +38,7 @@ public class GameMain {
             nome + ": Que legal que concurso que é esse?", "Alexandre: é o Concurso Espacial do Senac, na biblioteca você terá melhores informaçoes"};
         imprimirTexto(d);
         comandosDisponiveis(2, "Ir agora?", "ficar e falar com o prof?");
-
-        if (resposta == 'a') {
-            strNext();
-        } else if (resposta == 'b') {
+        if (resposta == 'b') {
             System.out.print(nome + ": Já sei Java, vou ficar aqui até eles chegarem.");
             sc.nextLine();
             strNext();
@@ -59,16 +54,14 @@ public class GameMain {
 
     static void biblioteca() {
         System.out.println(ambienteAtual("biblioteca"));
+        comandosDisponiveis(3, "Conversar com a balconista", "Praça alimentação 01", "Nasa");
         if (progressoPlayer == 0) {
-            System.out.println("Você chega na biblioteca e logo percebe outros alunos conversando sobre projetos para o Concurso...");
-            comandosDisponiveis(3, "Conversar com a balconista", "Procurar o livro", "Sair da Biblioteca");
-
             if (resposta == 'b') {
-                //gameOver();
+                pracaAlimentacao1();
             } else if (resposta == 'c') {
-                System.out.println(nome + ": Onde vou achar esse livro de Java?");
-                System.out.println("Talvez devesse ver sobre o concurso...");
+                nasa();
             }
+            System.out.println("[...ouve outros alunos conversando sobre projetos para o Concurso...]");
             System.out.print(nome + ": O que é esse concurso?");
             strNext();
             System.out.print(" Balconista: É o Primeiro Concurso Esapacial do Centro Universitário Senac ");
@@ -78,7 +71,7 @@ public class GameMain {
             System.out.print("Por exemplo, alguns alunos ja pensaram "
                     + "em criar cidades-bolha, casas ou edifícios em outros planetas, carros flutuantes, robôs operários,"
                     + "\nsuper proteses, entre outros. E voce, vai participar?\n");
-            comandosDisponiveis(2, "S", "N", "", "");
+            comandosDisponiveis(2, "Sim", "Não");
             if (resposta == 'n') {
                 System.out.println("Por enquanto nao");
                 //gameOver();
@@ -89,7 +82,7 @@ public class GameMain {
             System.out.print("....(procurando o livro nas estantes)");
             strNext();
             System.out.print("O que é esse papel amassado no chao?");
-            comandosDisponiveis(1, "Pegar o papel", "Ignorar", "", "");
+            comandosDisponiveis(2, "Pegar o papel", "Ignorar");
             if (resposta == 'a') {
                 System.out.print("Wow! É um projeto detalhado de um Foguete Espacial! Quem jogaria isso fora?");
                 strNext();
@@ -99,7 +92,7 @@ public class GameMain {
                 //gameOver();
             }
         }
-        comandosDisponiveis(1, "Praça de alimentação 1", "Sala de Aula", "", "");
+        comandosDisponiveis(2, "Praça de alimentação 1", "Sala de Aula");
         if (resposta == 'a') {
             pracaAlimentacao1();
         } else if (resposta == 'b') {
@@ -120,6 +113,7 @@ public class GameMain {
 
     public static void pracaAlimentacao1() {
         System.out.println("\n======================================================================================================================\n" + ambienteAtual("praca01"));
+        comandosDisponiveis(4, "Conversar com Paulo", "Nasa", "Biblioteca", "C136");//tem q ver se vai mudar os npc
         if (progressoPlayer == 0) {
             System.out.println(nome + " : Hey Paulo, quanto tempo não te vejo não lembrava que voce estudava aqui ");
             strNext();
@@ -133,13 +127,13 @@ public class GameMain {
                     + "\nvoce sabe onde é a Nasa, hoje é meu primeiro dia e estou meio perdido ainda, o campus é enorme ");
             strNext();
             System.out.println(" Ah, boa sorte em seu projeto, a Nasa fica logo ali, só seguir por aquele cooredor e entrar por uma porta de vidro ");
-
-            comandosDisponiveis(1, "Voltar para sala", "Nasa", "Biblioteca", "");
+            comandosDisponiveis(3, "Voltar para sala", "Nasa", "Biblioteca");
             if (resposta == 'a') {
                 voltadointervalo();
             } else if (resposta == 'b') {
                 nasa();
             } else if (resposta == 'c') {
+                biblioteca();
                 //gameOver();
             }
 
@@ -179,18 +173,18 @@ public class GameMain {
         } while (resposta != corretaFaceis[rnd] && tentativas > 0);
         if (resposta == corretaFaceis[rnd]) { //colocar uma funçao para a resposta CERTA 
             System.out.println("resposta certa");
-            System.out.println(nome+": Bom, agora que acabou a aula acho que vou no laborátorio de mecânica "
-                        + "\ntalvez o professor possa me ajudar");
-                strNext();
-                corredor();
+            System.out.println(nome + ": Bom, agora que acabou a aula acho que vou no laborátorio de mecânica "
+                    + "\ntalvez o professor possa me ajudar");
+            strNext();
+            corredor();
         } else {
             System.out.println("Gostaria de tentar outra pergunta? S/ N");
             charNext();
             if (resposta == 's') {
                 perguntaAlgoritimos();
             }
-            if(resposta == 'n'&&progressoPlayer == 0){
-                System.out.println(nome+": Bom, agora que acabou a aula acho que vou no laborátorio de mecânica "
+            if (resposta == 'n' && progressoPlayer == 0) {
+                System.out.println(nome + ": Bom, agora que acabou a aula acho que vou no laborátorio de mecânica "
                         + "\ntalvez o professor possa me ajudar");
                 strNext();
                 corredor();
@@ -198,14 +192,14 @@ public class GameMain {
         }
     }
 
-    public static void labMecanica(){
+    public static void labMecanica() {
         System.out.println(ambienteAtual("labmecanica"));
-        if(progressoPlayer == 0){
-            System.out.println("Paula: Oi professor Flávio esse é meu amigo "+nome+" ele precisa da sua ajuda"
-                + "\npara concretizar um projeto ");
-        strNext();
-        System.out.println("Flávio: Tubo bem ? "+nome+" "
-                + "\nem quê posso ser útil ?");
+        if (progressoPlayer == 0) {
+            System.out.println("Paula: Oi professor Flávio esse é meu amigo " + nome + " ele precisa da sua ajuda"
+                    + "\npara concretizar um projeto ");
+            strNext();
+            System.out.println("Flávio: Tubo bem ? " + nome + " "
+                    + "\nem quê posso ser útil ?");
             comandosDisponiveis(1, "apresentar");
             System.out.println("Flávio: Eu posso te ajudar mas você precisa de algumas peças "
                     + "\nvocê consegue as mesmas em todo o campus"
@@ -215,32 +209,32 @@ public class GameMain {
                     + "\n ou desidratar comida procure por Ana"
                     + "\nde qualquer forma pode contar comigo ");
             comandosDisponiveis(2, "gravidade0", "desidratar comida");
-            if(resposta == 'a'){
-                System.out.println(nome+": Vou treinar gravidade0");
+            if (resposta == 'a') {
+                System.out.println(nome + ": Vou treinar gravidade0");
                 strNext();
                 centroEsportivo();
             }
-            if(resposta == 'b'){
-                System.out.println(nome+": Vou treinar desidratar comida");
+            if (resposta == 'b') {
+                System.out.println(nome + ": Vou treinar desidratar comida");
                 strNext();
                 centroGastronomico();
             }
         }
-        
+
     }
-    
+
     public static void nasa() {
-        if(progressoPlayer == 0){
+        if (progressoPlayer == 0) {
             System.out.println("\n======================================================================================================================\n");
             System.out.println(nome + " Vou pesquisar alguma coisa para meu projeto e assim que terminar volto pra sala ");
             strNext();
             voltadointervalo();
             System.out.println("\n======================================================================================================================\n");
         }
-        if(progressoPlayer == 1){
-            
+        if (progressoPlayer == 1) {
+
         }
-        
+
     }
 
     /*    template pra progresso do jogo 
@@ -342,7 +336,6 @@ public class GameMain {
 
     static String ambienteAtual(String sala) { // vai trocar o nome do ambiente ( e talvez as imagens de cada uma )
         switch (sala) {
-
             case "entrada":
                 sala = "Entrada Principal";
                 break;
@@ -410,14 +403,11 @@ public class GameMain {
         System.out.print("Prof. Gilberto: muito bem " + nome + " , parece que voce me encontrou, como posso te ajudar ? ");
         strNext();
         comandosDisponiveis(2, "Pedir ajuda", "outra opçao");
-        //System.out.println("disponiveis: pedir ajuda | perguntar se vai ter prova");
         if (resposta == 'a') {
             String[] s = {nome + ": estou precisando de peças para montar meu projeto espacial creio que o senhor poderia me ajudar.",
                 "Prof. Gilberto: posso te ajudar sim, " + nome + ", porém voce terá de me responder uma pergunta.", "Voce está de acordo?"};
             imprimirTexto(s);
-            comandosDisponiveis(5, "Sim", "Nao");
-            System.out.println("Comandos Disponiveis: S | N");
-            charNext();
+            comandosDisponiveis(2, "Sim", "Nao");
             if (resposta == 's') {
                 perguntaFacil();
                 System.out.println(ganhaPeca(true));
@@ -512,25 +502,24 @@ public class GameMain {
 
     static void corredor() {
         System.out.println(ambienteAtual("corredor"));
-        if(progressoPlayer == 0){
-            System.out.println(nome+": Olá meu nome é "+nome+" estou a procura do professor de mecânica");
+        if (progressoPlayer == 0) {
+            System.out.println(nome + ": Olá meu nome é " + nome + " estou a procura do professor de mecânica");
             strNext();
             System.out.println("desconhecida: Olá meu nome é Paula, eu posso te ajudar a encontra-lo."
                     + "\nIsso é um projeto de um foguete ? posso ver ?");
-            comandosDisponiveis(2, "S", "N");
-            if(resposta == 'a'){
-                System.out.println(nome+": Claro por que não ?"
+            comandosDisponiveis(2, "Sim", "Não");
+            if (resposta == 'a') {
+                System.out.println(nome + ": Claro por que não ?"
                         + "\nPaula: Nossa isso é um projeto de um foguete com motor de fusão nuclear e equipado com velas solares "
                         + "\nque demais ");
                 strNext();
                 System.out.println("Paula: Bom, siga-me vou te apresentar ao professor");
                 strNext();
                 labMecanica();
-                
-                
+
             }
-            if(resposta == 'b'){
-                System.out.println(nome+": Não"
+            if (resposta == 'b') {
+                System.out.println(nome + ": Não"
                         + "\nPaula: ata");
                 strNext();
                 System.out.println("Paula: Bom, siga-me vou te apresentar ao professor");
@@ -538,7 +527,7 @@ public class GameMain {
                 labMecanica();
             }
         }
-        
+
     }
 
     public static void pracaAlimentacao3() {
@@ -631,30 +620,29 @@ public class GameMain {
     // O jogador vai fazer treinamentos de gravidade 0 na piscina
     public static void centroEsportivo() {
         System.out.println(ambienteAtual("centroesportivo"));
-        strNext();
-        if(progressoPlayer == 0){
-            System.out.println(nome+": Olá onde posso encotrar o Ducival ?");
+        if (progressoPlayer == 0) {
+            System.out.println(nome + ": Olá onde posso encotrar o Ducival ?");
             strNext();
             System.out.println("Desconhecido: Ducival é o treinador, ele está na quadra ");
-            comandosDisponiveis(2, "procurar treinador","ir para centro gastronômico");
-            if(resposta == 'a'){
-                System.out.println(nome+": Oi Ducival tenho um projeto de viagem espacial e precisaria de treinamento de gravidade 0");
+            comandosDisponiveis(2, "procurar treinador", "ir para centro gastronômico");
+            if (resposta == 'a') {
+                System.out.println(nome + ": Oi Ducival tenho um projeto de viagem espacial e precisaria de treinamento de gravidade 0");
                 strNext();
                 System.out.println("Ducival: O treinamento pode ser feito na piscina, vamos começar ?");
                 comandosDisponiveis(2, "começar", "outra hora");
-                if(resposta == 'a'){
+                if (resposta == 'a') {
                     strNext();
                     System.out.println("Treinamento cncluido "
                             + "\nParte do treinamento foi concluido");
                     strNext();
                     // ir para um outro lugar 
-                }else{
-                    System.out.println(nome+": vou para o centro gastronômico começamos depois ");
+                } else {
+                    System.out.println(nome + ": vou para o centro gastronômico começamos depois ");
                     strNext();
                     centroGastronomico();
                 }
             }
-            if(resposta == 'b'){
+            if (resposta == 'b') {
                 centroGastronomico();
             }
         }
@@ -731,7 +719,7 @@ public class GameMain {
             System.exit(1);//termina o programa
         }
         switch (op) {// diferencia entre as opçoes de salas ou açoes do usuario, das opçoes de escolhas entre sim ou nao
-            case 1://escolhas de opçoes ou salas                        opçao relativo a quantidade de opçoes disponiveis ( 2 )
+            case 1://escolhas de opçoes ou salas                        opçao relativo a quantidade de opçoes disponiveis ( 1 )
                 while (resposta != 'a') {
                     System.out.println("Comando inválido.");
                     charNext();//le o comando do usuario
@@ -751,12 +739,6 @@ public class GameMain {
                 break;
             case 4://escolhas de opçoes ou salas                        opçao relativo a quantidade de opçoes disponiveis ( 4 )
                 while (resposta != 'a' && resposta != 'b' && resposta != 'c' && resposta != 'd') {
-                    System.out.println("Comando inválido.");
-                    charNext();//le o comando do usuario
-                }
-                break;
-            case 5://escolhas sim ou nao                        opçao relativo tipo de escolhas disponiveis ( Sim ou Nao )
-                while (resposta != 's' && resposta != 'n') {
                     System.out.println("Comando inválido.");
                     charNext();//le o comando do usuario
                 }
@@ -829,6 +811,22 @@ public class GameMain {
      strNext();
      biblioteca();
      }*/
+    static void mapa() {
+        //mapa do campus
+        String s[] = {"|¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|", "|                         |¯¯¯¯¯¯¯¯|                      1 - Biblioteca      |",
+            "|                         |___3____|  |¯¯¯¯¯¯|            2 - Nasa            |", "|                                     |___9__|            3 - Lab Industrial  |",
+            "|                    |¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|            4 - Praça           |", "|               |¯¯| |   |¯¯¯¯|     |¯¯¯¯|   |                Alimentação 01  |",
+            "|               |  | |   |____|  7  |____|   |   |¯¯¯¯|   5 - A125            |", "|   |¯¯¯¯¯¯¯|   |  | |_______________________|   |8   |   6 - C136            |",
+            "|   |_______|   |__|                       |¯¯|  |    |   7 - Corredor        |", "|    |¯¯¯¯¯¯|   |¯¯¯¯¯¯¯¯¯¯¯¯6¯¯¯¯¯¯¯¯¯¯|  |__|  |    |   8 - Centro Esportivo|",
+            "|    |___4__|   |  |¯¯|    |¯¯|  |¯¯|   |        |    |   9 - Praça           |", "|               |  |__| 2  |__|  |__|   |        |    |       Alimentação 03  |",
+            "|               |_____________________5_|        |____|                       |", "|   |¯¯¯¯1¯¯¯|  |¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|                  |",
+            "|   |________|  |                                          |                  |", "|               |__________________________________________|                  |",
+            " ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯ "};
+        for (int i = 0; i < s.length; i++) {
+            System.out.println(s[i]);
+        }
+    }
+
     public static void instrucoes() {//funcao que ensina o basico para o usuario
         System.out.println("================================  Instruções  ================================\n"
                 + "Para conseguir jogar, voce deve digitar um dos COMANDOS DISPONÍVEIS "
@@ -839,7 +837,7 @@ public class GameMain {
                 + "Vamos testar se você entendeu.");
         sc.nextLine();
         do {//pequena verificaçao para o usuario estar apto a continuar
-            comandosDisponiveis(1, "Jogar", "Voltar ao menu", "", "");
+            comandosDisponiveis(2, "Jogar", "Voltar ao menu");
             charNext();
             if (resposta == 'a') {
                 System.out.println("Vamos começar nossa aventura!");
@@ -869,7 +867,7 @@ public class GameMain {
                 inicioGame();
                 break;
             case 3:
-                nasa(); // apenas acelerar o teste, tirar futuramente
+                mapa(); // apenas acelerar o teste, tirar futuramente
                 System.out.println("Pegadinha haha");
                 break;
             case 4:
