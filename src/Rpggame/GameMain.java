@@ -73,8 +73,9 @@ public class GameMain {
             imprimirTexto(d2);
             
             comandosDisponiveis(2, "Pegar o papel", "Ignorar");
-            String[] d3 = {nome + ": Wow! É um projeto detalhado de um Foguete Espacial! Quem jogaria isso fora?", nome + ": Bom, vou guardar... Quem sabe não será útil mais tarde?!",
-                nome + ": Hmmm... achei o livro! Agora preciso voltar pra sala..."};
+            String[] d3 = {nome + ": Wow! É um projeto detalhado de um Foguete Espacial! Quem jogaria isso fora?", nome + ": Bom, vou guardar... Quem sabe não será útil mais tarde ou talvez seria um bom projeto para o concurso?!",
+                nome + ": Hmmm... achei o livro! Agora preciso voltar pra sala, mas antes vou me inscrever para o concurso...", "[...]caminhando até a recepção da biblioteca ", " Balconista: decidiu se inscrever para o concurso? " ,
+            nome + " : Decidi sim " , " Balconista: preencha a ficha " , " [...]preenchendo a ficha " , nome + " : Ficha preenchida " , " Balconista: obrigado por participar , boa sorte "};
             if (resposta == 'a') {
                 imprimirTexto(d3);
                 if (interesseConcurso == false) {
@@ -90,7 +91,7 @@ public class GameMain {
             comandosDisponiveis(2, "Praça alimentação 01", "Voltar para a sala");
 
             if (resposta == 'a') {
-                System.out.println(nome + ": Tô com fome, vou comer antes de voltar pra sala.");
+                System.out.println(nome + ": Tô com fome, vou comer antes e ver melhor o projeto, depois voltar pra sala.");
                 sc.nextLine();
                 pracaAlimentacao1();
             } else if (resposta == 'b') {
@@ -115,7 +116,7 @@ public class GameMain {
             if (interesseConcurso == true) {
                 if (pegouPapel == true) {
                     
-                    comandosDisponiveis(2, "Contar sua ideia", "Comprar o lanche e voltar");
+                    comandosDisponiveis(2, "Contar sua ideia", "Comprar o lanche e analisar o projeto");
                     if (resposta == 'a') {
                         System.out.println(nome + " : Que idéia interessante! Eu ainda não decidi, mas estou pensando em construir um foguete...");
                         sc.next();
@@ -131,8 +132,10 @@ public class GameMain {
                     interesseConcurso = true;
                 }               
             }
-            String d3[] = {nome + ": Eu estou um pouco atrasado, vou comprar meu lanche e voltar para a sala!"
-                    + "Depois conversamos, ok?", "Paulo: Tudo bem! Até mais."};
+            String d3[] = {nome + ": Eu estou um pouco atrasado, vou comprar meu lanche e ler um negocio aqui"
+                    + "Depois conversamos, ok?", "Paulo: Tudo bem! Até mais." , " [...]vendo o proejto do foguete " , "[...]relação de peças: tanque de combustivel, "
+                    + "combustivel(hidrogenio), fuselagem, comida desidratada, turbina, asas, modulo de comando, traje espacial", nome + "agora vou voltar pra sala e ver se o "
+                    + "professor Alexandre sabe onde consigo encontrar alguma das peças " };
             imprimirTexto(d3);
             voltaParaSala();            
         }        
@@ -170,10 +173,13 @@ public class GameMain {
         if (resposta == corretaFaceis[rnd]) { //colocar uma funçao para a resposta CERTA 
             System.out.println("Resposta certa!");
             System.out.println("-----------------------------------\n");
-            System.out.println(nome + ": Bom, agora que acabou a aula acho que vou no laboratório de mecânica, "
-                    + "talvez o professor possa me ajudar...");
+            System.out.println(nome + ": Bom, já que acertei acho que o professor Alexandre vai me ajudar ");
+            System.out.println(" Alexandre: " + nome + " como posso te ajudar em seu projeto? ");
+            System.out.println(nome + " : preciso de um tanque de combustivel, fuselagem e asas para um foguete, em que "
+                    + " parte do campus posso encontrar esses itens? ");
+            System.out.println(" Alexandre: no laboratório de design voce vai encontrar, procure o professor Otávio ");
             strNext();
-            corredor();
+           labDesign();
         } else {
             System.out.println("Gostaria de tentar outra pergunta? S/ N");
             charNext();
@@ -184,38 +190,26 @@ public class GameMain {
                 System.out.println(nome + ": Bom, agora que acabou a aula acho que vou no laborátorio de mecânica "
                         + "\ntalvez o professor possa me ajudar");
                 strNext();
-                corredor();
+               labDesign();
             }
         }
     }
     
-    public static void labMecanica() {
-        System.out.println(ambienteAtual("labmecanica"));
+    public static void labDesign() {
+        System.out.println(ambienteAtual("labDesign"));
         if (progressoPlayer == 0) {
-            System.out.println("Paula: Oi professor Flávio esse é meu amigo " + nome + " ele precisa da sua ajuda"
-                    + "\npara concretizar um projeto ");
-            strNext();
-            System.out.println("Flávio: Tubo bem ? " + nome + " "
-                    + "\nem quê posso ser útil ?");
-            comandosDisponiveis(1, "apresentar");
-            System.out.println("Flávio: Eu posso te ajudar mas você precisa de algumas peças "
-                    + "\nvocê consegue as mesmas em todo o campus"
-                    + "\ntraga para o laboratório que temos as ferramentas necessarias");
-            strNext();
-            System.out.println("Paula: Perfeito, aconcelharia você ir fazer primeiro um treinamento de gravidade 0 procure por Ducival"
-                    + "\n ou desidratar comida procure por Ana"
-                    + "\nde qualquer forma pode contar comigo ");
-            comandosDisponiveis(2, "gravidade0", "desidratar comida");
-            if (resposta == 'a') {
-                System.out.println(nome + ": Vou treinar gravidade0");
-                strNext();
-                centroEsportivo();
-            }
-            if (resposta == 'b') {
-                System.out.println(nome + ": Vou treinar desidratar comida");
-                strNext();
-                centroGastronomico();
-            }
+            System.out.println("Professor Otávio: Bom dia aluno como posso te ajudar? ");
+            System.out.println(nome + " O professor Alexandre disse que voce poderia me ajudar com o projeto do concurso ");
+            System.out.println(" Professor Otávio: O que voce precisa? ");
+            System.out.println(nome + " : de um tanque de combustivel, fuselagem e asas para um foguete ");
+            System.out.println(" Professor Otávio: posso imprimir estes objeto na nossa super impressora 3D em um material super resistente, voce teria o "
+                    + "desenho deste itens? ");
+            System.out.println(nome + " : tenho sim ");
+            System.out.println(" Professor Otávio: certo, vai demorar 1 dia pra ficar pronto, amanha mesmo voce pode pegar ");
+            System.out.println(nome + " : amanhã não tenho aula ");
+            System.out.println(" Professor Otávio: mas venha ao campus amanha, tera uma simulação de um treinamento de gravidade zero dos alunos de educação fisica"
+                    + " e uma oficina de comida desidratada dos alunos de gastronomia ");
+          
         }
         
     }
@@ -428,7 +422,7 @@ public class GameMain {
             //continuar
         }
     }
-    
+    /*
     public static void labDesign() {
         int senha = 0;
         System.out.println(ambienteAtual("labDesign")); //mostra q o player foi para outro ambiente
@@ -474,6 +468,7 @@ public class GameMain {
                 break;
         }
     }
+    */
     
     static void salaA125() {
         System.out.println(ambienteAtual("a125"));
@@ -496,7 +491,7 @@ public class GameMain {
                 break;
         }
     }
-    
+    /*
     static void corredor() {
         System.out.println(ambienteAtual("corredor"));
         if (progressoPlayer == 0) {
@@ -526,7 +521,7 @@ public class GameMain {
         }
         
     }
-    
+    */
     public static void pracaAlimentacao3() {
         System.out.println(ambienteAtual("praca02"));
         switch (progressoPlayer) {
