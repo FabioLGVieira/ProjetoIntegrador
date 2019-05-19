@@ -69,7 +69,7 @@ public class GameMain {
             } else {
                 System.out.println(nome + ": Por enquanto não tenho interesse, obrigado!");
             }
-            String[] d2 = {nome + ": Agora preciso pegar o livro que o professor pediu!", "[...procurando o livro nas estantes]", nome + "O que é esse papel amassado no chão?"};
+            String[] d2 = {nome + ": Agora preciso pegar o livro que o professor pediu!", "[...procurando o livro nas estantes]", nome + ": O que é esse papel amassado no chão?"};
             imprimirTexto(d2);
             
             comandosDisponiveis(2, "Pegar o papel", "Ignorar");
@@ -88,7 +88,7 @@ public class GameMain {
             }
             
             comandosDisponiveis(2, "Praça alimentação 01", "Voltar para a sala");
-            sc.nextLine();
+
             if (resposta == 'a') {
                 System.out.println(nome + ": Tô com fome, vou comer antes de voltar pra sala.");
                 sc.nextLine();
@@ -107,9 +107,9 @@ public class GameMain {
         
         if (progressoPlayer == 0) {
             String[] d = {nome + ": Hey Paulo, quanto tempo não te vejo! Não lembrava que voce estudava aqui.", "Paulo: E aí," + nome + "! Eu stou no terceiro semestre de arquitetura",
-                nome + " :Que legal! Você se inscreveu para o Concurso Espacial?", "Paulo: Me inscrevi sim, estou pensando em algum projeto sobre como seria a arquitetura na lua. E o seu projeto?"};
-            String d2[] = {nome + "Eu ainda estou pensando se vou participar do concurso", "Paulo: Poxa, se eu fosse você eu participaria. É uma experiência muito legal!",
-                nome + "Tá bom, eu vou participar, mas eu ainda tenho que pensar na ideia!"};
+                nome + ": Que legal! Você se inscreveu para o Concurso Espacial?", "Paulo: Me inscrevi sim, estou pensando em algum projeto sobre como seria a arquitetura na lua. E o seu projeto?"};
+            String d2[] = {nome + ": Eu ainda estou pensando se vou participar do concurso", "Paulo: Poxa, se eu fosse você eu participaria. É uma experiência muito legal!",
+                nome + ": Tá bom, eu vou participar, mas eu ainda tenho que pensar na ideia!"};
             imprimirTexto(d);
             
             if (interesseConcurso == true) {
@@ -117,9 +117,12 @@ public class GameMain {
                     
                     comandosDisponiveis(2, "Contar sua ideia", "Comprar o lanche e voltar");
                     if (resposta == 'a') {
-                        System.out.println(nome + " : Que idéia interessante! Eu ainda não decidi, mas estou pensando em construir um foguete.");
+                        System.out.println(nome + " : Que idéia interessante! Eu ainda não decidi, mas estou pensando em construir um foguete...");
                         sc.next();
                     }                    
+                } else{
+                
+                    System.out.println(nome + ": Eu tenho interesse em participar do concurso, mas ainda não sei o que fazer...");
                 }
                 
             } else {
@@ -139,7 +142,7 @@ public class GameMain {
         
         System.out.println(ambienteAtual("lab136"));
         System.out.println("Alexandre: Muito bem turma, já que todos voltaram vou fazer algumas perguntas sobre programação. Quem acertar "
-                + " terá alguma ajuda para o projeto do Concurso Espacial.");
+                + "terá alguma ajuda para o projeto do Concurso Espacial.");
         strNext();
         perguntaAlgoritimos();
     }
@@ -160,14 +163,15 @@ public class GameMain {
             System.out.println("Voce tem " + tentativas + " tentativas"); //diminui as tentativas de resposta caso responder errado
             charNext();
             if (resposta != corretaFaceis[rnd]) {
-                System.out.println("Voce errou tente denovo!");
+                System.out.println("Você errou! Tente novamente.");
                 tentativas--;
             }
         } while (resposta != corretaFaceis[rnd] && tentativas > 0);
         if (resposta == corretaFaceis[rnd]) { //colocar uma funçao para a resposta CERTA 
-            System.out.println("resposta certa");
-            System.out.println(nome + ": Bom, agora que acabou a aula acho que vou no laborátorio de mecânica "
-                    + "\ntalvez o professor possa me ajudar");
+            System.out.println("Resposta certa!");
+            System.out.println("-----------------------------------\n");
+            System.out.println(nome + ": Bom, agora que acabou a aula acho que vou no laboratório de mecânica, "
+                    + "talvez o professor possa me ajudar...");
             strNext();
             corredor();
         } else {
