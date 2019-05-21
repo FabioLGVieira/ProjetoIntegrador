@@ -1,5 +1,6 @@
 package Rpggame;
 
+import com.sun.corba.se.impl.util.PackagePrefixChecker;
 import java.util.Random;
 import java.util.Scanner;
 import jdk.nashorn.internal.ir.BreakNode;
@@ -164,7 +165,7 @@ public class GameMain {
                 centroGastronomico();
                 break;
             case 3:
-                
+
                 break;
             case 5:
                 centroGastronomico();
@@ -323,19 +324,19 @@ public class GameMain {
         char corretaFaceis[] = {'c', 'c', 'b', 'a', 'd'}; //vetor de verificação das respostas
         int perguntasFeitas[] = new int[perguntas.length];
         /*  boolean feito = false;        
-        int rnd;
-        for (int i = 0; i < perguntasFeitas.length; i++) {//preenche o vetor de perguntas feitas com um numero fora do tamanho
-            perguntasFeitas[i] = perguntasFeitas.length+2;//assim, depois o elemento alterado se torna um numero para nao se repetir
-        }
-        do {
-            rnd = randomico.nextInt(perguntas.length); // gera um numero para randomizar as perguntas perguntas
-            for (int i = 0; i < perguntasFeitas.length; i++) {
-                feito = false;
-                if(rnd == perguntasFeitas[i])
-                    feito = true;
-                break;
-            }
-        } while (feito == true);*/
+         int rnd;
+         for (int i = 0; i < perguntasFeitas.length; i++) {//preenche o vetor de perguntas feitas com um numero fora do tamanho
+         perguntasFeitas[i] = perguntasFeitas.length+2;//assim, depois o elemento alterado se torna um numero para nao se repetir
+         }
+         do {
+         rnd = randomico.nextInt(perguntas.length); // gera um numero para randomizar as perguntas perguntas
+         for (int i = 0; i < perguntasFeitas.length; i++) {
+         feito = false;
+         if(rnd == perguntasFeitas[i])
+         feito = true;
+         break;
+         }
+         } while (feito == true);*/
         int rnd = randomico.nextInt(perguntas.length);//deletar essa linha e descomentar em em cima depois de tirar a duvida
 
         System.out.println(perguntas[rnd] + ":"); //imprime a pergunta e as respostas possiveis de acordo com o numero randomico gerado
@@ -411,7 +412,45 @@ public class GameMain {
         return "\n===================================\nAmbiente atual: " + sala + "\n";
     }
 
-    static void verificaSituacaoJogo() {// verifica se o player ou o adversario completou o projeto primeiro, e retorna o tipo de fim do jogo
+    static void verificaSituacaoJogo() {
+        String funcao;
+        System.out.println("Progresso:");
+        progressoPlayer = sc.nextInt();
+        System.out.println("Função: ");
+        funcao = sc.next();
+        System.out.println("Nome do player:");
+        nome = sc.next();
+        switch (funcao) {
+            case "biblioteca":
+                biblioteca();
+            case "entrada":
+                entradaCampus();
+                break;
+            case "labDesign":
+                labDesign();
+                break;
+            case "praca01":
+                pracaAlimentacao1();
+                break;
+            case "centroesportivo":
+                centroEsportivo();
+                break;
+            case "praca03":
+                pracaAlimentacao3();
+                break;
+            case "lab136":
+                salavazia();
+                break;
+            case "a125":
+                salaA125();
+                break;
+            case "centrogastronomico":
+                centroGastronomico();
+                break;
+            case "nasa":
+                nasa();
+                break;
+        }
         if (progressoPlayer == 7) {
             System.out.println(EndGame(1));
         }
@@ -531,7 +570,7 @@ public class GameMain {
     }
 
     /*
-    switch (progressoPlayer) {
+     switch (progressoPlayer) {
      case 0:
      break;
      case 1:
@@ -595,28 +634,28 @@ public class GameMain {
     static void centroGastronomico() {
         System.out.println(ambienteAtual("centrogastronomico"));
         //ainda vou mexer
-        switch(progressoPlayer){
+        switch (progressoPlayer) {
             case 1:
-        System.out.println("[Varios veteranos de Gastronomia estão fazendo confraternização com os bichos]");
-        System.out.println(nome + ": Oi, o prof Leonildo disse para eu pedir ajuda para o pessoal de Gastronomia, sobre meu projeto para o Concurso");
-        System.out.println("Veterano: Que bacana! O que vai ser? E diga lá, em que voce precisa de ajuda.");
-        System.out.println(nome + ": É um foguete! E para poder ir ao espaço irei precisar de alimento.");
-        System.out.println("Sei que preciso tirar 97% da água dos alimentos, mas não sei fazer isso. Por isso vim pedir ajuda...");
-        System.out.println("Veterano: De fato, vai ficar muito mais facil de levar com menos peso!");
-        System.out.println("Podemos te ajudar sim, mas demora um bom tempo, fala comigo daqui 3 dias que estará tudo pronto!");
-        System.out.println("Mas antes de voce correr atrás do restante do projeto, me diga/dê o que pretende levar.");//decidir se ele vai conseguir os alimentos antes
-        System.out.println(nome+": Beleza, vou levar...");
-        String inventario[] = new String[5];
-        for (int i = 0; i < inventario.length; i++) {
-            System.out.println(" Coloque o alimento: ");
-            inventario[i] = strNext();
-        }
-        System.out.println("Veterano: Bacana, ja vou começar o processo de desidratar, boa sorte no projeto!");
-        System.out.println(nome+": Obrigado, outro dia venho pegar então. Agora vou procura a proxima parte");
+                System.out.println("[Varios veteranos de Gastronomia estão fazendo confraternização com os bichos]");
+                System.out.println(nome + ": Oi, o prof Leonildo disse para eu pedir ajuda para o pessoal de Gastronomia, sobre meu projeto para o Concurso");
+                System.out.println("Veterano: Que bacana! O que vai ser? E diga lá, em que voce precisa de ajuda.");
+                System.out.println(nome + ": É um foguete! E para poder ir ao espaço irei precisar de alimento.");
+                System.out.println("Sei que preciso tirar 97% da água dos alimentos, mas não sei fazer isso. Por isso vim pedir ajuda...");
+                System.out.println("Veterano: De fato, vai ficar muito mais facil de levar com menos peso!");
+                System.out.println("Podemos te ajudar sim, mas demora um bom tempo, fala comigo daqui 3 dias que estará tudo pronto!");
+                System.out.println("Mas antes de voce correr atrás do restante do projeto, me diga/dê o que pretende levar.");//decidir se ele vai conseguir os alimentos antes
+                System.out.println(nome + ": Beleza, vou levar...");
+                String inventario[] = new String[5];
+                for (int i = 0; i < inventario.length; i++) {
+                    System.out.println(" Coloque o alimento: ");
+                    inventario[i] = strNext();
+                }
+                System.out.println("Veterano: Bacana, ja vou começar o processo de desidratar, boa sorte no projeto!");
+                System.out.println(nome + ": Obrigado, outro dia venho pegar então. Agora vou procura a proxima parte");
 
-        //desenvolver alguma historia que aborde o processo de tirar 97% da agua dos alimentos
-        //de preferencia: fazer o player saber sobre isso antes do progresso estiver em 3 ou mais. Entao ele recebe a comida ja desidratada.
-        //pode ser na praça de alimentação 1 tbm, por estar perto do predio gastro
+                //desenvolver alguma historia que aborde o processo de tirar 97% da agua dos alimentos
+                //de preferencia: fazer o player saber sobre isso antes do progresso estiver em 3 ou mais. Entao ele recebe a comida ja desidratada.
+                //pode ser na praça de alimentação 1 tbm, por estar perto do predio gastro
                 break;
             case 5:
                 break;
@@ -777,7 +816,8 @@ public class GameMain {
 
     public static void menu() {//menu inicial responsavel por apresentar opçoes ao usuario
         String[] s = {"      Beyond the earth   ", "\n --------------------------", "\n|       --> Menu <--       |", "\n| 1- Instruções            |",
-            "\n| 2- Jogar                 |", "\n| 3- Ir para o fim do jogo |", "\n| 4- Créditos              |", "\n| 5- Sair                  |",
+            "\n| 2- Jogar                 |", "\n| 3- Executar função       |\n| específica               |"
+                , "\n| 4- Créditos              |", "\n| 5- Sair                  |",
             "\n --------------------------\n"};
         for (int i = 0; i < s.length; i++) {
             System.out.print(s[i]);
