@@ -22,15 +22,14 @@ public class GameMain {
 
         System.out.println(ambienteAtual("entrada"));
         if (progressoPlayer == 0) {
-            String[] d = {"Voce esta chegando ao Centro Universitário Senac para seu primeiro dia de aula ...\n", "Ao chegar, um dos alunos da atlética vem falar com você.\n",};
+            String[] d = {"Voce esta chegando ao Centro Universitário Senac para mais um dia de aula ...\n", "Ao chegar, um dos alunos da atlética vem falar com você.\n",};
 
             imprimirTexto(d);
-            System.out.println("João: Bom dia, novo aluno! Como se chama?");
+            System.out.println("João: Bom dia, aluno! Como se chama?");
             System.out.println("[Digite seu nome...]");
             nome = sc.nextLine();
             nome = verificaNome(nome);
-            String[] d2 = {"Seja bem-vindo ao Senac, " + nome + "!", "João: Qual o seu curso?", nome + ": Tecnologia em análise e desenvolvimento de sistemas ",
-                "João: Sua sala é a C136, vá até lá, o professor vai passar algumas orientações"};
+            String[] d2 = {"Está acontecendo no decorrer desta semana Concurso Espacial do Centro Universitario Senac" + nome + "! Siga até a sua sala para o professor te dar melhores informaçoes "};
             imprimirTexto(d2);
             salavazia();
         } else if (progressoPlayer == 1) {
@@ -178,6 +177,7 @@ public class GameMain {
                 + "terá alguma ajuda para o projeto do Concurso Espacial.");
         strNext();
         perguntaAlgoritimos();
+        
     }
 
     public static void perguntaAlgoritimos() {
@@ -241,6 +241,7 @@ public class GameMain {
             case 1:
                 break;
         }
+        salaConceitos ();
     }
 
     public static void nasa() {
@@ -858,5 +859,31 @@ public class GameMain {
                 break;
         }
     }
+    
+    public static void salaADM(){
+        System.out.println(ambienteAtual("a125"));
+        if (progressoPlayer == 0){
+        String[] d = {" [...Aula de fundamento da administração] ", " Keli: Vou passar uma apresentação sobre uma empresa de que desidrata comida"
+                + " para NASA e depois vou fazer um questionario, quem acertar estara liberado " , "[...Parte importante da apresentação] ", " Keli: "
+                + "grande parte dos funcionários desta empresa são formados em gastronomi e eles tem de lidar com o processo de desidratação da comida "
+                + "em que são tirados 97% de liquido do alimento, afim de reduzir o peso da carga dos foguetes ", nome + " agora já sei onde conseguir "
+                + "um dos itens para o meu projeto "  };
+        perguntaMedia();
+        }
+        
+    }
+    
+         
+    public static void salaConceitos (){
+    System.out.println(ambienteAtual("a125"));
+    if (progressoPlayer == 0){
+    String[] d = {" [...Aula de conceitos da computação] ", "Stelvio: muito bem turma, tudo bem com voces? Alguma duvida? "
+            + "Algum problema com outra matéria? E como anda o PI de voces? Bom, como todos devem saber, estamo na semana do Concurso Espacial"
+            + "E os professores estão ajudando os alunos de alguma forma, vou fazer algumas perguntas a respeito da minha materia, que acertar, "
+            + "pode falar comigo no final da aula, que dou alguma ajuda "};
+                perguntaMedia();
+        }
+    }
 
 }
+
