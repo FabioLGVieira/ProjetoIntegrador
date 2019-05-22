@@ -1,9 +1,7 @@
 package Rpggame;
 
-import com.sun.corba.se.impl.util.PackagePrefixChecker;
 import java.util.Random;
 import java.util.Scanner;
-import jdk.nashorn.internal.ir.BreakNode;
 
 public class GameMain {
 
@@ -604,8 +602,20 @@ public class GameMain {
         System.out.println(ambienteAtual("centroesportivo"));
         if (progressoPlayer == 0) {
             System.out.println(nome + ": Olá onde posso encotrar o Ducival ?");
-            strNext();
             System.out.println("Desconhecido: Ducival é o treinador, ele está na quadra ");
+            comandosDisponiveis(2, "Procurar treinador", "ir para outro lugar");
+            System.out.println("Vem comigo, vou te mostrar");
+            System.out.println("[...procurando o Ducival]");
+            System.out.println("Desconhecido: Aquele ali eh o Treinador.");
+            System.out.println(nome+": Treinador... Fulano disse para eu te procurar.");
+            System.out.println("Preciso de ajuda com o meu projeto do Concurso Espacial.");
+            System.out.println("Ducival: Muito bem, em que posso te ajudar?");
+            System.out.println(nome+": Quero desenvolver uma teoria e provar que eh possivel ter uma nocao de gravidade zero na piscina");
+            System.out.println("Ducival: Legal, entaox vamos ter que usar a nossa piscina mais funda!");
+            System.out.println("Mas acho que seria interessante ja testarmos com a roupa de astronauta.");
+            System.out.println("Que tal voce tentar conseguir ela, e depois comecamosx o treinamento?");
+            comandosDisponiveis(2, "Sim", "Naox");
+            
             comandosDisponiveis(2, "procurar treinador", "ir para centro gastronômico");
             if (resposta == 'a') {
                 System.out.println(nome + ": Oi Ducival tenho um projeto de viagem espacial e precisaria de treinamento de gravidade 0");
