@@ -7,15 +7,19 @@ public class GameMain {
 
     static Random randomico = new Random();
     static Scanner sc = new Scanner(System.in);
-    static String nome;
+    static String nome="zz";
     static int progressoPlayer, progressoAdversários;
-    static char resposta;
+    static String resposta;
     static boolean pegouPapel = false, interesseConcurso = false;
 
     public static void main(String[] args) {
         progressoPlayer = 0;
         progressoAdversários = 0;
         menu();
+    }
+
+    public static void controlador() {
+        String escolhasJogo[] = {"","",""};// primeiro elemento é o nome
     }
 
     public static void entradaCampus() {
@@ -26,8 +30,8 @@ public class GameMain {
 
             imprimirTexto(d);
             System.out.println("João: Bom dia, aluno! Como se chama?");
-            System.out.println("[Digite seu nome...]");
-            nome = sc.nextLine();
+            //System.out.println("[Digite seu nome...]");
+            //nome = sc.nextLine();
             nome = verificaNome(nome);
             String[] d2 = {"Veterano: Está acontecendo no decorrer desta semana Concurso Espacial do Centro Universitario Senac!", nome + ", siga até a sua sala para o professor te dar melhores informaçoes."};
             imprimirTexto(d2);
@@ -46,7 +50,7 @@ public class GameMain {
             nome + ": Que legal! E que concurso é esse?", "Alexandre: é o Concurso Espacial do Senac, na biblioteca você terá melhores informaçoes"};
         imprimirTexto(d);
         comandosDisponiveis(2, "Ir agora?", "ficar e falar com o prof?");
-        if (resposta == 'b') {
+        if (resposta.equals("b")) {
             String[] d2 = {nome + ": Já sei Java, vou ficar aqui até eles chegarem.", "Alexandre: Beleza então, abre o NetBeans ai e me faz um clone do Whatsapp aí.",
                 "Alexandre: Se não conseguir, já está reprovado. Ou prefere ir na biblioteca?"};
             imprimirTexto(d2);
@@ -70,7 +74,7 @@ public class GameMain {
                 };
                 imprimirTexto(d);
                 comandosDisponiveis(2, "Sim", "Não");
-                if (resposta == 'a') {
+                if (resposta.equals("a")) {
                     System.out.print(nome + ": Gostei muito da ideia, mas nao sei ainda o que fazer, vou pensar mais!");
                     sc.nextLine();
                     interesseConcurso = true;
@@ -83,7 +87,7 @@ public class GameMain {
                 comandosDisponiveis(2, "Pegar o papel", "Ignorar");
                 String[] d3 = {nome + ": Wow! É um projeto detalhado de um Foguete Espacial! Quem jogaria isso fora?", nome + ": Bom, vou guardar... Quem sabe não seria um bom projeto para o concurso?!",
                     nome + ": Hmmm... achei o livro! Agora preciso voltar pra sala"};
-                if (resposta == 'a') {
+                if (resposta.equals("a")) {
                     imprimirTexto(d3);
                     if (interesseConcurso == false) {
                         interesseConcurso = true;
@@ -97,11 +101,11 @@ public class GameMain {
 
                 comandosDisponiveis(2, "Praça alimentação 01", "Voltar para a sala");
 
-                if (resposta == 'a') {
+                if (resposta.equals("b")) {
                     System.out.println(nome + ": Tô com fome, vou comer antes e ver melhor o projeto, depois voltar pra sala.");
                     sc.nextLine();
                     pracaAlimentacao1();
-                } else if (resposta == 'b') {
+                } else if (resposta.equals("b")) {
                     voltaParaSala();
                 }
                 break;
@@ -131,7 +135,7 @@ public class GameMain {
                     if (pegouPapel == true) {
 
                         comandosDisponiveis(2, "Contar sua ideia", "Comprar o lanche e analisar o projeto");
-                        if (resposta == 'a') {
+                        if (resposta.equals("a")) {
                             System.out.println(nome + " : Que idéia interessante! Eu ainda não decidi, mas estou pensando em construir um foguete...");
                             sc.next();
                         }
@@ -176,53 +180,15 @@ public class GameMain {
         System.out.println("Alexandre: Muito bem turma, já que todos voltaram vou fazer algumas perguntas sobre programação. Quem acertar "
                 + "terá alguma ajuda para o projeto do Concurso Espacial.");
         strNext();
-        perguntaAlgoritimos();
-
-    }
-
-    public static void perguntaAlgoritimos() {
-        int tentativas = 3;// numero de tentativas para acertar a pergunta e conseguir progredir
-        String perguntas[] = {" Para executar um mesmo bloco de código por determinadas vezes, o melhor a se fazer é: "},
-                respostasFaceis[][] = {{" while ", " if ", " do while ", " for "}};
-        char corretaFaceis[] = {'d'}; //vetor de verificação das respostas
-        int rnd = randomico.nextInt(perguntas.length); // gera um numero para randomizar as perguntas perguntas
-
-        System.out.println(perguntas[rnd] + ":"); //imprime a pergunta e as respostas possiveis de acordo com o numero randomico gerado
-        System.out.println("a)" + respostasFaceis[rnd][0]);
-        System.out.println("b)" + respostasFaceis[rnd][1]);
-        System.out.println("c)" + respostasFaceis[rnd][2]);
-        System.out.println("d)" + respostasFaceis[rnd][3]);
-        do {
-            System.out.println("Voce tem " + tentativas + " tentativas"); //diminui as tentativas de resposta caso responder errado
-            charNext();
-            if (resposta != corretaFaceis[rnd]) {
-                System.out.println("Você errou! Tente novamente.");
-                tentativas--;
-            }
-        } while (resposta != corretaFaceis[rnd] && tentativas > 0);
-        if (resposta == corretaFaceis[rnd]) { //colocar uma funçao para a resposta CERTA 
-            System.out.println("Resposta certa!");
+        perguntaFacil();
+        System.out.println("Resposta certa!");
             System.out.println("-----------------------------------\n");
             System.out.println(nome + ": Bom, já que acertei acho que o professor Alexandre vai me ajudar...");
             System.out.println("Alexandre: " + nome + " como posso te ajudar em seu projeto?");
             System.out.println(nome + " : Preciso de algumas peças: um tanque de combustivel, fuselagem e asas para um foguete, em que "
                     + " parte do campus posso encontrar esses itens? ");
             System.out.println(" Alexandre: no laboratório de design voce vai encontrar, procure o professor Otávio ");
-            strNext();
-            labDesign();
-        } else {
-            System.out.println("Gostaria de tentar outra pergunta? S/ N");
-            charNext();
-            if (resposta == 's') {
-                perguntaAlgoritimos();
-            }
-            if (resposta == 'n' && progressoPlayer == 0) {
-                System.out.println(nome + ": Bom, agora que acabou a aula acho que vou no laborátorio de mecânica "
-                        + "\ntalvez o professor possa me ajudar");
-                strNext();
-                labDesign();
-            }
-        }
+labDesign();
     }
 
     public static void labDesign() {
@@ -251,7 +217,7 @@ public class GameMain {
         System.out.println("Tem como me ajudar? Tenta digitar sobre seu projeto,\n e a resposta deve ser algo relacionado a ele!");
         switch (progressoPlayer) {
             case 0:// tanque de combustivel
-                
+
                 break;
             case 1://combustivel    avisa pra saber sobre a comida
                 break;
@@ -309,18 +275,18 @@ public class GameMain {
         System.out.println("d)" + respostasMedias[rnd][3]);
         do {
             System.out.println("Voce tem " + tentativas + " tentativas"); //diminui as tentativas de resposta caso responder errado
-            charNext();
-            if (resposta != corretaMedias[rnd]) {
+            pulaLinha();
+            if (resposta.equals(corretaMedias[rnd])) {
                 System.out.println("Voce errou! Tente novamente.");
                 tentativas--;
             }
-        } while (resposta != corretaMedias[rnd] && tentativas > 0);
-        if (resposta == corretaMedias[rnd]) { //colocar uma funçao para a resposta CERTA 
+        } while (!resposta.equals(corretaMedias[rnd]) && tentativas > 0);
+        if (resposta.equals(corretaMedias[rnd])) { //colocar uma funçao para a resposta CERTA 
             System.out.println("resposta certa");
         } else {
             System.out.println("Gostaria de tentar outra pergunta? S/ N");
-            charNext();
-            if (resposta == 's') {
+            pulaLinha();
+            if (resposta.equals("s")) {
                 perguntaMedia();
             }
         }
@@ -335,8 +301,8 @@ public class GameMain {
                 respostasFaceis[][] = {{"[ 10/4 ; 15 ]", "[ 2,5 ; 15 [", "] 10/4 ; 15 ]", "] 2,5 ; 15 ["}, //matriz de respostas das perguntas
                 {"01100110, 356 ,EE", "00001111, 380, EF", "11111111, 377, FF", "11110000, 374, FE"},
                 {"8", "16", "32", "64"}, {"a³ - 3a³b + 3ab³ - b³", "a³ + 3a³b + 3ab³ + b³", "a³ - 3a³b - 3ab³ - b³", "a³ - 3a³b - 3ab³ + b³"},
-                {" while ", " if ", " do while ", " for "}};
-        char corretaFaceis[] = {'c', 'c', 'b', 'a', 'd'}; //vetor de verificação das respostas
+                {" while ", " if ", " do while ", " for "}},
+                corretaFaceis[] = {"c", "c", "b", "a", "d"}; //vetor de verificação das respostas
         int perguntasFeitas[] = new int[perguntas.length];
         /*  boolean feito = false;        
          int rnd;
@@ -361,20 +327,20 @@ public class GameMain {
         System.out.println("d)" + respostasFaceis[rnd][3]);
         do {
             System.out.println("Voce tem " + tentativas + " tentativas"); //diminui as tentativas de resposta caso responder errado
-            charNext();
-            if (resposta != corretaFaceis[rnd]) {
+            strNext();
+            if (!resposta.equals(corretaFaceis[rnd])) {
                 System.out.println("Voce errou! Tente novamente.");
                 tentativas--;
             }
-        } while (resposta != corretaFaceis[rnd] && tentativas > 0);
-        if (resposta == corretaFaceis[rnd]) {
+        } while (!resposta.equals(corretaFaceis[rnd]) && tentativas > 0);
+        if (resposta.equals(corretaFaceis[rnd])) {
             System.out.println("resposta certa");
             //perguntasFeitas[rnd] = rnd;//adiciona o numero da pergunta random para nao se repetir caso acerte
             //perguntaFacil();
         } else {
             System.out.println("Gostaria de tentar outra pergunta? S/ N");
-            charNext();
-            if (resposta == 's') {
+            pulaLinha();
+            if (resposta.equals("s")) {
                 perguntaFacil();
             }
         }
@@ -496,12 +462,12 @@ public class GameMain {
         System.out.print("Prof. Gilberto: muito bem " + nome + " , parece que voce me encontrou, como posso te ajudar ? ");
         strNext();
         comandosDisponiveis(2, "Pedir ajuda", "outra opçao");
-        if (resposta == 'a') {
+        if (resposta.equals("a")) {
             String[] s = {nome + ": estou precisando de peças para montar meu projeto espacial creio que o senhor poderia me ajudar.",
                 "Prof. Gilberto: posso te ajudar sim, " + nome + ", porém voce terá de me responder uma pergunta.", "Voce está de acordo?"};
             imprimirTexto(s);
             comandosDisponiveis(2, "Sim", "Nao");
-            if (resposta == 's') {
+            if (resposta.equals("a")) {
                 perguntaFacil();
                 System.out.println(ganhaPeca(true));
                 //pracaAlimentacao3();
@@ -509,13 +475,13 @@ public class GameMain {
                 //gameOver();
             }
             System.out.println(" Parabéns " + nome + " com essa resposta certa voce ganha um item para o seu projeto ");
-        } else if (resposta == 'b') {
+        } else if (resposta.equals("b")) {
             System.out.println(nome + "Vai ter prova?");
             System.out.println("Prof. Gilberto: Vai sim, (completar com alguma materia aqui)");
             System.out.println("Você está com dúvida na matéria?");
             System.out.println("Disponíveis: S | N");
-            charNext();
-            if (resposta == 's') {
+            pulaLinha();
+            if (resposta.equals("s")) {
                 System.out.println("Sim, não entendi nada.");
             } //continuar
             else {
@@ -559,11 +525,11 @@ public class GameMain {
                     strNext();
                 }
                 System.out.println("Deseja pagar um lanche para ter seu projeto de volta?");
-                comandosDisponiveis(1, "Sim", "Não", "", "");
-                if (resposta == 'a') {
+                comandosDisponiveis(1, "Sim", "Não");
+                if (resposta.equals("a")) {
                     System.out.println(" Conseguiu seu projeto de volta ");
                     nasa();
-                } else if (resposta == 'b') {
+                } else if (resposta.equals("b")) {
                     EndGame(2);
                 }
                 break;
@@ -638,12 +604,12 @@ public class GameMain {
                 break;
         }// decidir reaproveita ou muda abaixo
         comandosDisponiveis(2, "procurar treinador", "ir para centro gastronômico");
-        if (resposta == 'a') {
+        if (resposta.equals("a")) {
             System.out.println(nome + ": Oi Ducival tenho um projeto de viagem espacial e precisaria de treinamento de gravidade 0");
             strNext();
             System.out.println("Ducival: O treinamento pode ser feito na piscina, vamos começar ?");
             comandosDisponiveis(2, "começar", "outra hora");
-            if (resposta == 'a') {
+            if (resposta.equals("a")) {
                 strNext();
                 System.out.println("Treinamento cncluido "
                         + "\nParte do treinamento foi concluido");
@@ -655,7 +621,7 @@ public class GameMain {
                 centroGastronomico();
             }
         }
-        if (resposta == 'b') {
+        if (resposta.equals("a")) {
             centroGastronomico();
         }
     }
@@ -720,34 +686,31 @@ public class GameMain {
         verificaComando(op);
     }
 
-    static char verificaComando(int op) {// 1 para respostas a, b ,c ,d   2 para s, n.  \ para finalizar o programa
-        charNext();//le o comando do usuario
-        if (resposta == '\\') {//para o comando \ funcionar precisa de duas(\\), \ é um escape character, com 2 eles se cancelam
-            System.exit(1);//termina o programa
-        }
+    static String verificaComando(int op) {// 1 para respostas a, b ,c ,d   2 para s, n.  \ para finalizar o programa
+        strNext();//le o comando do usuario
         switch (op) {// diferencia entre as opçoes de salas ou açoes do usuario, das opçoes de escolhas entre sim ou nao
             case 1://escolhas de opçoes ou salas                        opçao relativo a quantidade de opçoes disponiveis ( 1 )
-                while (resposta != 'a') {
+                while (!resposta.equals("a")) {
                     System.out.println("Comando inválido.");
-                    charNext();//le o comando do usuario
+                    strNext();//le o comando do usuario
                 }
                 break;
             case 2://escolhas de opçoes ou salas                        opçao relativo a quantidade de opçoes disponiveis ( 2 )
-                while (resposta != 'a' && resposta != 'b') {
+                while (resposta.equals("a") && !resposta.equals("b")) {
                     System.out.println("Comando inválido.");
-                    charNext();//le o comando do usuario
+                    strNext();//le o comando do usuario
                 }
                 break;
             case 3://escolhas de opçoes ou salas                         opçao relativo a quantidade de opçoes disponiveis ( 3 )
-                while (resposta != 'a' && resposta != 'b' && resposta != 'c') {
+                while (resposta.equals("a") && resposta.equals("b") && resposta.equals("c")) {
                     System.out.println("Comando inválido.");
-                    charNext();//le o comando do usuario
+                    strNext();//le o comando do usuario
                 }
                 break;
             case 4://escolhas de opçoes ou salas                        opçao relativo a quantidade de opçoes disponiveis ( 4 )
-                while (resposta != 'a' && resposta != 'b' && resposta != 'c' && resposta != 'd') {
+                while (resposta.equals("a") && resposta.equals("b") && resposta.equals("b") && resposta.equals("d")) {
                     System.out.println("Comando inválido.");
-                    charNext();//le o comando do usuario
+                    strNext();//le o comando do usuario
                 }
                 break;
         }
@@ -755,38 +718,32 @@ public class GameMain {
     }
 
     static String verificaNome(String nome) {//verifica se o nome contem muitos espaços ou se começa com espaço ou é null
-        char[] c = new char[nome.length()];
-        int n = 0;
-        for (int i = 0; i < c.length; i++) {
-            c[i] = nome.charAt(i);
-            if (c[i] == ' ') {
-                n++;
-            }
-        }
-        while (n >= 2 || nome.equals("") || nome.charAt(0) == ' ') {
+        do {
             System.out.println("[Digite seu nome...]");
             nome = sc.nextLine();
-            n = 0;
-        }
+        }while (nome.isEmpty()|| nome.equals("") || nome.charAt(0) == ' ');
         return nome;
     }
 
     static void imprimirTexto(String v[]) {//recebe o Vetor de Dialogo dos NPCs e imprime na tela
         for (int i = 0; i < v.length; i++) {
             System.out.print(v[i]);
-            strNext();
+            pulaLinha();
         }// strNext() serve como pausa entre uma frase e outra
     }
 
-    static char charNext() {//pega o input do usuario em todas as partes do jogo
-        resposta = sc.next().toLowerCase().charAt(0);
-        sc.nextLine();
-        return resposta;
+    static String pulaLinha() {
+        String pula = sc.nextLine();
+        if(pula.equals("\\"))//para o comando \ funcionar precisa de duas(\\), \ é um escape character, com 2 eles se cancelam
+            System.exit(1);//termina o programa
+        return pula;
     }
 
-    public static String strNext() {//pega o input do usuario em todas as partes do jogo que nao sejam opçoes e mais de um caractere, e serve de pausa do dialogo
-        String pegaComando = sc.nextLine().toLowerCase();
-        return pegaComando;
+    public static String strNext() {//pega o input do usuario em todas as partes do jogo
+        resposta = sc.nextLine().toLowerCase();
+        if(resposta.equals("\\"))//para o comando \ funcionar precisa de duas(\\), \ é um escape character, com 2 eles se cancelam
+            System.exit(1);//termina o programa
+        return resposta;
     }
 
     static String EndGame(int op) {// casos de fim de jogo
@@ -829,25 +786,21 @@ public class GameMain {
                 + "E para o desenvolvimento dos diálogos basta apertar ENTER sempre ao final da fala do personagem.\n"
                 + "Você pode também digitar '\\' para finalizar o programa.\n"
                 + "Vamos testar se você entendeu.");
-        sc.nextLine();
-        do {//pequena verificaçao para o usuario estar apto a continuar
-            comandosDisponiveis(2, "Jogar", "Voltar ao menu");
-            charNext();
-            if (resposta == 'a') {
-                System.out.println("Vamos começar nossa aventura!");
-                entradaCampus();
-            } else if (resposta == 'b') {
-                menu();
-            } else {
-                System.out.println("Comando inválido.\n");
-            }
-        } while (resposta != 'a' && resposta != 'b');
+        comandosDisponiveis(2, "Jogar", "Voltar ao menu");        //sc.nextLine();
+        if (resposta.equals("a")) {
+            System.out.println("Vamos começar nossa aventura!");
+            entradaCampus();
+        } else if (resposta.equals("a")) {
+            menu();
+        } else {
+            System.out.println("Comando inválido.\n");
+        }
     }
 
     public static void menu() {//menu inicial responsavel por apresentar opçoes ao usuario
         String[] s = {"      Beyond the earth   ", "\n --------------------------", "\n|       --> Menu <--       |", "\n| 1- Instruções            |",
             "\n| 2- Jogar                 |", "\n| 3- Executar função       |\n| específica               |",
-             "\n| 4- Créditos              |", "\n| 5- Sair                  |",
+            "\n| 4- Créditos              |", "\n| 5- Sair                  |",
             "\n --------------------------\n"};
         for (int i = 0; i < s.length; i++) {
             System.out.print(s[i]);
@@ -862,6 +815,7 @@ public class GameMain {
                 entradaCampus();
                 break;
             case 3:
+                perguntaFacil();
                 verificaSituacaoJogo(); // apenas acelerar o teste, tirar futuramente
                 System.out.println("Pegadinha haha");
                 break;
