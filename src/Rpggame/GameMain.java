@@ -29,7 +29,7 @@ public class GameMain {
             System.out.println("[Digite seu nome...]");
             nome = sc.nextLine();
             nome = verificaNome(nome);
-            String[] d2 = {"Está acontecendo no decorrer desta semana Concurso Espacial do Centro Universitario Senac" + nome + "! Siga até a sua sala para o professor te dar melhores informaçoes "};
+            String[] d2 = {"Veterano: Está acontecendo no decorrer desta semana Concurso Espacial do Centro Universitario Senac!", nome + ", siga até a sua sala para o professor te dar melhores informaçoes."};
             imprimirTexto(d2);
             salavazia();
         } else if (progressoPlayer == 1) {
@@ -177,7 +177,7 @@ public class GameMain {
                 + "terá alguma ajuda para o projeto do Concurso Espacial.");
         strNext();
         perguntaAlgoritimos();
-        
+
     }
 
     public static void perguntaAlgoritimos() {
@@ -241,15 +241,31 @@ public class GameMain {
             case 1:
                 break;
         }
-        salaConceitos ();
+        salaConceitos();
     }
 
-    public static void nasa() {
+    public static void nasa() { //um aluno veterano de computacaox ta fazendo uma AI,
+        System.out.println(ambienteAtual("nasa"));  // e ela da a resposta da proxima pecax
+        System.out.println("Veterano: Ei! Voce ai, Voce mesmo! Acabei de melhorar a AI que estou desenvolvendo!");
+        System.out.println("Tenho problema de memoria, criei ela pra me lembrar do que fazer. \nEntao sempre deve me dizer o proximo passo.");
+        System.out.println("Tem como me ajudar? Tenta digitar sobre seu projeto,\n e a resposta deve ser algo relacionado a ele!");
         switch (progressoPlayer) {
-            case 0:
-                System.out.println(ambienteAtual("nasa"));
+            case 0:// tanque de combustivel
+                
                 break;
-            case 1:
+            case 1://combustivel    avisa pra saber sobre a comida
+                break;
+            case 2://turbina    avisa pra saber sobre o traje
+                break;
+            case 3://estabilizador
+                break;
+            case 4://fuselagem
+                break;
+            case 5://modulo comando
+                break;
+            case 6:// recebe o traje
+                break;
+            case 7:// recebe a comida
                 break;
         }
 
@@ -450,7 +466,7 @@ public class GameMain {
                 nasa();
                 break;
         }
-        if (progressoPlayer == 7) {
+        if (progressoPlayer == 8) {
             System.out.println(EndGame(1));
         }
         if (progressoAdversários == 10) {
@@ -601,43 +617,46 @@ public class GameMain {
     // O jogador vai fazer treinamentos de gravidade 0 na piscina
     public static void centroEsportivo() {
         System.out.println(ambienteAtual("centroesportivo"));
-        if (progressoPlayer == 0) {
-            System.out.println(nome + ": Olá onde posso encotrar o Ducival ?");
-            System.out.println("Desconhecido: Ducival é o treinador, ele está na quadra ");
-            comandosDisponiveis(2, "Procurar treinador", "ir para outro lugar");
-            System.out.println("Vem comigo, vou te mostrar");
-            System.out.println("[...procurando o Ducival]");
-            System.out.println("Desconhecido: Aquele ali eh o Treinador.");
-            System.out.println(nome+": Treinador... Fulano disse para eu te procurar.");
-            System.out.println("Preciso de ajuda com o meu projeto do Concurso Espacial.");
-            System.out.println("Ducival: Muito bem, em que posso te ajudar?");
-            System.out.println(nome+": Quero desenvolver uma teoria e provar que eh possivel ter uma nocao de gravidade zero na piscina");
-            System.out.println("Ducival: Legal, entaox vamos ter que usar a nossa piscina mais funda!");
-            System.out.println("Mas acho que seria interessante ja testarmos com a roupa de astronauta.");
-            System.out.println("Que tal voce tentar conseguir ela, e depois comecamosx o treinamento?");
-            comandosDisponiveis(2, "Sim", "Naox");
-            
-            comandosDisponiveis(2, "procurar treinador", "ir para centro gastronômico");
+        switch (progressoPlayer) {
+            case 3:
+                System.out.println(nome + ": Olá onde posso encotrar o Ducival ?");
+                System.out.println("Desconhecido: Ducival é o treinador, ele está na quadra ");
+                comandosDisponiveis(2, "Procurar treinador", "ir para outro lugar");
+                System.out.println("Vem comigo, vou te mostrar");
+                System.out.println("[...procurando o Ducival]");
+                System.out.println("Desconhecido: Aquele ali eh o Treinador.");
+                System.out.println(nome + ": Treinador... Fulano disse para eu te procurar.");
+                System.out.println("Preciso de ajuda com o meu projeto do Concurso Espacial.");
+                System.out.println("Ducival: Muito bem, em que posso te ajudar?");
+                System.out.println(nome + ": Quero desenvolver uma teoria e provar que eh possivel ter uma nocao de gravidade zero na piscina");
+                System.out.println("Ducival: Legal, entaox vamos ter que usar a nossa piscina mais funda!");
+                System.out.println("Mas acho que seria interessante ja testarmos com a roupa de astronauta.");
+                System.out.println("Que tal voce tentar conseguir ela, e depois comecamosx o treinamento?");
+                comandosDisponiveis(2, "Sim", "Naox");
+                break;
+            case 6://vai conseguir a roupa e treinar na piscina
+                break;
+        }// decidir reaproveita ou muda abaixo
+        comandosDisponiveis(2, "procurar treinador", "ir para centro gastronômico");
+        if (resposta == 'a') {
+            System.out.println(nome + ": Oi Ducival tenho um projeto de viagem espacial e precisaria de treinamento de gravidade 0");
+            strNext();
+            System.out.println("Ducival: O treinamento pode ser feito na piscina, vamos começar ?");
+            comandosDisponiveis(2, "começar", "outra hora");
             if (resposta == 'a') {
-                System.out.println(nome + ": Oi Ducival tenho um projeto de viagem espacial e precisaria de treinamento de gravidade 0");
                 strNext();
-                System.out.println("Ducival: O treinamento pode ser feito na piscina, vamos começar ?");
-                comandosDisponiveis(2, "começar", "outra hora");
-                if (resposta == 'a') {
-                    strNext();
-                    System.out.println("Treinamento cncluido "
-                            + "\nParte do treinamento foi concluido");
-                    strNext();
-                    // ir para um outro lugar 
-                } else {
-                    System.out.println(nome + ": vou para o centro gastronômico começamos depois ");
-                    strNext();
-                    centroGastronomico();
-                }
-            }
-            if (resposta == 'b') {
+                System.out.println("Treinamento cncluido "
+                        + "\nParte do treinamento foi concluido");
+                strNext();
+                // ir para um outro lugar 
+            } else {
+                System.out.println(nome + ": vou para o centro gastronômico começamos depois ");
+                strNext();
                 centroGastronomico();
             }
+        }
+        if (resposta == 'b') {
+            centroGastronomico();
         }
     }
 
@@ -668,7 +687,7 @@ public class GameMain {
                 //de preferencia: fazer o player saber sobre isso antes do progresso estiver em 3 ou mais. Entao ele recebe a comida ja desidratada.
                 //pode ser na praça de alimentação 1 tbm, por estar perto do predio gastro
                 break;
-            case 5:
+            case 7://consegue a comida
                 break;
         }
     }
@@ -744,7 +763,7 @@ public class GameMain {
                 n++;
             }
         }
-        while (n >= 2 || nome == null || nome.charAt(0) == ' ') {
+        while (n >= 2 || nome.equals("") || nome.charAt(0) == ' ') {
             System.out.println("[Digite seu nome...]");
             nome = sc.nextLine();
             n = 0;
@@ -827,8 +846,8 @@ public class GameMain {
 
     public static void menu() {//menu inicial responsavel por apresentar opçoes ao usuario
         String[] s = {"      Beyond the earth   ", "\n --------------------------", "\n|       --> Menu <--       |", "\n| 1- Instruções            |",
-            "\n| 2- Jogar                 |", "\n| 3- Executar função       |\n| específica               |"
-                , "\n| 4- Créditos              |", "\n| 5- Sair                  |",
+            "\n| 2- Jogar                 |", "\n| 3- Executar função       |\n| específica               |",
+             "\n| 4- Créditos              |", "\n| 5- Sair                  |",
             "\n --------------------------\n"};
         for (int i = 0; i < s.length; i++) {
             System.out.print(s[i]);
@@ -859,31 +878,29 @@ public class GameMain {
                 break;
         }
     }
-    
-    public static void salaADM(){
+
+    public static void salaADM() {
         System.out.println(ambienteAtual("a125"));
-        if (progressoPlayer == 0){
-        String[] d = {" [...Aula de fundamento da administração] ", " Keli: Vou passar uma apresentação sobre uma empresa de que desidrata comida"
-                + " para NASA e depois vou fazer um questionario, quem acertar estara liberado " , "[...Parte importante da apresentação] ", " Keli: "
+        if (progressoPlayer == 0) {
+            String[] d = {" [...Aula de fundamento da administração] ", " Keli: Vou passar uma apresentação sobre uma empresa de que desidrata comida"
+                + " para NASA e depois vou fazer um questionario, quem acertar estara liberado ", "[...Parte importante da apresentação] ", " Keli: "
                 + "grande parte dos funcionários desta empresa são formados em gastronomi e eles tem de lidar com o processo de desidratação da comida "
                 + "em que são tirados 97% de liquido do alimento, afim de reduzir o peso da carga dos foguetes ", nome + " agora já sei onde conseguir "
-                + "um dos itens para o meu projeto "  };
-        perguntaMedia();
+                + "um dos itens para o meu projeto "};
+            perguntaMedia();
         }
-        
+
     }
-    
-         
-    public static void salaConceitos (){
-    System.out.println(ambienteAtual("a125"));
-    if (progressoPlayer == 0){
-    String[] d = {" [...Aula de conceitos da computação] ", "Stelvio: muito bem turma, tudo bem com voces? Alguma duvida? "
-            + "Algum problema com outra matéria? E como anda o PI de voces? Bom, como todos devem saber, estamo na semana do Concurso Espacial"
-            + "E os professores estão ajudando os alunos de alguma forma, vou fazer algumas perguntas a respeito da minha materia, que acertar, "
-            + "pode falar comigo no final da aula, que dou alguma ajuda "};
-                perguntaMedia();
+
+    public static void salaConceitos() {
+        System.out.println(ambienteAtual("a125"));
+        if (progressoPlayer == 0) {
+            String[] d = {" [...Aula de conceitos da computação] ", "Stelvio: muito bem turma, tudo bem com voces? Alguma duvida? "
+                + "Algum problema com outra matéria? E como anda o PI de voces? Bom, como todos devem saber, estamo na semana do Concurso Espacial"
+                + "E os professores estão ajudando os alunos de alguma forma, vou fazer algumas perguntas a respeito da minha materia, que acertar, "
+                + "pode falar comigo no final da aula, que dou alguma ajuda "};
+            perguntaMedia();
         }
     }
 
 }
-
