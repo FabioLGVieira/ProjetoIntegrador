@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class GameMain {
 
+    // VERSAO ANTIGA E DESCONTINUADA
+    
     static Random randomico = new Random();
     static Scanner sc = new Scanner(System.in);
     static int progressoPlayer, progressoAdversários;
@@ -27,9 +29,7 @@ public class GameMain {
 
         entradaCampus(escolhasJogo); //tanque combustivel
         salavazia(escolhasJogo);
-        int a = biblioteca(escolhasJogo); // ver se é melhor deixar assim, ou passar direto no if
-        //if(biblioteca(escolhasJogo)==1)
-        if (a == 1) {
+        if(biblioteca(escolhasJogo)==1){
             pracaAlimentacao1(escolhasJogo);
         }
         voltaParaSala(escolhasJogo);//pergunta prog
