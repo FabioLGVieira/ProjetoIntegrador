@@ -24,29 +24,68 @@ public class BeyondTheEarth {
         
         entradaCampus(escolhasJogo);
         nasa(escolhasJogo);
-        caixaDagua(escolhasJogo);
+        caixaDagua(escolhasJogo);//pergunta adm
         
         nasa(escolhasJogo);
-        estacionamento(escolhasJogo);
+        estacionamento(escolhasJogo);//pergunta matematica
         
         nasa(escolhasJogo);
-        cuboSenac(escolhasJogo);
+        cuboSenac(escolhasJogo);// pergunta conceitos
         
         nasa(escolhasJogo);
-        cit(escolhasJogo);
+        cit(escolhasJogo);//pergunta prog/alg
         
         nasa(escolhasJogo);
-        praca01(escolhasJogo);
+        praca01(escolhasJogo);//pergunta prog/alg
         //fim
 
     }
 
     static boolean nasa(String[][] v) {
+        System.out.println(ambienteAtual("nasa"));  // e ela da a resposta da proxima peça
+        System.out.println("Crug'Oto: Ei! Você ai, Você mesmo! A I.A. que eu criei me disse que viria! Dei o nome de SAVVY");
+        System.out.println("Tenho problema de memória, criei ela pra me lembrar do que fazer. Então sempre deve me dizer o próximo passo.");
+        System.out.println("Pergunte algo pra ela. E a resposta esclarecerá suas duvidas!");
+        switch(v[0][1]){
+            case "1":
+                comandosDisponiveis(2, "Perguntar o que precisa fazer","Perguntar sobre o planeta deles");
+                if(resposta.equals("a")){
+                    System.out.println("SAVVY: Seu destino é ir até a caixa d'agua e obter o tanque de [algo].");
+                }else{
+                    System.out.println("O que aconteceu com o planeta de vocês?");
+                    System.out.println("Crug'Oto: Não tem hamburguer");
+                    System.out.println("SAVVY: Já na hora de ir pra caixa d'agua");
+                }
+        break;
+            case "2":
+        break;
+            case "3":
+        break;
+            case "4":
+        break;
+        }
         return false;
     }
 
     static boolean entradaCampus(String[][] v) {
-        System.out.println("Hanbāgā wa jinseidesu");
+        String[] falas={"Hanbägä wa piza yori mo sugurete ori, bëkon wa jinseidesu","Bisuketto ka Borasha","Burubasaūru, chāmuanda ka fanshutsu?",
+        "Ruuku, anata no otōsan im",};
+        int rnd = randomico.nextInt(falas.length);
+        
+        System.out.println("O que eu to fazendo no Senac? Eu estava em casa até agora...");
+        System.out.println("[...ouve alguem falando alguma coisa longe]");
+        System.out.println(falas[rnd]);
+        System.out.println("[...ao se aproximar, se assusta por ser um Alienigena!]");
+        System.out.println("ET: Saudações terráqueo, como voce se chama?");
+        v[0][0] = verificaNome();
+        System.out.println("Mas o que ta acontecendo?!?!? Por que eu consigo te entender?");
+        System.out.println("ET: Somos muito mais evoluidos que voces, nao precisa mais me dizer seu nome, a Cebola Mágica do meu povo ja me revelou, " + v[0][0]);
+        System.out.println(v[0][0]+": Que cebola? por que eu to falando com um ET? E o pior, ele eu entendo o idioma dele");
+        System.out.println("ET: Nao temos tempo para ficar respondendo perguntas tolas!");
+        System.out.println("Seu destino é nos ajudar e montar nosso foguete para buscarmos o resto de nosso povo e viver comendo Hamburguers neste planeta inferior.");
+        System.out.println("Fale com Crug'Oto para descobrir o que precisa fazer");
+        System.out.println("Vá reto neste corredor e vire a direita, ande logo, ele está te esperando!");
+        //complementar com algo?
         return false;
     }
 
@@ -55,6 +94,15 @@ public class BeyondTheEarth {
     }
 
     static boolean caixaDagua(String[][] v) {
+        System.out.println("ET: O que você quer terráqueo?");
+        System.out.println(v[0][0]+": Falaram que eu devia vir aqui.");
+        //completar com algo rapido
+        System.out.println("ET: Eu só irei te ajudar se você me mostrar seu valor respondendo uma pergunta.");
+        System.out.println(v[0][0]+"Manda vê.");
+        System.out.println("Muito confiante para um simples terráqueo, lá vai...");
+        chamarPergunta('a', v);
+        System.out.println("ET: Argh, tudo bem, você provou seu valor, aqui está leve este tanque de [algo] ela será útil para cumprir sua missão");
+        System.out.println("Agora vá até Crug'Oto denovo para saber seu destino");
         return false;
     }
 
@@ -151,7 +199,7 @@ public class BeyondTheEarth {
         return escolhida;
     }
 
-    public static void chamarPergunta(char materia) {
+    public static void chamarPergunta(char materia,String[][] v) {
         String[][][] perguntaResposta = {{{""}, {"", "", "", ""}, {""}}};
         int tentativas = 3;// numero de tentativas para acertar a pergunta e conseguir progredir
         perguntas(materia, perguntaResposta);
@@ -171,7 +219,7 @@ public class BeyondTheEarth {
         } while (!resposta.equals(perguntaResposta[0][2][0]) && tentativas > 0);
         if (resposta.equals(perguntaResposta[0][2][0])) {
             System.out.println("Resposta certa!");
-            progressoPlayer++;
+            v[0][1] = "1";
         } else {
             progressoAdversários++;
             System.out.println("Gostaria de tentar outra pergunta? S/ N");
@@ -292,7 +340,8 @@ public class BeyondTheEarth {
         return resposta;//retorna o input do usuario
     }
 
-    static String verificaNome(String nome) {//verifica se o nome contem muitos espaços ou se começa com espaço ou é null
+    static String verificaNome() {//verifica se o nome contem muitos espaços ou se começa com espaço ou é null
+        String nome;
         do {
             System.out.println("[Digite seu nome...]");
             nome = sc.nextLine();
