@@ -71,7 +71,7 @@ public class BeyondTheEarth {
 
     static boolean entradaCampus(String[][] v) {
         String[] falas={"Hanbägä wa piza yori mo sugurete ori, bëkon wa jinseidesu","Bisuketto ka Borasha?","Burubasaūru, chāmuanda ka fanshutsu?",
-        "Ruuku, anata no otōsan im"}; // ,"pave ou pa come" 
+        "Ruuku, anata no otōsan im","è vedere o mangiare"};
         int rnd = randomico.nextInt(falas.length);
         String [] d1 = {"O que eu to fazendo no Senac? Eu estava em casa até agora... "  , "[...ouve alguem falando alguma coisa longe] "};
         imprimirTexto(d1);
@@ -116,7 +116,7 @@ public class BeyondTheEarth {
         System.out.println(v[0][0] + " Obrigado Sr. Crug'Oto ");
         System.out.println(" Não me chame de senhor, rapazinho, tenho apenas 250 anos, isso para mim foi uma ofensa ");
         System.out.println(" Sua proxima tarefa é procurar um outro amigo meu ele está no estacionamento ");
-    }
+    return true;}
 
     static boolean caixaDagua(String[][] v) {
         System.out.println("ET: O que você quer terráqueo?");
