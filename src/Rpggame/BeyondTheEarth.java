@@ -71,26 +71,48 @@ public class BeyondTheEarth {
         String[] falas={"Hanbägä wa piza yori mo sugurete ori, bëkon wa jinseidesu","Bisuketto ka Borasha","Burubasaūru, chāmuanda ka fanshutsu?",
         "Ruuku, anata no otōsan im",};
         int rnd = randomico.nextInt(falas.length);
-        
-        System.out.println("O que eu to fazendo no Senac? Eu estava em casa até agora...");
-        System.out.println("[...ouve alguem falando alguma coisa longe]");
-        System.out.println(falas[rnd]);
-        System.out.println("[...ao se aproximar, se assusta por ser um Alienigena!]");
-        System.out.println("ET: Saudações terráqueo, como voce se chama?");
+        String [] d1 = {"O que eu to fazendo no Senac? Eu estava em casa até agora... "  , "[...ouve alguem falando alguma coisa longe] "};
+        imprimirTexto(d1);
+        System.out.println(falas[rnd]);        
+        System.out.println("[...ao se aproximar, se assusta por ser um Alienigena!] ");
+        System.out.println("ET: Saudações terráqueo, como voce se chama? ");
         v[0][0] = verificaNome();
-        System.out.println("Mas o que ta acontecendo?!?!? Por que eu consigo te entender?");
-        System.out.println("ET: Somos muito mais evoluidos que voces, nao precisa mais me dizer seu nome, a Cebola Mágica do meu povo ja me revelou, " + v[0][0]);
-        System.out.println(v[0][0]+": Que cebola? por que eu to falando com um ET? E o pior, ele eu entendo o idioma dele");
-        System.out.println("ET: Nao temos tempo para ficar respondendo perguntas tolas!");
-        System.out.println("Seu destino é nos ajudar e montar nosso foguete para buscarmos o resto de nosso povo e viver comendo Hamburguers neste planeta inferior.");
-        System.out.println("Fale com Crug'Oto para descobrir o que precisa fazer");
-        System.out.println("Vá reto neste corredor e vire a direita, ande logo, ele está te esperando!");
+        String [] d2 = {"Mas o que ta acontecendo?!?!? Por que eu consigo te entender? ",
+        "ET: Somos muito mais evoluidos que voces, nao precisa mais me dizer seu nome, a Cebola Mágica do meu povo ja me revelou, " + v[0][0],
+        v[0][0]+": Que cebola? por que eu to falando com um ET? E o pior, ele eu entendo o idioma dele ", "ET: Nao temos tempo para ficar respondendo perguntas tolas! ",
+        "Seu destino é nos ajudar e montar nosso foguete para buscarmos o resto de nosso povo e viver comendo Hamburguers neste planeta inferior. ", "Fale com Crug'Oto para descobrir o que precisa fazer ",
+        "Vá reto neste corredor e vire a direita, ande logo, ele está te esperando! "};
+        imprimirTexto(d2);        
         //complementar com algo?
         return false;
     }
+    static boolean nasa2(String [][] v){
+        System.out.println(ambienteAtual("nasa"));
+        System.out.println(" Crug'Oto: voce novamente humano, pelo visto voce é muito persistente ");
+        System.out.println(v[0][0] + " : Acertei a pergunta, me diga qual o proximo passo ");
+        System.out.println(" Crug'Oto: Fale com um de meus amigos, ele está meditando no cubo ");
+        return false;        
+    }
 
     static boolean cuboSenac(String[][] v) {
+        System.out.println(v[0][0] + " : Hey Et desculpe atrapalhar sua meditação, mas Crug'Oto falou pra eu vir aqui ");
+        System.out.println(" Et: não estou sabendo disso, mas como posso te ajudar? ");
+        System.out.println(v[0][0] + " Não sei, mas estou cumprindo uma missão pra voces ");
+        System.out.println(" [...] Et volta a meditar ");
+        System.out.println(" Et: vizualizei sua tarefa atraves da meditação, mas voce tem de me provar do que é capaz ");
+        System.out.println(v[0][0] + " sou capaz de tudo ");
+        System.out.println(" responda - me uma pergunta em caso de acerto voce ganha um item a mais para sua missão ");
+        chamarPergunta('m', v);
+        
         return false;
+    }
+    
+    static boolean nasa3 (String[][] v){
+        System.out.println(ambienteAtual("nasa"));
+        System.out.println(" Crug'Oto: estou começando a gostar de voce humano, estou impressionado pela sua inteligencia ");
+        System.out.println(v[0][0] + " Obrigado Sr. Crug'Oto ");
+        System.out.println(" Não me chame de senhor, rapazinho, tenho apenas 250 anos, isso para mim foi uma ofensa ");
+        System.out.println(" Sua proxima tarefa é procurar um outro amigo meu ele está no estacionamento ");
     }
 
     static boolean caixaDagua(String[][] v) {
@@ -107,6 +129,14 @@ public class BeyondTheEarth {
     }
 
     static boolean estacionamento(String[][] v) {
+        System.out.println(" [...] chega ao estacionamento e não ve ninguem, mas de repente escuta um barulho vindo de um carro parado e um et com roupas"
+                + "de mecanico e ferramentas na mão se aproximando ");
+        System.out.println(" Et: acho que é voce mesmo que Crug'Oto enviou, não precisa dizer seu nome,"
+                + "estou vendo aqui nesta ferramenta " + v[0][0]);
+        System.out.println(" Et: até posso te ajudar a conseguir o que o precisa mas deverá me provar do que é capaz ");
+        System.out.println(v[0][0] + " : sou capaz de tudo pela minha sobrevivencia ");
+        System.out.println(" responda - me está pergunta: ");
+        chamarPergunta('p',v);        
         return false;
     }
 
