@@ -47,7 +47,7 @@ public class BeyondTheEarth {
         System.out.println("Tenho problema de memória, criei ela pra me lembrar do que fazer. Então sempre deve me dizer o próximo passo.");
         System.out.println("Pergunte algo pra ela. E a resposta esclarecerá suas duvidas!");
         switch(v[0][1]){
-            case "1":
+            case "0":
                 comandosDisponiveis(2, "Perguntar o que precisa fazer","Perguntar sobre o planeta deles");
                 if(resposta.equals("a")){
                     System.out.println("SAVVY: Seu destino é ir até a caixa d'agua e obter o tanque de [algo].");
@@ -56,6 +56,8 @@ public class BeyondTheEarth {
                     System.out.println("Crug'Oto: Não tem hamburguer");
                     System.out.println("SAVVY: Já na hora de ir pra caixa d'agua");
                 }
+        break;
+            case "1":
         break;
             case "2":
         break;
@@ -68,8 +70,8 @@ public class BeyondTheEarth {
     }
 
     static boolean entradaCampus(String[][] v) {
-        String[] falas={"Hanbägä wa piza yori mo sugurete ori, bëkon wa jinseidesu","Bisuketto ka Borasha","Burubasaūru, chāmuanda ka fanshutsu?",
-        "Ruuku, anata no otōsan im",};
+        String[] falas={"Hanbägä wa piza yori mo sugurete ori, bëkon wa jinseidesu","Bisuketto ka Borasha?","Burubasaūru, chāmuanda ka fanshutsu?",
+        "Ruuku, anata no otōsan im"}; // ,"pave ou pa come" 
         int rnd = randomico.nextInt(falas.length);
         String [] d1 = {"O que eu to fazendo no Senac? Eu estava em casa até agora... "  , "[...ouve alguem falando alguma coisa longe] "};
         imprimirTexto(d1);
@@ -86,6 +88,7 @@ public class BeyondTheEarth {
         //complementar com algo?
         return false;
     }
+    
     static boolean nasa2(String [][] v){
         System.out.println(ambienteAtual("nasa"));
         System.out.println(" Crug'Oto: voce novamente humano, pelo visto voce é muito persistente ");
@@ -188,7 +191,7 @@ public class BeyondTheEarth {
                 {"for", "do while", "while", "if"}, {"a"}},
                 {{"Qual função está correta"}, {"static int nome(String s){ return s; }", "static String nome(String s){ return s; }", "static String nome(int n){ return true; }", "static boolean nome(char c){ return c; }"}, {"b"}},
                 {{"Qual das alternativas abaixo representa a sintaxe correta"},
-                {"static String nome(){ return \"S\"; }", "static String nome([]String s){ return s; }", "static String nome(){ return “s”; }", "static int nome(String[] s){ return s; }"}, {"c"}},
+                {"static String nome(){ return 7; }", "static String nome([]String s){ return s; }", "static String nome(){ return s; }", "static int nome(String[] s){ return s; }"}, {"c"}},
                 {{"Em uma estrutura de repetição, o comando break tem a função de"},
                 {"condicionar a execução de um comando de atribuição a um operador lógico", "segmentar a execução de um loop em duas ou mais partes aninhadas", "estabelecer um intervalo de depuração durante a execução de um loop", "interromper a execução do laço"}, {"d"}},
                 {{"Na linguagem Java, os tipos primitivos são"},
@@ -249,16 +252,20 @@ public class BeyondTheEarth {
         } while (!resposta.equals(perguntaResposta[0][2][0]) && tentativas > 0);
         if (resposta.equals(perguntaResposta[0][2][0])) {
             System.out.println("Resposta certa!");
-            v[0][1] = "1";
+            int conversor = Integer.parseInt(v[0][1]); //recebe o valor da String como int
+            conversor++; // acrescenta o ponto caso o player acerte
+            v[0][1] = String.valueOf(conversor); // retorna o novo valor pra String
         } else {
-            progressoAdversários++;
+            int conversor = Integer.parseInt(v[0][2]); //recebe o valor da String como int
+            conversor++; // acrescenta o ponto na variavel 'inimiga' caso o player erre
+            v[0][2] = String.valueOf(conversor); // retorna o novo valor pra String
             System.out.println("Gostaria de tentar outra pergunta? S/ N");
             pulaLinha();
             if (resposta.equals("s")) {
-                chamarPergunta(materia);
+                chamarPergunta(materia, v);
             }
         }
-        verificaSituacaoJogo();
+        verificaSituacaoJogo(v);
     }
 
     static String ambienteAtual(String sala) { // vai trocar o nome do ambiente ( e talvez as imagens de cada uma )
@@ -301,11 +308,11 @@ public class BeyondTheEarth {
     }
 
     static void verificaSituacaoJogo(String[][] v) {
-        if (progressoPlayer == 8) {
+        if (v[0][1].equals("5")) {
             System.out.println(EndGame(1));
             System.exit(1);//termina o programa
         }
-        if (progressoAdversários == 10) {
+        if (v[0][2].equals("10")) {
             System.out.println(EndGame(3));
             System.exit(1);//termina o programa
         }
@@ -461,8 +468,8 @@ public class BeyondTheEarth {
                 controlador();
                 break;
             case 3:
-                chamarPergunta('p');
-                verificaSituacaoJogo(); // apenas acelerar o teste, tirar futuramente
+                //chamarPergunta('p');
+                //verificaSituacaoJogo(); // apenas acelerar o teste, tirar futuramente
                 System.out.println("Pegadinha haha");
                 break;
             case 4:
