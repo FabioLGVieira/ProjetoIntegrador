@@ -15,8 +15,8 @@ public class BeyondTheEarth {
 
     public static void controlador() {
         String escolhasJogo[][] = {{"zz", "0", "0"}, //nome, progresso do player, progresso adversario
-        {"", "", "", "", ""}, //vetor para guardar comidas escolhidas pelo player
-        {}};
+        {}, //vetor para guardar coisas escolhidas pelo player
+        {"f", "f"}};  //true or false  substitui a necessidade de variaveis globais de decisão
 
         entradaCampus(escolhasJogo);
         nasa(escolhasJogo);
@@ -33,23 +33,50 @@ public class BeyondTheEarth {
 
         nasa(escolhasJogo);
         praca01(escolhasJogo);//pergunta prog/alg
-        //fim
+        fimDeJogo(escolhasJogo);
+    }
+
+    static void fimDeJogo(String[][] v) {
+        System.out.println(ambienteAtual("entrada"));
+        System.out.println("Gortwog: Já voltou humano? Cade as peças? Vamos logo, temos que buscar o resto de nosso povo!");
+        System.out.println(v[0][0] + ": Consegui sim.");
+        System.out.println("Gortwog: Muito bem.");
+        if (v[2][0].equals("t")) {
+            System.out.println("...enquanto meus soldados terminam de reparar a nave podemos conversar.");
+            System.out.println("Crug'Oto me disse que você queria viajar conosco até nosso planeta...");
+            System.out.println("Por você ter nos ajudado, irei permitir, mas não sei quanto tempo pode levar ou se você voltará para este planeta.");
+            if (v[2][1].equals("t")) {
+                System.out.println("Aqui está os items que deixou com Crug'Oto:");
+                for (int i = 0; i < v[1].length - 1; i++) {
+                    System.out.print(v[1][i] + ", ");
+                }
+                System.out.println(v[1][v[1].length - 1] + ".");
+            }
+            System.out.println("Gortwog: Agora que está pronta a Nave, podemos partir para nossa jornada.");
+            v[0][1] = "fim1";
+        } else {
+            System.out.println("Gortwog: Seu destino foi cumprido humano, nós vamos deixa-los por enquanto.");
+            System.out.println("Mas quando voltarmos, iremos escraviza-los a fazerem Hamburguers para nós por toda a Eternidade");
+            v[0][1] = "fim2";
+        }
+        verificaSituacaoJogo(v);
     }
 
     static boolean nasa(String[][] v) {
         System.out.println(ambienteAtual("nasa"));  // e ela da a resposta da proxima peça
-        System.out.println("Crug'Oto: Ei! Você ai, Você mesmo! A I.A. que eu criei me disse que viria! Dei o nome de SAVVY");
-        System.out.println("Tenho problema de memória, criei ela pra me lembrar do que fazer. Então sempre deve me dizer o próximo passo.");
-        System.out.println("Pergunte algo pra ela. E a resposta esclarecerá suas duvidas!");
+        String d[] = {"Crug'Oto: Eu sou Crug'Oto! Criei uma I.A. e dei o nome de SAVVY.", "Tenho problema de memória, Ela sempre me diz o devo fazer."};
+        imprimirTexto(d);
         switch (v[0][1]) {
             case "0": // peça 1 tanque de combustivel
-                comandosDisponiveis(2, "O que precisa fazer?", "O que aconteceu com o planeta de vocês?");
+                System.out.println("Gortwog me disse que viria, vou deixar você usar a SAVVY para cumprir sua missão. Vamos lá, pergunte algo...");
+                pulaLinha();
+                comandosDisponiveis(2, "O que preciso fazer?", "O que aconteceu com o planeta de vocês?");
                 if (resposta.equals("a")) {
                     System.out.println("SAVVY: Seu destino é ir até a caixa d'agua e obter o tanque com combustível.");
                 } else {
-                    System.out.println("O que aconteceu com o planeta de vocês?");
-                    System.out.println("Crug'Oto: Não tem hamburguer. E adoramos Hamburguer.");
-                    System.out.println("SAVVY: Já está na hora de ir pra caixa d'agua.");
+                    String d2[] = {"Crug'Oto: Nós gostamos tanto de Hamburguer, que comemos todos que o planeta tinha.",
+                        "Agora, viajamos por todo o universo atrás de Hamburgueres, e então chegamos aqui.", "SAVVY: Já está na hora de ir pra caixa d'agua."};
+                    imprimirTexto(d2);
                 }
                 comandosDisponiveis(1, "Ir para a Caixa D'agua");
                 break;
@@ -58,8 +85,8 @@ public class BeyondTheEarth {
                 if (resposta.equals("a")) {
                     System.out.println("SAVVY: Vá para o estacionamento.");
                 } else {
-                    System.out.println("Crug'Oto: Porque não tem nada melhor que Hamburguer no Universo.");
-                    System.out.println(/*v[0][0] + ": Concordo plenamente, mas qual o meu próximo passo?"*/);
+                    System.out.println("Crug'Oto: Porque nosso Deus, Lugrots, nos criou a partir de Hamburguers.");
+                    System.out.println("Hamburguer é a nossa fonte de vida!");
                     System.out.println("SAVVY: Tudo pronto? Vamos. Recalculando rota...");
                 }
                 comandosDisponiveis(1, "Ir para o estacionamento");
@@ -78,22 +105,29 @@ public class BeyondTheEarth {
             case "3": // peça 4 modulo comando
                 comandosDisponiveis(2, "Qual a próxima tarefa?", "Quero visitar o planeta de vocês!");
                 if (resposta.equals("a")) {
-                    System.out.println("SAVVY: Vá programar o Computador de Bordo");
+                    System.out.println("SAVVY: Vá arrumar o Computador de Bordo");
                 } else {
+                    v[2][0] = "t";
                     System.out.println("Crug'Oto: Vou pensar no seu caso humano.");
-                    System.out.println("");
-                    System.out.println("SAVVY: Vá programar o Computador de Bordo");
+                    System.out.println("Mas de qualquer forma humano, deixe comigo algumas coisas que gostaria de levar com você.");
+                    comandosDisponiveis(2, "Deixar coisas", "Não deixar nada.");
+                    if (resposta.equals("a")) {
+                        v[2][1] = "t";
+                        guardarCoisas(v);
+                        System.out.println("Crug'Oto: Vou guardar estes items até sua missão terminar, humano.");
+                    }
+                    System.out.println("SAVVY: Agora vá arrumar o Computador de Bordo");
                 }
                 comandosDisponiveis(1, "Ir para o Centro de Inovações");
                 break;
             case "4": // peça 5 comida
                 comandosDisponiveis(2, "Falta muito pra completar a missão?", "Vocês vão ficar aqui para sempre?");
                 if (resposta.equals("a")) {
-                    System.out.println("SAVVY: Você deve fazer Hamburguers para a raça superior");
+                    System.out.println("SAVVY: Você deve buscar Hamburguers para a viagem");
                 } else {
                     System.out.println("Crug'Oto: Sim, mas nós vamos buscar o resto do nosso povo.");
                     System.out.println("Como posso ajudar voces agor?");
-                    System.out.println("SAVVY: Você deve fazer Hamburguers para a raça superior");
+                    System.out.println("SAVVY: Vá buscar Hamburguers para a longa viagem");
                 }
                 comandosDisponiveis(1, "Ir para a Praça de Alimentação 01");
                 break;
@@ -104,86 +138,99 @@ public class BeyondTheEarth {
     static boolean entradaCampus(String[][] v) {
         System.out.println(ambienteAtual("entrada"));
         String[] falas = {"Hanbägä wa piza yori mo sugurete ori, bëkon wa jinseidesu", "Bisuketto ka Borasha?", "Burubasaūru, chāmuanda ka fanshutsu?",
-            "Ruuku, anata no otōsan im", "è vedere o mangiare"};
+            "Ruuku, watashi wa anata no chichiwue", "è vedere o mangiare"};
         int rnd = randomico.nextInt(falas.length);
-        String[] d1 = {"O que eu to fazendo no Senac? Eu estava em casa até agora... ", "[...ouve alguem falando alguma coisa longe] "};
+        String[] d1 = {"O que eu to fazendo no Senac? Eu estava em casa até agora...", "[...ouve alguem falando alguma coisa longe]",
+            falas[rnd], "[...ao se aproximar, se assusta por ser um Alienigena!]", "ET: Saudações terráqueo, como voce se chama?"};
         imprimirTexto(d1);
-        System.out.println(falas[rnd]);
-        System.out.println("[...ao se aproximar, se assusta por ser um Alienigena!] ");
-        System.out.println("ET: Saudações terráqueo, como voce se chama? ");
         v[0][0] = verificaNome();
-        String[] d2 = {"Mas o que ta acontecendo?!?!? Por que eu consigo te entender? ",
+        String[] d2 = {"Mas o que ta acontecendo?!?!? Por que eu consigo te entender?",
             "ET: Somos muito mais evoluidos que voces, nao precisa mais me dizer seu nome, a Cebola Mágica do meu povo ja me revelou, " + v[0][0],
-            v[0][0] + ": Que cebola? por que eu to falando com um ET? E o pior, ele eu entendo o idioma dele ", "ET: Nao temos tempo para ficar respondendo perguntas tolas! ",
-            "Seu destino é nos ajudar e montar nosso foguete para buscarmos o resto de nosso povo e viver comendo Hamburguers neste planeta inferior. ", "Fale com Crug'Oto para descobrir o que precisa fazer ",
-            "Vá reto neste corredor e vire a direita, ande logo, ele está te esperando! "};
+            v[0][0] + ": Que cebola? por que eu to falando com um ET? E o pior, eu entendo o idioma dele", "ET: Nao temos tempo para ficar respondendo perguntas tolas!",
+            "Seu destino é nos ajudar e montar nossa Nave para buscarmos o resto de nosso povo e viver comendo Hamburguers neste planeta inferior.", "Fale com Crug'Oto para descobrir o que precisa fazer",
+            "Vá reto neste corredor e vire a direita, ande logo, ele está te esperando!"};
         imprimirTexto(d2);
-        //complementar com algo?
         return false;
     }
 
     static boolean cuboSenac(String[][] v) {
         System.out.println(ambienteAtual("cubo"));
-        String[] d1 = {v[0][0] + ":Hey Et desculpe atrapalhar sua meditação, mas Crug'Oto falou pra eu vir aqui",
-            "Como voce se chama?", "Sindri: não estou sabendo disso, mas como posso te ajudar? Meu nome é Sindri e já vi o seu no"
-            + " colar de cebola", v[0][0] + " Não sei, mas estou cumprindo uma missão pra voces ", " [...] Sindri volta a meditar ",
-            " Sindri: vizualizei sua tarefa atraves da meditação, mas voce tem de me provar do que é capaz ",
-            v[0][0] + " sou capaz de tudo ", "Sindri: responda - me uma pergunta em caso de acerto voce "
-            + "ganha um item a mais para sua missão "};
+        String[] d1 = {v[0][0] + ": Hey ET desculpe atrapalhar sua meditação, mas Crug'Oto falou pra eu vir aqui, como voce se chama?",
+            "ET: Meu nome é Sindri, como posso te ajudar?", v[0][0] + ": Não sei, mas estou cumprindo uma missão pra voces.", "[...] Sindri volta a meditar ",
+            "Sindri: vizualizei sua tarefa atraves da meditação, mas voce tem de me provar do que é capaz.",
+            v[0][0] + ": Aceito o desafio.", "Sindri: responda-me esta pergunta caso acertar, voce ganha um item a mais para sua missão.", "Lá vai:"};
         imprimirTexto(d1);
-        chamarPergunta('m', v);
+        chamarPergunta('m', v);//pergunta de Pré-Calculo
+        System.out.println("Muito bem, humano. Pegue estas peças de Metal para a nave");
+        System.out.println("[...]Usando um poder de Telecinese molda o Cubo do Senac em partes para a Fuselagem");
         return false;
     }
 
     static boolean caixaDagua(String[][] v) {
-        System.out.println(ambienteAtual("cubo"));
-        System.out.println("Gunnhildur: O que você quer terráqueo?");
-        System.out.println(v[0][0] + ": Falaram que eu devia vir aqui.");
-        //completar com algo rapido
-        System.out.println("Gunnhildur: Eu só irei te ajudar se você me mostrar seu valor respondendo uma pergunta.");
-        System.out.println(v[0][0] + "Manda vê.");
-        System.out.println("Muito confiante para um simples terráqueo, lá vai...");
-        chamarPergunta('a', v);
-        System.out.println("Gunnhildur: Argh, tudo bem, você provou seu valor, aqui está leve este tanque de [algo] ela será útil para cumprir sua missão");
-        System.out.println("Agora vá até Crug'Oto denovo para saber seu destino");
+        System.out.println(ambienteAtual("caixa"));
+        String d[] = {"Oi, me mandaram vir aqui, como se chama?", "ET: Gunnhildur.", "Gunnhildur: O que você quer terráqueo?", v[0][0] + ": Falaram que eu devia vir aqui.",
+            "Gunnhildur: Argh, eles querem arrumar nossa nave e voltar para aquele planeta à beira da extinção. Mas...",
+            "Gunnhildur: Eu só irei te ajudar se você me mostrar seu valor respondendo uma pergunta.",
+            v[0][0] + ": Manda vê.", "Muito confiante para um simples terráqueo, lá vai..."};
+        imprimirTexto(d);
+        chamarPergunta('a', v);// pergunta de Administração
+        String d2[] = {"Gunnhildur: Argh, tudo bem, você provou seu valor, aqui está leve este tanque com combustível.", "Agora vá até Crug'Oto denovo para saber seu destino."};
+        imprimirTexto(d2);
         return false;
     }
 
     static boolean estacionamento(String[][] v) {
         System.out.println(ambienteAtual("estacionamento"));
-        String[] d1 = {"[...] Voce chega ao estacionamento e não ve ninguem, mas de repente escuta um barulho vindo de um carro parado e um et com roupas "
-            + " e mecanico e ferramentas na mão se aproximando"};
+        String[] d1 = {"[...] Voce chega ao estacionamento e não ve ninguem", "[...]Mas de repente escuta um barulho vindo de um carro parado e"
+            + " um et com roupas de mecanico e ferramentas na mão vem em sua direção.", "ET: Acho que é voce mesmo que Crug'Oto enviou, não precisa dizer seu nome que já sei, eu me chamo Brynhildur.", "Brynhildur: E sei como posso te ajudar, "
+            + "acabei de conseguir o que voce precisa em uma dessas porcarias de naves espaciais terrestres que aparentemente não voam.",
+            "Mas para conseguir este item voce terá de me provar sua inteligencia respondendo uma pergunta.", v[0][0] + ": Sou capaz de tudo, manda a pergunta ai."};
         imprimirTexto(d1);
-        String[] d2 = {"Brynhildur: acho que é voce mesmo que Crug'Oto enviou, não precisa dizer seu nome, que já sei e já sei como posso te ajudar, eu me chamo Brynhildur"
-            + "acabei de conseguir o que voce precisa em uma dessas porcarias de naves espaciais terrestres que aparentemente não voam, mas"
-            + "para conseguir este item voce terá de me provar sua inteligencia respondendo uma pergunta ", v[0][0] + ": sou capaz de tudo, manda a pergunta ai "};
-        imprimirTexto(d2);
-        chamarPergunta('c', v);
+        chamarPergunta('c', v);//pergunta de conceitos da computação
+        System.out.println("Brynhildur: Certo, humano. Pegue estas peças para reparar a Turbina");
         return false;
     }
 
     static boolean cit(String[][] v) {
         System.out.println(ambienteAtual("cit"));
-        String[] d1 = {"[...]Voce chega ao centro de inovação tecnologica e ve um Et com trajes de Nerd usando um dos computadores"};
+        String[] d1 = {"[...]Voce chega ao centro de inovação tecnológica e ve um ET com trajes de Nerd usando um dos computadores"};
         imprimirTexto(d1);
-        String[] d2 = {"Garpur: como posso te ajudar? Alias, meu nome é Garpur", v[0][0] + ": Crug'Oto me falou pra vir até aqui falar com voce",
-            "Garpur: Espere eu terminar de jogar uma partida deste jogo que já te atendo", "[...] esperando o Et terminar o jogo",
+        String[] d2 = {"ET: Oh?! Finalmente chegou humano? Alias, meu nome é Garpur", v[0][0] + ": Crug'Oto me falou pra vir até aqui falar com voce",
+            "Garpur: Sim, sim. Espere eu terminar de jogar uma partida disso que voces chamam de Jogo", "[...] esperando o ET terminar o jogo",
             "Garpur: terminei a partida aqui, pelo que vi em meu colar de cebola voce foi o escolhido para nos ajudar a montar "
-            + "nosso foguete, certo " + v[0][0], v[0][0] + ": fui eu sim", "Garpur: aqui voce vai conseguir seu computador de bordo, "
-            + "me ajude a desvendar esse enigma que te dou o item "};
+            + "nossa Nave, certo " + v[0][0] + "?", v[0][0] + ": fui eu sim", "Garpur: Eu montei as peças necessárias com restos destas caixas pretas."
+            + "Mas me ajude a desvendar esse enigma que te dou o item."};
         imprimirTexto(d2);
-        chamarPergunta('p', v);
+        chamarPergunta('p', v); //pergunta de Algoritmos e Programção
+        System.out.println("Muito bem, " + v[0][0] + "Aqui está as peças para reparar o Computador de Bordo da Nave Espaical.");
         return false;
     }
 
     static boolean praca01(String[][] v) {
         System.out.println(ambienteAtual("praca01"));
-        String[] d1 = {"[...]Voce vai a praça de alimentação a procura de alguma coisa para comer, chega na cantina e tem um Et no balcão"
+        String[] d1 = {"[...]Voce vai a praça de alimentação a procura de alguma coisa para comer, chega na cantina e tem um ET no balcão"
             + "e em seu cracha escrito Sunna"};
         imprimirTexto(d1);
-        String[] d2 = {"Sunna: olá terraqueo, como posso ajudar? "};
-        chamarPergunta('p', v);
+        String[] d2 = {"ET: Olá terraqueo, o que vai querer?"};
+        System.out.println("Ué?! Agora vocês vão querer trabalhar igual a gente?");
+        System.out.println("Sunna: Adorei este lugar, tem tudo que preciso para fazer Hamburguers deliciosos para minha raça.");
+        System.out.println("Crug'Oto me disse que viria buscar muitos Hamburguers para a viagem até nosso planeta.");
+        System.out.println("Eu preparei eles"); //nao preparou todos e tem q responder algumas perguntas até ficar prontos?
+        chamarPergunta('p', v);//pergunta de Algoritmos e Programção
+        //chamarPergunta('p', v);   chama varias perguntas?
         return false;
+    }
+
+    static String[][] guardarCoisas(String[][] v) {
+        System.out.println("Quantas coisas quer levar?");
+        int n = sc.nextInt();
+        sc.nextLine();  // necessário para nao comer linha
+        v[1] = new String[n];
+        for (int i = 0; i < v[1].length; i++) {
+            System.out.println("Item " + (i + 1) + ":");
+            v[1][i] = sc.nextLine();
+        }
+        return v;
     }
 
     //static boolean nasa(String[][] v){ return false;}
@@ -298,6 +345,9 @@ public class BeyondTheEarth {
             pulaLinha();
             if (resposta.equals("s")) {
                 chamarPergunta(materia, v);
+            } else {
+                System.out.println(EndGame(2));
+                System.exit(0);//se o player desiste de responder uma nova pergunta, o programa termina
             }
         }
         verificaSituacaoJogo(v);
@@ -331,12 +381,14 @@ public class BeyondTheEarth {
     }
 
     static void verificaSituacaoJogo(String[][] v) {
-        if (v[0][1].equals("5")) {
+        if (v[0][1].equals("fim1")) {
             System.out.println(EndGame(1));
             System.exit(1);//termina o programa
-        }
-        if (v[0][2].equals("10")) {
+        } else if (v[0][1].equals("fim2")) {
             System.out.println(EndGame(2));
+        }
+        if (v[0][2].equals("10")) {//gameover
+            System.out.println(EndGame(3));
             System.exit(1);//termina o programa
         }
     }
@@ -438,9 +490,12 @@ public class BeyondTheEarth {
         String fim = "";
         switch (op) {
             case 1:
-                fim = "Voce ajudou os Aliens a voltar para seu planeta, agora só falta ir para Beyond the Earth!";
+                fim = "Voce ajudou os Aliens e eles irão te levar para Beyond the Earth!!!";
                 break;
             case 2:
+                fim = "Voce ajudou os Aliens, e em muitos anos a Humanidade será escravizada!";
+                break;
+            case 3:
                 fim = "Parece que você não é tão inteligente quanto os Aliens pensaram... Você perdeu a oportunidade de viajar ao espaço.";
                 break;
         }
