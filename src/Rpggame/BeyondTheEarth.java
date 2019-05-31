@@ -260,7 +260,7 @@ public class BeyondTheEarth {
                 {"000 100 010 111 011 = 74321", "111 101 011 100 001 = 75341", "111 110 101 100 011 = 76351", "111 010 011 110 001 = 72361"}, {"b"}},
                 {{"A expressão S = A . B . 'C . D + 'A . 'B . C . D + 'A . B . C .'D tem as seguintes entradas"},
                 {"0 1 0 1   |   1 0 1 0   |   1 0 0 1", "1 1 1 0   |   0 1 0 1   |   1 1 0 0", "0 0 1 1   |   1 0 0 0   |   0 0 0 1", "1 1 0 1   |   0 0 1 1   |   0 1 1 0"}, {"d"}},
-                {{"A saída da expressão S = A " + (char) 8857 + " B é"}, {"a1", "b1", "c1", "d1"}, {"a"}},
+                {{"A saída da expressão S = A " + (char) 8857 + " B é"}, {"1001", "1100", "0101", "0001"}, {"a"}},
                 {{"o número 15 na base decimal, convertido para base Hexadecimal é"},
                 {"10", "F", "9", "B"}, {"b"}}}, // perguntas conceitos de computaçao
 
