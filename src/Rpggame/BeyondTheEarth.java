@@ -38,25 +38,27 @@ public class BeyondTheEarth {
 
     static void fimDeJogo(String[][] v) {
         System.out.println(ambienteAtual("entrada"));
-        System.out.println("Gortwog: Já voltou humano? Cade as peças? Vamos logo, temos que buscar o resto de nosso povo!");
-        System.out.println(v[0][0] + ": Consegui sim.");
-        System.out.println("Gortwog: Muito bem.");
+        String[] d1 = {"Gortwog: Já voltou humano? Cade as peças? Vamos logo, temos que buscar o resto de nosso povo!",
+            v[0][0] + ": Consegui sim.", "Gortwog: Muito bem."}, d2 = {"...enquanto meus soldados terminam de reparar a nave podemos conversar.",
+            "Crug'Oto me disse que você queria viajar conosco até nosso planeta...", "Por você ter nos ajudado, irei permitir, mas não sei quanto tempo pode levar ou se você voltará para este planeta.",},
+                d3 = {"Gortwog: Seu destino foi cumprido humano, nós vamos deixa-los por enquanto.","Mas quando voltarmos, iremos escraviza-los a fazerem Hamburguers para nós por toda a Eternidade"};
+        imprimirTexto(d1);
         if (v[2][0].equals("t")) {
-            System.out.println("...enquanto meus soldados terminam de reparar a nave podemos conversar.");
-            System.out.println("Crug'Oto me disse que você queria viajar conosco até nosso planeta...");
-            System.out.println("Por você ter nos ajudado, irei permitir, mas não sei quanto tempo pode levar ou se você voltará para este planeta.");
+            imprimirTexto(d2);
             if (v[2][1].equals("t")) {
                 System.out.println("Aqui está os items que deixou com Crug'Oto:");
+                pulaLinha();
                 for (int i = 0; i < v[1].length - 1; i++) {
                     System.out.print(v[1][i] + ", ");
                 }
                 System.out.println(v[1][v[1].length - 1] + ".");
             }
+            pulaLinha();
             System.out.println("Gortwog: Agora que está pronta a Nave, podemos partir para nossa jornada.");
+            pulaLinha();
             v[0][1] = "fim1";
         } else {
-            System.out.println("Gortwog: Seu destino foi cumprido humano, nós vamos deixa-los por enquanto.");
-            System.out.println("Mas quando voltarmos, iremos escraviza-los a fazerem Hamburguers para nós por toda a Eternidade");
+            imprimirTexto(d3);
             v[0][1] = "fim2";
         }
         verificaSituacaoJogo(v);
@@ -69,7 +71,6 @@ public class BeyondTheEarth {
         switch (v[0][1]) {
             case "0": // peça 1 tanque de combustivel
                 System.out.println("Gortwog me disse que viria, vou deixar você usar a SAVVY para cumprir sua missão. Vamos lá, pergunte algo...");
-                pulaLinha();
                 comandosDisponiveis(2, "O que preciso fazer?", "O que aconteceu com o planeta de vocês?");
                 if (resposta.equals("a")) {
                     System.out.println("SAVVY: Seu destino é ir até a caixa d'agua e obter o tanque com combustível.");
@@ -86,7 +87,9 @@ public class BeyondTheEarth {
                     System.out.println("SAVVY: Vá para o estacionamento.");
                 } else {
                     System.out.println("Crug'Oto: Porque nosso Deus, Lugrots, nos criou a partir de Hamburguers.");
+                    pulaLinha();
                     System.out.println("Hamburguer é a nossa fonte de vida!");
+                    pulaLinha();
                     System.out.println("SAVVY: Tudo pronto? Vamos. Recalculando rota...");
                 }
                 comandosDisponiveis(1, "Ir para o estacionamento");
@@ -97,7 +100,9 @@ public class BeyondTheEarth {
                     System.out.println("SAVVY: Você deve falar com alguém perto do Objeto Quadrado");
                 } else {
                     System.out.println("Crug'Oto: Com esse colar de Onion Rings que usamos.");
+                    pulaLinha();
                     System.out.println("É parecido com essa coisa que vocês chamam de celular.");
+                    pulaLinha();
                     System.out.println("SAVVY: Você deve falar com alguém perto do Objeto Quadrado");
                 }
                 comandosDisponiveis(1, "Ir para o Cubo");
@@ -109,12 +114,14 @@ public class BeyondTheEarth {
                 } else {
                     v[2][0] = "t";
                     System.out.println("Crug'Oto: Vou pensar no seu caso humano.");
+                    pulaLinha();
                     System.out.println("Mas de qualquer forma humano, deixe comigo algumas coisas que gostaria de levar com você.");
                     comandosDisponiveis(2, "Deixar coisas", "Não deixar nada.");
                     if (resposta.equals("a")) {
                         v[2][1] = "t";
                         guardarCoisas(v);
                         System.out.println("Crug'Oto: Vou guardar estes items até sua missão terminar, humano.");
+                        pulaLinha();
                     }
                     System.out.println("SAVVY: Agora vá arrumar o Computador de Bordo");
                 }
@@ -126,7 +133,9 @@ public class BeyondTheEarth {
                     System.out.println("SAVVY: Você deve buscar Hamburguers para a viagem");
                 } else {
                     System.out.println("Crug'Oto: Sim, mas nós vamos buscar o resto do nosso povo.");
-                    System.out.println("Como posso ajudar voces agor?");
+                    pulaLinha();
+                    System.out.println("Pare de gastar nosso tempo, e cumpra sua missão, precisamos partir o mais rápido possível!");
+                    pulaLinha();
                     System.out.println("SAVVY: Vá buscar hambúrgueres para a longa viagem");
                 }
                 comandosDisponiveis(1, "Ir para a Praça de Alimentação 01");
@@ -147,7 +156,7 @@ public class BeyondTheEarth {
         String[] d2 = {v[0][0] + ": Mas o que está acontecendo?!?!? Por quê eu consigo te entender?",
             "ET: Somos muito mais evoluidos que vocês. Não precisa mais me dizer seu nome, a Cebola Mágica do meu povo já me revelou, " + v[0][0],
             v[0][0] + ": Quê? Cebola mágica? Por quê eu tô falando com um ET? Como isso é possível?", "ET: Não temos tempo para ficar respondendo perguntas tolas!",
-            "ET: Nossa nave quebrou na aterrissagem neste planeta miserável!", "ET: Seu destino é nos ajudar a construir outra nave para buscarmos o resto de nosso povo.", 
+            "ET: Nossa nave quebrou na aterrissagem neste planeta miserável!", "ET: Seu destino é nos ajudar a construir outra nave para buscarmos o resto de nosso povo.",
             "ET: Queremos passar o resto de nossas vidas comendo hambúrgueres neste planeta inferior!", "ET: Fale com Crug'Oto para descobrir o que precisa fazer,",
             "vá reto neste corredor e vire a direita, e ande logo, ele está te esperando!"};
         imprimirTexto(d2);
@@ -163,7 +172,9 @@ public class BeyondTheEarth {
         imprimirTexto(d1);
         chamarPergunta('m', v); //pergunta de Pré-Calculo
         System.out.println("Muito bem, humano. Pegue estas peças de Metal para a nave");
+        pulaLinha();
         System.out.println("[...]Usando um poder de Telecinese molda o Cubo do Senac em partes para a Fuselagem");
+        pulaLinha();
         return false;
     }
 
@@ -204,21 +215,20 @@ public class BeyondTheEarth {
         imprimirTexto(d2);
         chamarPergunta('p', v); //pergunta de Algoritmos e Programção
         System.out.println("Muito bem, " + v[0][0] + "Aqui está as peças para reparar o Computador de Bordo da Nave Espaical.");
+        pulaLinha();
         return false;
     }
 
     static boolean praca01(String[][] v) {
         System.out.println(ambienteAtual("praca01"));
         String[] d1 = {"[...]Voce vai a praça de alimentação a procura de alguma coisa para comer, chega na cantina e tem um ET no balcão"
-            + "e em seu cracha escrito Sunna"};
+            + "e em seu cracha escrito Sunna", "ET: Olá terráqueo, o que vai querer?",
+            "Ué?! Agora vocês vão querer trabalhar igual a gente?",
+            "Sunna: Adorei este lugar, tem tudo que preciso para fazer hambúrgueres deliciosos para minha raça.",
+            "Crug'Oto me disse que viria buscar muitos hambúrgueres para a viagem até nosso planeta.",
+            "Eu preparei eles"};
         imprimirTexto(d1);
-        String[] d2 = {"ET: Olá terráqueo, o que vai querer?"};
-        System.out.println("Ué?! Agora vocês vão querer trabalhar igual a gente?");
-        System.out.println("Sunna: Adorei este lugar, tem tudo que preciso para fazer hambúrgueres deliciosos para minha raça.");
-        System.out.println("Crug'Oto me disse que viria buscar muitos hambúrgueres para a viagem até nosso planeta.");
-        System.out.println("Eu preparei eles"); //nao preparou todos e tem q responder algumas perguntas até ficar prontos?
         chamarPergunta('p', v);//pergunta de Algoritmos e Programção
-        //chamarPergunta('p', v);   chama varias perguntas?
         return false;
     }
 
@@ -334,24 +344,26 @@ public class BeyondTheEarth {
             }
         } while (!resposta.equals(perguntaResposta[0][2][0]) && tentativas > 0);
         if (resposta.equals(perguntaResposta[0][2][0])) {
-            System.out.println("Resposta certa!");
+            //System.out.println("Resposta certa!");
             int conversor = Integer.parseInt(v[0][1]); //recebe o valor da String como int
             conversor++; // acrescenta o ponto caso o player acerte
             v[0][1] = String.valueOf(conversor); // retorna o novo valor pra String
         } else {
+            verificaSituacaoJogo(v);
             int conversor = Integer.parseInt(v[0][2]); //recebe o valor da String como int
             conversor++; // acrescenta o ponto na variavel 'inimiga' caso o player erre
             v[0][2] = String.valueOf(conversor); // retorna o novo valor pra String
-            System.out.println("Gostaria de tentar outra pergunta? S/ N");
-            pulaLinha();
-            if (resposta.equals("s")) {
-                chamarPergunta(materia, v);
-            } else {
-                System.out.println(EndGame(2));
-                System.exit(0);//se o player desiste de responder uma nova pergunta, o programa termina
-            }
+            do {
+                System.out.println("Gostaria de tentar outra pergunta? S/ N");
+                strNext();
+                if (resposta.equals("s")) {
+                    chamarPergunta(materia, v);
+                } else if (resposta.equals("n")) {
+                    System.out.println(EndGame(3));
+                    System.exit(0);//se o player desiste de responder uma nova pergunta, o programa termina
+                }
+            } while (!resposta.equals("s") && !resposta.equals("n"));
         }
-        verificaSituacaoJogo(v);
     }
 
     static String ambienteAtual(String sala) { // vai trocar o nome do ambiente ( e talvez as imagens de cada uma )
