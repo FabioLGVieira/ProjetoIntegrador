@@ -4,21 +4,23 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class BeyondTheEarth {
+    
+    //    VERSAO OFICIAL 
 
-    static Random randomico = new Random();
-    static Scanner sc = new Scanner(System.in);
-    static String resposta;
+    static Random randomico = new Random(); // variavel para ter um numero aleatorio
+    static Scanner sc = new Scanner(System.in); //variavel de leitura de inputs
+    static String resposta; //variavel para os inputs do player
 
     public static void main(String[] args) {
-        menu();
+        menu(); // chama a função de menu
     }
 
-    public static void controlador() {
-        String escolhasJogo[][] = {{"zz", "0", "0"}, //nome, progresso do player, progresso adversario
+    public static void controlador() { //função controladora que inicia o jogo e dita a ordem dos ambientes
+        String escolhasJogo[][] = {{"zz", "0", "0"}, //nome, progresso do player, progresso de gameover
         {}, //vetor para guardar coisas escolhidas pelo player
         {"f", "f"}};  //true or false  substitui a necessidade de variaveis globais de decisão
-
-        entradaCampus(escolhasJogo);
+        //fluxo do jogo
+        entradaCampus(escolhasJogo); // chama os respectivos ambientes
         nasa(escolhasJogo);
         caixaDagua(escolhasJogo);//pergunta adm
 
@@ -36,12 +38,12 @@ public class BeyondTheEarth {
         fimDeJogo(escolhasJogo);
     }
 
-    static void fimDeJogo(String[][] v) {
+    static void fimDeJogo(String[][] v) { // função onde o jogo termina, e é escolhido o fim
         System.out.println(ambienteAtual("entrada"));
         String[] d1 = {"Gortwog: Já voltou humano? Cade as peças? Vamos logo, temos que buscar o resto de nosso povo!",
             v[0][0] + ": Consegui sim.", "Gortwog: Muito bem."}, d2 = {"...enquanto meus soldados terminam de reparar a nave podemos conversar.",
             "Crug'Oto me disse que você queria viajar conosco até nosso planeta...", "Por você ter nos ajudado, irei permitir, mas não sei quanto tempo pode levar ou se você voltará para este planeta.",},
-                d3 = {"Gortwog: Seu destino foi cumprido humano, nós vamos deixa-los por enquanto.","Mas quando voltarmos, iremos escraviza-los a fazerem Hamburguers para nós por toda a Eternidade"};
+                d3 = {"Gortwog: Seu destino foi cumprido humano, nós vamos deixa-los por enquanto.", "Mas quando voltarmos, iremos escraviza-los a fazerem Hamburguers para nós por toda a Eternidade"};
         imprimirTexto(d1);
         if (v[2][0].equals("t")) {
             imprimirTexto(d2);
@@ -53,7 +55,7 @@ public class BeyondTheEarth {
                 }
                 System.out.println(v[1][v[1].length - 1] + ".");
             }
-            pulaLinha();
+            pulaLinha(); // o player tem q apertar enter para receber a proxima linha
             System.out.println("Gortwog: Agora que está pronta a Nave, podemos partir para nossa jornada.");
             pulaLinha();
             v[0][1] = "fim1";
@@ -61,17 +63,17 @@ public class BeyondTheEarth {
             imprimirTexto(d3);
             v[0][1] = "fim2";
         }
-        verificaSituacaoJogo(v);
+        verificaSituacaoJogo(v); // verifica qual final o player teve
     }
 
-    static boolean nasa(String[][] v) {
-        System.out.println(ambienteAtual("nasa"));  // e ela da a resposta da proxima peça
+    static boolean nasa(String[][] v) {  //ambiente onde o player irá saber sobre o que tem q fazer
+        System.out.println(ambienteAtual("nasa"));  // e se quiser, conhecer um pouco sobre a historia
         String d[] = {"Crug'Oto: Eu sou Crug'Oto! Criei uma I.A. e dei o nome de SAVVY.", "Tenho problema de memória, Ela sempre me diz o que devo fazer."};
         imprimirTexto(d);
-        switch (v[0][1]) {
+        switch (v[0][1]) { //verifica qual parte do jogo o player se encontra 
             case "0": // peça 1 tanque de combustivel
                 System.out.println("Gortwog me disse que viria, vou deixar você usar a SAVVY para cumprir sua missão. Vamos lá, pergunte algo...");
-                comandosDisponiveis(2, "O que preciso fazer?", "O que aconteceu com o planeta de vocês?");
+                comandosDisponiveis(2, "O que preciso fazer?", "O que aconteceu com o planeta de vocês?"); // função que imprime as opçoes do player
                 if (resposta.equals("a")) {
                     System.out.println("SAVVY: Seu destino é ir até a caixa d'agua e obter o tanque com combustível.");
                 } else {
@@ -86,11 +88,9 @@ public class BeyondTheEarth {
                 if (resposta.equals("a")) {
                     System.out.println("SAVVY: Vá para o estacionamento.");
                 } else {
-                    System.out.println("Crug'Oto: Porque nosso Deus, Lugrots, nos criou a partir de Hamburguers.");
-                    pulaLinha();
-                    System.out.println("Hamburguer é a nossa fonte de vida!");
-                    pulaLinha();
-                    System.out.println("SAVVY: Tudo pronto? Vamos. Recalculando rota...");
+                    String d3[] = {"Crug'Oto: Porque nosso Deus, Pälíndhröhmö, nos criou a partir de Hamburguers.", "Hamburguer é a nossa fonte de vida!",
+                        "SAVVY: Tudo pronto? Vamos. Recalculando rota..."};
+                    imprimirTexto(d3);
                 }
                 comandosDisponiveis(1, "Ir para o estacionamento");
                 break;
@@ -99,11 +99,9 @@ public class BeyondTheEarth {
                 if (resposta.equals("a")) {
                     System.out.println("SAVVY: Você deve falar com alguém perto do Objeto Quadrado");
                 } else {
-                    System.out.println("Crug'Oto: Com esse colar de Onion Rings que usamos.");
-                    pulaLinha();
-                    System.out.println("É parecido com essa coisa que vocês chamam de celular.");
-                    pulaLinha();
-                    System.out.println("SAVVY: Você deve falar com alguém perto do Objeto Quadrado");
+                    String d4[] = {"Crug'Oto: Com esse colar de Onion Rings que usamos.", "É parecido com essa coisa que vocês chamam de celular.",
+                        "SAVVY: Você deve falar com alguém perto do Objeto Quadrado"};
+                    imprimirTexto(d4);
                 }
                 comandosDisponiveis(1, "Ir para o Cubo");
                 break;
@@ -132,11 +130,9 @@ public class BeyondTheEarth {
                 if (resposta.equals("a")) {
                     System.out.println("SAVVY: Você deve buscar Hamburguers para a viagem");
                 } else {
-                    System.out.println("Crug'Oto: Sim, mas nós vamos buscar o resto do nosso povo.");
-                    pulaLinha();
-                    System.out.println("Pare de gastar nosso tempo, e cumpra sua missão, precisamos partir o mais rápido possível!");
-                    pulaLinha();
-                    System.out.println("SAVVY: Vá buscar hambúrgueres para a longa viagem");
+                    String d5[] = {"Crug'Oto: Sim, mas nós vamos buscar o resto do nosso povo.", "Pare de gastar nosso tempo, e cumpra sua missão, precisamos partir o mais rápido possível!",
+                        "SAVVY: Vá buscar hambúrgueres para a longa viagem"};
+                    imprimirTexto(d5);
                 }
                 comandosDisponiveis(1, "Ir para a Praça de Alimentação 01");
                 break;
@@ -144,15 +140,15 @@ public class BeyondTheEarth {
         return false;
     }
 
-    static boolean entradaCampus(String[][] v) {
-        System.out.println(ambienteAtual("entrada"));
+    static boolean entradaCampus(String[][] v) { //inicio do jogo, onde o player descobre seu objetivo
+        System.out.println(ambienteAtual("entrada")); // função que mostra o nome do ambiente
         String[] falas = {"Hanbägä wa piza yori mo sugurete ori, bëkon wa jinseidesu", "Bisuketto ka Borasha?", "Burubasaūru, chāmuanda ka fanshutsu?",
             "Ruuku, watashi wa anata no chichiwue", "è vedere o mangiare"};
         int rnd = randomico.nextInt(falas.length);
         String[] d1 = {"O que eu estou fazendo no Senac? Eu estava em casa até agora...", "[...ouve uma voz distante]",
             falas[rnd], "[...ao se aproximar, se assusta por ser um alienígena!]", "ET: Saudações terráqueo, como voce se chama?"};
-        imprimirTexto(d1);
-        v[0][0] = verificaNome();
+        imprimirTexto(d1); // função que imprime o texto na tela a partir do vetor, e ja obriga o input do Enter para pular linha
+        v[0][0] = verificaNome();// recebe o nome escolhido pelo player e verifica se é valido
         String[] d2 = {v[0][0] + ": Mas o que está acontecendo?!?!? Por quê eu consigo te entender?",
             "ET: Somos muito mais evoluidos que vocês. Não precisa mais me dizer seu nome, a Cebola Mágica do meu povo já me revelou, " + v[0][0],
             v[0][0] + ": Quê? Cebola mágica? Por quê eu tô falando com um ET? Como isso é possível?", "ET: Não temos tempo para ficar respondendo perguntas tolas!",
@@ -200,6 +196,7 @@ public class BeyondTheEarth {
         imprimirTexto(d1);
         chamarPergunta('c', v);//pergunta de conceitos da computação
         System.out.println("Brynhildur: Certo, humano. Pegue estas peças para reparar a Turbina");
+        pulaLinha();
         return false;
     }
 
@@ -222,17 +219,18 @@ public class BeyondTheEarth {
     static boolean praca01(String[][] v) {
         System.out.println(ambienteAtual("praca01"));
         String[] d1 = {"[...]Voce vai a praça de alimentação a procura de alguma coisa para comer, chega na cantina e tem um ET no balcão"
-            + "e em seu cracha escrito Sunna", "ET: Olá terráqueo, o que vai querer?",
-            "Ué?! Agora vocês vão querer trabalhar igual a gente?",
+            + "e em seu cracha escrito Sunna", "ET: Olá terráqueo, o que vai querer?", "Ué?! Agora vocês vão querer trabalhar igual a gente?",
             "Sunna: Adorei este lugar, tem tudo que preciso para fazer hambúrgueres deliciosos para minha raça.",
             "Crug'Oto me disse que viria buscar muitos hambúrgueres para a viagem até nosso planeta.",
-            "Eu preparei eles"};
+            "Eu preparei eles, mas não vou entregá-los facilmente. Responda corretamente..."};
         imprimirTexto(d1);
         chamarPergunta('p', v);//pergunta de Algoritmos e Programção
+        System.out.println("Terraqéo espertinho, mas vou cumprir minha palavra, aqui estão os hamburgueres.");
+        pulaLinha();
         return false;
     }
 
-    static String[][] guardarCoisas(String[][] v) {
+    static String[][] guardarCoisas(String[][] v) { //função que guarda item escolhidos pelo player no Array principal do jogo
         System.out.println("Quantas coisas você quer levar?");
         int n = sc.nextInt();
         sc.nextLine();  // necessário para nao comer linha
@@ -244,8 +242,7 @@ public class BeyondTheEarth {
         return v;
     }
 
-    //static boolean nasa(String[][] v){ return false;}
-    static String[][][] perguntas(char materia, String[][][] escolhida) {
+    static String[][][] perguntas(char materia, String[][][] escolhida) { //função que tem todas as perguntas, randomiza e retorna a escolhida 
         String[][][] matematica = {{{"O conjunto {x " + (char) 8712 + " R / 2,5 < x <= 15} pode ser representado pelo seguinte intervalo"}, //pergunta 1
         {"[ 10/4 ; 15 ]", "[ 2,5 ; 15 [", "] 10/4 ; 15 ]", "] 2,5 ; 15 ["}, {"c"}}, // resposta e resposta certa da 1
         {{"A expressão (a-b)³ pode ser representada por"},//pergunta 2
@@ -262,8 +259,8 @@ public class BeyondTheEarth {
                 {{"O salário, os benefícios e as condições físicas e ambientais do trabalho são denominados fatores"},
                 {"Intrínsecos", "Higiênicos", "Fisiológicos", "Igualdade"}, {"b"}},
                 {{"Um bom líder é reconhecido por"}, {"Saber de tudo e ser melhor que os outros", "Dar ordens e não fazer nada", "Influenciar, motivar uma equipe e viver pelo exemplo", "Ter salário alto e automóveis caros"}, {"c"}},
-                {{"Qual destes abaixo é o teorico responsavel pela Teoria da burocracia "}, {"Henry Ford", "Max Weber", "Frederick Taylor", "Elton Mayo"}, {"b"}},
-                {{"Qual alternativa indica uma característica que, segundo Fayol, não faz parte da organização Formal."}, {"Divisão do Trabalho", "Hierarquia", "Autoridade", "Motivação"}, {"d"}}},//perguntas adm
+                {{"Qual destes abaixo é o teorico responsavel pela Teoria da burocracia"}, {"Henry Ford", "Max Weber", "Frederick Taylor", "Elton Mayo"}, {"b"}},
+                {{"Qual alternativa indica uma característica que, segundo Fayol, não faz parte da organização Formal"}, {"Divisão do Trabalho", "Hierarquia", "Autoridade", "Motivação"}, {"d"}}},//perguntas adm
 
                 conceitos = {{{"o número 255 na base decimal, pode ser representado, respectivamente, nas bases Binária, Octal e Hexadecimal por"},
                 {"01100110, 356 ,EE", "00001111, 380, EF", "11111111, 377, FF", "11110000, 374,FE"}, {"c"}},
@@ -296,7 +293,7 @@ public class BeyondTheEarth {
         //perguntas de algoritmos e programaçao
         int random;// inicia a varivavel randomica
 
-        switch (materia) {
+        switch (materia) { // de acordo com a necessidade de Materia, é escolhida randomicamente uma pergunta relativa ao Array de perguntas
             case 'm':
                 random = randomico.nextInt(matematica.length);//gera um numero numero random até a quantidade de perguntas do vetor
                 escolhida[0][0][0] = matematica[random][0][0];//coloca a a pergunta no vetor
@@ -322,11 +319,11 @@ public class BeyondTheEarth {
                 escolhida[0][2][0] = prog[random][2][0];//coloca a resposta certa no vetor de verificação
                 break;
         }
-        return escolhida;
+        return escolhida; // retorna a pergunta escolhida randomicamente
     }
 
-    public static void chamarPergunta(char materia, String[][] v) {
-        String[][][] perguntaResposta = {{{""}, {"", "", "", ""}, {""}}};
+    public static void chamarPergunta(char materia, String[][] v) { // recebe a pergunta randomizada, imprime e verifica se é correta ou nao
+        String[][][] perguntaResposta = {{{""}, {"", "", "", ""}, {""}}}; //caso nao seja correta a resposta, pergunta se quer repetir
         int tentativas = 3;// numero de tentativas para acertar a pergunta e conseguir progredir
         perguntas(materia, perguntaResposta);
 
@@ -337,36 +334,34 @@ public class BeyondTheEarth {
         System.out.println("d) " + perguntaResposta[0][1][3]);
         do {
             System.out.println("Voce tem " + tentativas + " tentativas"); //diminui as tentativas de resposta caso responder errado
-            strNext();
-            if (!resposta.equals(perguntaResposta[0][2][0])) {
+            strNext(); // recebe o input da resposta do player
+            if (!resposta.equals(perguntaResposta[0][2][0])) { // caso o player  erre diminui as tentativas 
                 System.out.println("Voce errou! Tente novamente.");
                 tentativas--;
             }
-        } while (!resposta.equals(perguntaResposta[0][2][0]) && tentativas > 0);
-        if (resposta.equals(perguntaResposta[0][2][0])) {
+        } while (!resposta.equals(perguntaResposta[0][2][0]) && tentativas > 0); // laço que verifica as chances do player enquanto responde errado
+        if (resposta.equals(perguntaResposta[0][2][0])) { // se a resposta for certa, o player avança no progresso do jogo
             //System.out.println("Resposta certa!");
             int conversor = Integer.parseInt(v[0][1]); //recebe o valor da String como int
             conversor++; // acrescenta o ponto caso o player acerte
             v[0][1] = String.valueOf(conversor); // retorna o novo valor pra String
-        } else {
+        } else { // se o player errar, o progresso de GameOver aumenta
             verificaSituacaoJogo(v);
             int conversor = Integer.parseInt(v[0][2]); //recebe o valor da String como int
             conversor++; // acrescenta o ponto na variavel 'inimiga' caso o player erre
             v[0][2] = String.valueOf(conversor); // retorna o novo valor pra String
-            do {
-                System.out.println("Gostaria de tentar outra pergunta? S/ N");
-                strNext();
-                if (resposta.equals("s")) {
-                    chamarPergunta(materia, v);
-                } else if (resposta.equals("n")) {
-                    System.out.println(EndGame(3));
-                    System.exit(0);//se o player desiste de responder uma nova pergunta, o programa termina
-                }
-            } while (!resposta.equals("s") && !resposta.equals("n"));
+            System.out.println("Gostaria de tentar outra pergunta?");
+            comandosDisponiveis(2, "Sim", "Não");
+            if (resposta.equals("a")) {
+                chamarPergunta(materia, v); // chama outra pergunta se o player quiser tentar denovo
+            } else {
+                System.out.println(EndGame(3)); // se nao quiser outra pergunta, o player desistiu do jogo e recebe uma mensagem de GameOver
+                System.exit(0);//se o player desiste de responder uma nova pergunta, o programa termina
+            }
         }
     }
 
-    static String ambienteAtual(String sala) { // vai trocar o nome do ambiente ( e talvez as imagens de cada uma )
+    static String ambienteAtual(String sala) { // vai trocar o nome do ambiente
         switch (sala) {
             case "entrada":
                 sala = "Entrada Principal";
@@ -393,7 +388,7 @@ public class BeyondTheEarth {
         return "\n===================================\nAmbiente atual: " + sala + "\n";
     }
 
-    static void verificaSituacaoJogo(String[][] v) {
+    static void verificaSituacaoJogo(String[][] v) { // verifica qual final o player vai receber ou se desistiu do jogo
         if (v[0][1].equals("fim1")) {
             System.out.println(EndGame(1));
             System.exit(1);//termina o programa
@@ -406,37 +401,37 @@ public class BeyondTheEarth {
         }
     }
 
-    static void comandosDisponiveis(int op, String t1) {
+    static void comandosDisponiveis(int op, String t1) { //funçao para mostrar ao usuario 1 opção diponivel no momento
         String disponiveis = "";
         disponiveis = "a) " + t1;
         System.out.println("Comando Disponível: " + disponiveis);
-        verificaComando(op);
+        verificaComando(op); // verifica a decisao do player
     }
 
-    static void comandosDisponiveis(int op, String t1, String t2) {
+    static void comandosDisponiveis(int op, String t1, String t2) { //funçao para mostrar ao usuario 2 opçoes diponiveis no momento
         String disponiveis = "";
         disponiveis = "a) " + t1 + " | b) " + t2;
         System.out.println("Comandos Disponíveis: " + disponiveis);
-        verificaComando(op);
+        verificaComando(op); // verifica a decisao do player
     }
 
-    static void comandosDisponiveis(int op, String t1, String t2, String t3) {
+    static void comandosDisponiveis(int op, String t1, String t2, String t3) { //funçao para mostrar ao usuario 3 opçoes diponiveis no momento
         String disponiveis = "";
         disponiveis = "a) " + t1 + " | b) " + t2 + " | c) " + t3;
         System.out.println("Comandos Disponíveis: " + disponiveis);
-        verificaComando(op);
+        verificaComando(op); // verifica a decisao do player
     }
 
-    static void comandosDisponiveis(int op, String t1, String t2, String t3, String t4) {//funçao para mostrar ao usuario a quantidade de opçoes diponiveis no momento
+    static void comandosDisponiveis(int op, String t1, String t2, String t3, String t4) { //funçao para mostrar ao usuario 4 opçoes diponiveis no momento
         String disponiveis = "";
         disponiveis = "a) " + t1 + " | b) " + t2 + " | c) " + t3 + " | d) " + t4;
         System.out.println("Comandos Disponíveis: " + disponiveis);
-        verificaComando(op);
+        verificaComando(op); // verifica a decisao do player
     }
 
-    static String verificaComando(int op) {// 1 para respostas a, b ,c ,d   2 para s, n.  \ para finalizar o programa
+    static String verificaComando(int op) {// verifica se o comando do player é valido ou nao,  \ para finalizar o programa
         strNext();//le o comando do usuario
-        switch (op) {// diferencia entre as opçoes de salas ou açoes do usuario, das opçoes de escolhas entre sim ou nao
+        switch (op) {// diferencia entre as opçoes de salas ou açoes do usuario
             case 1://escolhas de opçoes ou salas                        opçao relativo a quantidade de opçoes disponiveis ( 1 )
                 while (!resposta.equals("a")) {
                     System.out.println("Comando inválido.");
@@ -469,19 +464,19 @@ public class BeyondTheEarth {
         String nome;
         do {
             System.out.println("[Digite seu nome...]");
-            nome = sc.nextLine();
+            nome = sc.nextLine(); //recebe o nome do usuario
         } while (nome.isEmpty() || nome.equals("") || nome.charAt(0) == ' ');
-        return nome;
+        return nome; //retorna o nome escolhido e validado para o Array principal
     }
 
     static void imprimirTexto(String v[]) {//recebe o Vetor de Dialogo dos NPCs e imprime na tela
         for (int i = 0; i < v.length; i++) {
             System.out.print(v[i]);
-            pulaLinha();
-        }// strNext() serve como pausa entre uma frase e outra
+            pulaLinha(); //serve como pausa entre uma frase e outra
+        }
     }
 
-    static String pulaLinha() {
+    static String pulaLinha() { //serve como pausa entre uma frase e outra
         String pula = sc.nextLine();
         if (pula.equals("\\"))//para o comando \ funcionar precisa de duas(\\), \ é um escape character, com 2 eles se cancelam
         {
@@ -491,7 +486,7 @@ public class BeyondTheEarth {
     }
 
     public static String strNext() {//pega o input do usuario em todas as partes do jogo
-        resposta = sc.nextLine().toLowerCase();
+        resposta = sc.nextLine().toLowerCase(); // recebe a resposta do player com a variavel Scanner e passa para minusculo para evitar erros
         if (resposta.equals("\\"))//para o comando \ funcionar precisa de duas(\\), \ é um escape character, com 2 eles se cancelam
         {
             System.exit(1);//termina o programa
@@ -512,7 +507,7 @@ public class BeyondTheEarth {
                 fim = "Parece que você não é tão inteligente quanto os Aliens pensaram... Você perdeu a oportunidade de viajar para o espaço.";
                 break;
         }
-        return fim;
+        return fim; // retorna a mensagem final necessaria para determinada parte do jogo
     }
 
     public static void instrucoes() {//funcao que ensina o basico para o usuario
@@ -523,17 +518,17 @@ public class BeyondTheEarth {
                 + "Para o desenvolvimento dos diálogos, sempre pressione ENTER ao final da fala de cada personagem.\n"
                 + "Você pode também digitar '\\' para finalizar o programa.\n"
                 + "Vamos testar se você entendeu.");
-        comandosDisponiveis(2, "Jogar", "Voltar ao menu");        //sc.nextLine();
-        switch (resposta) {
+        comandosDisponiveis(2, "Jogar", "Voltar ao menu");
+        switch (resposta) { //verifica a escolha do jogador
             case "a":
                 System.out.println("Vamos começar nossa aventura!");
-                controlador();
+                controlador(); // inicia a função controladora e inicia o jogo
                 break;
             case "b":
-                menu();
+                menu(); // chama o menu novamente
                 break;
-            //System.out.println("Comando inválido.\n");
             default:
+                System.out.println("Comando inválido.");
                 break;
         }
     }
@@ -546,21 +541,21 @@ public class BeyondTheEarth {
         for (int i = 0; i < s.length; i++) {
             System.out.print(s[i]);
         }
-        int option = sc.nextInt();
+        int option = sc.nextInt(); // recebe a escolha do usuario
         sc.nextLine();//IMPORTANTE: alguns .next come a quebra de linha do scanner anterior, por isso, é necessário fazer o comando acima para que funcione corretamente.
         switch (option) {//decide qual foi o comando do usuario
             case 1:
-                instrucoes();
+                instrucoes(); // chama a função de instruções
                 break;
             case 2:
-                controlador();
+                controlador(); //chama a função controladora para inicio do jogo
                 break;
             case 3:
                 System.out.printf("==== Developed by: ==== %n=> Fabio Vieira %n=> Leonardo Barbosa"
                         + "%n=> Pedro Arantes %n=> Vagner Matos%n");
                 System.out.println("\nPressione [ENTER] para voltar ao menu.");
                 sc.nextLine();
-                menu();
+                menu(); // chama o menu
                 break;
             case 4:
                 System.out.println("Ate a proxima!");
