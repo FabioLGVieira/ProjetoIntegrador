@@ -211,7 +211,7 @@ public class BeyondTheEarth {
             + "Mas me ajude a desvendar esse enigma que te dou o item."};
         imprimirTexto(d2);
         chamarPergunta('p', v); //pergunta de Algoritmos e Programção
-        System.out.println("Muito bem, " + v[0][0] + "Aqui está as peças para reparar o Computador de Bordo da Nave Espaical.");
+        System.out.println("Muito bem, " + v[0][0] + ". Aqui está as peças para reparar o Computador de Bordo da Nave Espaical.");
         pulaLinha();
         return false;
     }
@@ -225,7 +225,7 @@ public class BeyondTheEarth {
             "Eu preparei eles, mas não vou entregá-los facilmente. Responda corretamente..."};
         imprimirTexto(d1);
         chamarPergunta('p', v);//pergunta de Algoritmos e Programção
-        System.out.println("Terraqéo espertinho, mas vou cumprir minha palavra, aqui estão os hamburgueres.");
+        System.out.println("Terraquéo espertinho, mas vou cumprir minha palavra, aqui estão os hamburgueres.");
         pulaLinha();
         return false;
     }
@@ -281,7 +281,7 @@ public class BeyondTheEarth {
                 {"for", "do while", "while", "if"}, {"a"}},
                 {{"Qual função está correta"}, {"static int nome(String s){ return s; }", "static String nome(String s){ return s; }", "static String nome(int n){ return true; }", "static boolean nome(char c){ return c; }"}, {"b"}},
                 {{"Qual das alternativas abaixo representa a sintaxe correta"},
-                {"static String nome(){ return 7; }", "static String nome([]String s){ return s; }", "static String nome(){ return s; }", "static int nome(String[] s){ return s; }"}, {"c"}},
+                {"static String nome(){ return 7; }", "static String nome([]String s){ return s; }", "static String nome(){ return \"s\"; }", "static int nome(String[] s){ return s; }"}, {"c"}},
                 {{"Em uma estrutura de repetição, o comando break tem a função de"},
                 {"condicionar a execução de um comando de atribuição a um operador lógico", "segmentar a execução de um loop em duas ou mais partes aninhadas", "estabelecer um intervalo de depuração durante a execução de um loop", "interromper a execução do laço"}, {"d"}},
                 {{"Na linguagem Java, os tipos primitivos são"},
@@ -498,13 +498,13 @@ public class BeyondTheEarth {
         String fim = "";
         switch (op) {
             case 1:
-                fim = "Você ajudou os Aliens e eles irão te levar para Beyond the Earth!!!";
+                fim = "\nVocê ajudou os Aliens e eles irão te levar para Beyond the Earth!!!\n";
                 break;
             case 2:
-                fim = "Você ajudou os Aliens, e em muitos anos a Humanidade será escravizada!";
+                fim = "\nVocê ajudou os Aliens, e em muitos anos a Humanidade será escravizada!\n";
                 break;
             case 3:
-                fim = "Parece que você não é tão inteligente quanto os Aliens pensaram... Você perdeu a oportunidade de viajar para o espaço.";
+                fim = "\nParece que você não é tão inteligente quanto os Aliens pensaram... Você perdeu a oportunidade de viajar para o espaço.\n";
                 break;
         }
         return fim; // retorna a mensagem final necessaria para determinada parte do jogo
